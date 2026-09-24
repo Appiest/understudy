@@ -166,7 +166,7 @@ Leave the command window open while you use the deck, because closing it stops t
 | Jump to the first or last slide | Home or End |
 | Close the notes | Escape |
 
-Most slides build in steps, so each press brings in the next part. The blue line along the bottom shows how far through the deck you are, and the number in the bottom right shows the slide.
+Most slides build in steps, so each press brings in the next part. The slides have no progress bar or slide numbers, so if you lose your place, press N to see which slide you're on.
 
 ### Speaker notes
 
@@ -407,7 +407,7 @@ understudy/
     │   ├── primitives.tsx             Shared animation pieces (text reveals, count-ups)
     │   ├── VoiceWave.tsx              The animated voice line that recurs through the deck
     │   ├── GlassesRender.tsx          Shows a rendered view of the glasses
-    │   ├── SlideFooter.tsx            Sources, rubric tag, slide number and progress line
+    │   ├── SlideFooter.tsx            Sources and rubric tag
     │   ├── NotesPanel.tsx             The speaker notes panel (N)
     │   ├── PrintDeck.tsx              Lays every slide out for printing
     │   ├── useDeckNavigation.ts       Keyboard, click, swipe and address bar navigation

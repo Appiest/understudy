@@ -102,8 +102,6 @@ export const slides: SlideDefinition[] = [
   },
 ];
 
-export const mainSlideCount = slides.filter((slide) => slide.id !== "sources").length;
-
 export function sourcesForStep(slide: SlideDefinition, step: number) {
   return slide.sourcesByStep[Math.min(step, slide.sourcesByStep.length - 1)];
 }

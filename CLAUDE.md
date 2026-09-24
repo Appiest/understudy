@@ -13,6 +13,8 @@ A web slide deck for our USC Iovine and Young Academy Blue Ocean Strategy projec
 
 The visual reference is the Standard Physics deck: one full-bleed stage, huge display type, drawn SVG diagrams that animate in, paper grain, a neutral palette with one accent, and fine-print sources.
 
+Keep the slides clean: no progress bar, dots or slide numbers. This overrides the brief, which asks for them. Each slide's footer carries only its sources and its rubric tag.
+
 ## General
 
 - Don't write summary markdown files or make copies of files (`.backup`, `.old`). We use Git.
