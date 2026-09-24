@@ -133,4 +133,11 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  /* Chrome rasterizes box-shadow into a solid gray box in PDFs, so cards rely on their fill in print. */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+  }
 }
