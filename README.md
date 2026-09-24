@@ -166,7 +166,7 @@ Leave the command window open while you use the deck, because closing it stops t
 | Jump to the first or last slide | Home or End |
 | Close the notes | Escape |
 
-Most slides build in steps, so each press brings in the next part. The slides have no progress bar or slide numbers, so if you lose your place, press N to see which slide you're on.
+Most slides build in steps, called beats, so each press brings in the next part. The small label in the bottom right corner, like "Slide 2, beat 3", tells you exactly where you are, which makes it easy to call out hand-offs between speakers. The label doesn't appear in the printed PDF.
 
 ### Speaker notes
 
@@ -407,7 +407,7 @@ understudy/
     │   ├── primitives.tsx             Shared animation pieces (text reveals, count-ups)
     │   ├── VoiceWave.tsx              The animated voice line that recurs through the deck
     │   ├── GlassesRender.tsx          Shows a rendered view of the glasses
-    │   ├── SlideFooter.tsx            Sources for the current step
+    │   ├── SlideFooter.tsx            Sources and the slide and beat label
     │   ├── NotesPanel.tsx             The speaker notes panel (N)
     │   ├── PrintDeck.tsx              Lays every slide out for printing
     │   ├── useDeckNavigation.ts       Keyboard, click, swipe and address bar navigation
