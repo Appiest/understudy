@@ -125,7 +125,7 @@ function GlassesView() {
         </div>
         <div className="pb-16">
           <p className="text-poster font-black text-ocean">
-            <CountUp progress={progress} total={soldIn2025.value} format={(value) => `${Math.round(value)}M`} />
+            <CountUp progress={progress} total={soldIn2025.value} format={(value) => `${Math.round(value)}M+`} />
           </p>
           <motion.p variants={fadeReveal(1.6)} className="mt-4 text-lede font-bold">
             {soldIn2025.caption}

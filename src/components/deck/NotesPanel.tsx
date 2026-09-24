@@ -1,9 +1,10 @@
 "use client";
 
-import { Printer, X } from "@phosphor-icons/react";
+import { ListMagnifyingGlass, Printer, X } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { asset } from "@/lib/asset";
 import { easeDrawn } from "@/lib/motion";
+import { factsHash } from "../useHashRoute";
 import type { SlideDefinition } from "./slides";
 
 const shortcuts = [
@@ -12,9 +13,10 @@ const shortcuts = [
   ["Notes", "N"],
   ["Full screen", "F"],
   ["Print", "P"],
+  ["Facts", "D"],
 ];
 
-export function NotesPanel({ open, slide, onClose }: { open: boolean; slide: SlideDefinition; onClose: () => void }) {
+export function NotesPanel({ open, slide, slideNumber, onClose }: { open: boolean; slide: SlideDefinition; slideNumber: number; onClose: () => void }) {
   return (
     <AnimatePresence>
       {open && (
@@ -29,6 +31,10 @@ export function NotesPanel({ open, slide, onClose }: { open: boolean; slide: Sli
           <div className="flex items-center justify-between gap-4 px-6 pt-5">
             <h2 className="text-lg font-bold">{slide.name}</h2>
             <div className="flex items-center gap-1">
+              <a href={factsHash(slideNumber)} className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
+                <ListMagnifyingGlass size={18} weight="bold" aria-hidden />
+                Facts behind this slide
+              </a>
               <a href={asset("/print")} target="_blank" className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
                 <Printer size={18} weight="bold" aria-hidden />
                 Print or save as PDF

@@ -168,7 +168,7 @@ function CostView() {
           {replacement.caption}
         </motion.p>
         <motion.p variants={fadeReveal(0.7)} className="mt-3 text-caption text-ink-muted">
-          {replacement.label}, the most recent industry figure we found
+          {replacement.label}
         </motion.p>
         <CostTally />
       </div>

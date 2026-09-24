@@ -16,7 +16,7 @@ const slideFrame: Variants = {
 
 export function Deck() {
   const { index, step, ready, handlePointerDown, handlePointerUp, handleContextMenu } = useDeckNavigation(slideStepCounts);
-  const { notesOpen, toggleNotes } = usePresenterKeys();
+  const { notesOpen, toggleNotes } = usePresenterKeys(index + 1);
   const cursorIsIdle = useIdleCursor();
   const scale = useStageScale();
   const slide = slides[index];
@@ -48,7 +48,7 @@ export function Deck() {
           <SlideFooter slide={slide} step={step} slideNumber={index + 1} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
-        <NotesPanel open={notesOpen} slide={slide} onClose={toggleNotes} />
+        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} onClose={toggleNotes} />
       </main>
     </MotionConfig>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
+import { factsHash } from "../useHashRoute";
 
 function toggleFullscreen() {
   if (document.fullscreenElement) {
@@ -11,7 +12,7 @@ function toggleFullscreen() {
   void document.documentElement.requestFullscreen({ navigationUI: "hide" });
 }
 
-export function usePresenterKeys() {
+export function usePresenterKeys(slideNumber: number) {
   const [notesOpen, setNotesOpen] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,9 @@ export function usePresenterKeys() {
       n: () => setNotesOpen((open) => !open),
       f: toggleFullscreen,
       p: () => window.open(asset("/print"), "_blank"),
+      d: () => {
+        window.location.hash = factsHash(slideNumber);
+      },
       Escape: () => setNotesOpen(false),
     };
 
@@ -31,7 +35,7 @@ export function usePresenterKeys() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [slideNumber]);
 
   return { notesOpen, toggleNotes: () => setNotesOpen((open) => !open) };
 }

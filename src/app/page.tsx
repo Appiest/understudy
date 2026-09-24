@@ -1,5 +1,5 @@
-import { Deck } from "@/components/deck/Deck";
+import { Presentation } from "@/components/Presentation";
 
 export default function PresentPage() {
-  return <Deck />;
+  return <Presentation />;
 }
