@@ -4,7 +4,7 @@ import { team } from "./config";
 export const title = {
   tagline: "Your best employee, in every new hire’s ear.",
   subtitle: "A Blue Ocean approach to frontline training in high-turnover businesses",
-  rulesHeading: "Our rules against solution jumping",
+  rulesHeading: "Avoiding Solution Jumping",
   rules: [
     { rule: "Fall in love with the problem, not the technology.", detail: "We started from turnover, not from “let’s use AR glasses.”" },
     { rule: "Talk to noncustomers first.", detail: "Owners with no training department and no budget for VR." },
@@ -22,11 +22,11 @@ export const title = {
 export const turnover = {
   headline: "Every new hire costs owners time they don’t have.",
   sectors: [
-    { name: "Retail", monthlySeparationRate: 3.8 },
-    { name: "Restaurants and hotels", monthlySeparationRate: 5.5 },
+    { name: "Retail", caption: "of retail jobs turned over in 2025", monthlySeparationRate: 3.8 },
+    { name: "Restaurants and hotels", caption: "of restaurant and hotel jobs turned over in 2025", monthlySeparationRate: 5.5 },
   ],
   seatsPerRow: 20,
-  rateCaption: "of workers leave each year",
+  legend: { stayed: "Same person all year", replaced: "Someone left, so a new hire needs training" },
   source: "blsJolts" as SourceId,
   replacement: {
     costPerHire: 4200,

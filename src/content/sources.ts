@@ -9,7 +9,8 @@ export type Source = {
 export const sources = {
   kimMauborgne: {
     cite: "Kim and Mauborgne, California Management Review, 2005",
-    title: "Kim, W.C. and Mauborgne, R. (2005). “Blue Ocean Strategy: From Theory to Practice.” California Management Review 47(3).",
+    title: "Kim, W.C. and Mauborgne, R. (2005). “Blue Ocean Strategy: From Theory to Practice.” California Management Review 47(3), 105–121.",
+    url: "https://cmr.berkeley.edu/2005/05/47-3-blue-ocean-strategy-from-theory-to-practice/",
   },
   blsJolts: {
     cite: "BLS JOLTS Table 20, 2025",
@@ -234,6 +235,18 @@ export const sources = {
     cite: "Blue Ocean Strategy teaching materials",
     title: "Kim and Mauborgne: [yellow tail] teaching materials",
     url: "https://www.blueoceanstrategy.com/teaching-materials/yellowtail/",
+    factsOnly: true,
+  },
+  californiaRecording: {
+    cite: "California Penal Code § 632",
+    title: "California Penal Code § 632: recording confidential communications",
+    url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=PEN&sectionNum=632",
+    factsOnly: true,
+  },
+  alixPartners: {
+    cite: "AlixPartners, May 2024",
+    title: "AlixPartners: how grocery CEOs can mitigate turnover (May 2, 2024)",
+    url: "https://www.alixpartners.com/insights/102j6lk/how-grocery-ceos-can-mitigate-turnover-retain-leadership-strengthen-culture-and/",
     factsOnly: true,
   },
   wineExcerpt: {

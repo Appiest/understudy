@@ -123,7 +123,7 @@ const challenge: SlideFacts = {
       derivation: "This comes from a 2017 column by Chris Cooley, a benefits consultant, who credits the Coca-Cola Retailing Research Council. We changed the slide to say so. It was first labeled as a research council study.",
       source: "shelbyReport",
       quote: "Average cost for grocer to replace each worker making $8 per hour",
-      caveat: "The figure is old and hard to trace. Cooley names no report, and a research council study from 2000 put a cashier’s turnover cost at about $3,700. Newer restaurant figures are lower: Black Box Intelligence put hard costs at $2,305 per hourly worker in 2024. Present $4,200 as a dated estimate.",
+      caveat: "The figure is old and hard to trace. Cooley names no report, and we couldn’t find a Coca-Cola Retailing Research Council report containing $4,200. Its closest published figure is from a 2000 study, which put a cashier’s turnover cost at about $3,700, and its January 2024 retention report gives no dollar figure per hire. Newer restaurant figures are lower: Black Box Intelligence put hard costs at $2,305 per hourly worker in 2024. Present $4,200 as a dated estimate.",
     },
     {
       figure: "$67,200",
@@ -148,7 +148,7 @@ const challenge: SlideFacts = {
       status: "verified",
       source: "noncustomerTiers",
       quote: "Tier two, “refusing”: buyers who have seen the current offering as an option… but have decided against participating",
-      caveat: "Which businesses sit in which tier is our judgment. Independent grocers as refusing noncustomers is the claim the owner interviews need to test.",
+      caveat: "The tiers come from Kim and Mauborgne’s book Blue Ocean Strategy, not the 2005 article. Their site gives the definitions but doesn’t name the chapter. Which businesses sit in which tier is our judgment, and independent grocers as refusing noncustomers is the claim the owner interviews need to test.",
     },
   ],
   background: [
@@ -192,7 +192,7 @@ const challenge: SlideFacts = {
       claim: "Frontline grocery turnover, which a research council report puts at 60% above the all-industry rate of 45%. It also estimates turnover can cost 10 to 20% of a grocer’s profit.",
       status: "verified",
       source: "ccrrcRetention",
-      caveat: "The report’s publication year isn’t clear on the page, and its 69% is a forecast for 2023.",
+      caveat: "The report was published in January 2024, according to AlixPartners’ citation of it. Its 69% is a forecast for 2023.",
     },
   ],
   questions: [
@@ -377,7 +377,7 @@ const solution: SlideFacts = {
     },
     {
       question: "What about customers’ privacy? You’re recording in a store.",
-      answer: "It’s our biggest risk. Capture happens during one employee’s shifts, and we would need clear signage, blurred faces and audio limited to the employee. Some states, including California, require everyone’s consent to record a private conversation, so this needs legal review before any pilot.",
+      answer: "It’s our biggest risk. Capture happens during one employee’s shifts, and we would need clear signage, blurred faces and audio limited to the employee. California, for example, requires the consent of everyone in a confidential conversation before it’s recorded. The law excludes conversations where people can reasonably expect to be overheard, which may cover a chat at a register but not a private one in a back office. Laws differ by state, so this needs legal review before any pilot.",
     },
     {
       question: "How much will it cost?",
@@ -406,7 +406,7 @@ const canvasFacts: SlideFacts = {
       status: "verified",
       source: "valueInnovation",
       quote: "the simultaneous pursuit of differentiation and low cost, creating a leap in value for both buyers and the company",
-      caveat: "We read these definitions on Kim and Mauborgne’s official site. Get exact page quotes from the California Management Review article through the USC library.",
+      caveat: "The full article is behind a paywall everywhere we looked, so we checked its abstract on the California Management Review site and the definitions on Kim and Mauborgne’s own site. To quote the article itself, open it through the USC library, which gives access through the publisher, SAGE.",
     },
     {
       figure: "$3,500",
@@ -418,10 +418,26 @@ const canvasFacts: SlideFacts = {
     },
     {
       figure: "225,000 cases",
-      claim: "[yellow tail] sold 225,000 cases in its first year, against 25,000 expected, and became the top imported wine in the US within two years.",
+      claim: "[yellow tail] sold 225,000 cases in its first year, nine times the 25,000 Casella expected, and reached 25 million cases in total by the end of 2005.",
       status: "verified",
+      derivation: "The source says Casella sold “nine times” its 25,000-case target, and 9 × 25,000 = 225,000.",
       source: "yellowTailCase",
-      caveat: "Sources say “two years” in one place and “less than three years” in another. Use “within about two years.”",
+      quote: "they had expected to sell 25,000 cases in their first year. In fact, they had sold nine times that amount.",
+    },
+    {
+      figure: "2 years",
+      claim: "[yellow tail] became the number-one imported wine in the US within two years by eliminating complexity and aging and creating easy drinking, easy selection, and fun and adventure.",
+      status: "verified",
+      source: "wineExcerpt",
+      quote: "In the space of only two years, Yellow Tail emerged as the fastest-growing brand… and the number-one imported wine into the United States",
+    },
+    {
+      figure: "3 characteristics",
+      claim: "A good blue ocean strategy has focus, divergence and a compelling tagline.",
+      status: "verified",
+      source: "wineExcerpt",
+      quote: "A good strategy has a clear-cut and compelling tagline.",
+      caveat: "This quote is from the authors’ book. The 2005 article makes the same point, but we couldn’t open its full text.",
     },
   ],
   questions: [
