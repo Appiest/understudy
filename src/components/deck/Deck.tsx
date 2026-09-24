@@ -45,7 +45,7 @@ export function Deck() {
               </motion.section>
             )}
           </AnimatePresence>
-          <SlideFooter slide={slide} step={step} />
+          <SlideFooter slide={slide} step={step} slideNumber={index + 1} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
         <NotesPanel open={notesOpen} slide={slide} onClose={toggleNotes} />
