@@ -1,17 +1,6 @@
 import type { SourceId } from "./sources";
 import { team } from "./config";
 
-export type Rubric = "b" | "c" | "d" | "e" | "f" | "g";
-
-export const rubricNames: Record<Rubric, string> = {
-  b: "Avoiding solution jumping",
-  c: "Challenge and evidence",
-  d: "Exponential drivers",
-  e: "Proposed solution",
-  f: "Blue Ocean value map",
-  g: "Mind map of the problem space",
-};
-
 export const title = {
   tagline: "Your best employee, in every new hire’s ear.",
   subtitle: "A Blue Ocean approach to frontline training in high-turnover businesses",

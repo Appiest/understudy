@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { appendix, canvas, drivers, landscape, mindMap, solution, title, turnover, type Rubric } from "@/content/content";
+import { appendix, canvas, drivers, landscape, mindMap, solution, title, turnover } from "@/content/content";
 import type { SourceId } from "@/content/sources";
 import { CanvasSlide } from "./slides/CanvasSlide";
 import { ChallengeSlide } from "./slides/ChallengeSlide";
@@ -15,7 +15,6 @@ export type SlideProps = { step: number };
 export type SlideDefinition = {
   id: string;
   name: string;
-  rubric?: Rubric[];
   steps: number;
   printSteps?: number[];
   sourcesByStep: SourceId[][];
@@ -27,7 +26,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "title",
     name: "Title and our rules against solution jumping",
-    rubric: ["b"],
     steps: 2,
     printSteps: [0, 1],
     sourcesByStep: [[]],
@@ -37,7 +35,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "challenge",
     name: "The challenge and the evidence",
-    rubric: ["c"],
     steps: 4,
     printSteps: [0, 1, 2, 3],
     sourcesByStep: [["blsJolts"], ["groceryDive", "strivrWalmart"], ["kimMauborgne"], ["kimMauborgne"]],
@@ -47,7 +44,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "drivers",
     name: "Exponential drivers",
-    rubric: ["d"],
     steps: 3,
     printSteps: [0, 1, 2],
     sourcesByStep: [[], ["idcShipments", "uploadVr"], ["roadToVr", "skillsive", "techSpot", "googleXr"]],
@@ -57,7 +53,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "solution",
     name: "The solution",
-    rubric: ["e"],
     steps: 4,
     printSteps: [0, 1, 2, 3],
     sourcesByStep: [[], [], [], ["retrocausal", "mentra", "viture"]],
@@ -67,7 +62,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "canvas",
     name: "Blue Ocean value map",
-    rubric: ["f"],
     steps: 3,
     printSteps: [1, 2],
     sourcesByStep: [["kimMauborgne"]],
@@ -77,7 +71,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "landscape",
     name: "Competitive landscape",
-    rubric: ["c", "e", "f"],
     steps: 1,
     sourcesByStep: [["strivrWalmart", "viture", "yoobic"]],
     notes: landscape.notes,
@@ -86,7 +79,6 @@ export const slides: SlideDefinition[] = [
   {
     id: "mind-map",
     name: "Mind map of the problem space",
-    rubric: ["g"],
     steps: 1,
     sourcesByStep: [[]],
     notes: mindMap.notes,
