@@ -41,14 +41,11 @@ function TitleCard() {
   );
 }
 
-const PATHS = { left: 30, right: 730, jumpY: 70, ourY: 230, nodeRadius: 16 };
+const PATHS = { left: 30, right: 730, ourY: 290, nodeRadius: 16 };
+const JUMP = { start: { x: 30, y: 100 }, end: { x: 492, y: 66 }, controlY: -50 };
 
 type TrackNode = { label: string; at: number };
 
-const jumpNodes: TrackNode[] = [
-  { label: "AI glasses", at: 0 },
-  { label: "Build it", at: 1 },
-];
 const ourNodes: TrackNode[] = [
   { label: "Turnover", at: 0 },
   { label: "Evidence", at: 0.3 },
@@ -70,23 +67,39 @@ function labelX(node: TrackNode, index: number, count: number) {
   return nodeX(node) + offset;
 }
 
-function Track({ nodes, y, tone, delay }: { nodes: TrackNode[]; y: number; tone: "rival" | "ocean"; delay: number }) {
-  const color = `var(--color-${tone})`;
-  const isOurs = tone === "ocean";
+function SolutionJump({ delay }: { delay: number }) {
+  const { start, end, controlY } = JUMP;
+  const controlX = (start.x + end.x) / 2;
   return (
     <g>
       <motion.path
-        d={`M ${PATHS.left} ${y} L ${PATHS.right} ${y}`}
-        stroke={color}
-        strokeWidth={isOurs ? 8 : 4}
+        d={`M ${start.x} ${start.y} Q ${controlX} ${controlY} ${end.x} ${end.y}`}
+        fill="none"
+        stroke="var(--color-rival)"
+        strokeWidth={4}
         strokeLinecap="round"
-        strokeDasharray={isOurs ? undefined : "4 14"}
-        variants={isOurs ? strokeDraw(delay, 1.2) : fadeReveal(delay)}
+        strokeDasharray="4 14"
+        variants={fadeReveal(delay)}
       />
-      {nodes.map((node, index) => (
-        <motion.g key={node.label} variants={fadeReveal(delay + (isOurs ? index * 0.3 : 0))}>
-          <circle cx={nodeX(node)} cy={y} r={PATHS.nodeRadius} fill="var(--color-paper)" stroke={color} strokeWidth={isOurs ? 8 : 5} />
-          <text x={labelX(node, index, nodes.length)} y={y + 58} textAnchor={labelAnchor(index, nodes.length)} className="text-caption font-bold" fill={isOurs ? "var(--color-ink)" : "var(--color-ink-muted)"}>
+      {[start, end].map((point) => (
+        <motion.circle key={point.x} cx={point.x} cy={point.y} r={PATHS.nodeRadius} fill="var(--color-paper)" stroke="var(--color-rival)" strokeWidth={5} variants={fadeReveal(delay)} />
+      ))}
+      <motion.text variants={fadeReveal(delay + 0.3)} x={end.x} y={end.y + 58} textAnchor="middle" className="text-caption font-bold" fill="var(--color-ink-muted)">
+        Build AI glasses
+      </motion.text>
+    </g>
+  );
+}
+
+function OurPath({ delay }: { delay: number }) {
+  const y = PATHS.ourY;
+  return (
+    <g>
+      <motion.path d={`M ${PATHS.left} ${y} L ${PATHS.right} ${y}`} stroke="var(--color-ocean)" strokeWidth={8} strokeLinecap="round" variants={strokeDraw(delay, 1.2)} />
+      {ourNodes.map((node, index) => (
+        <motion.g key={node.label} variants={fadeReveal(delay + index * 0.3)}>
+          <circle cx={nodeX(node)} cy={y} r={PATHS.nodeRadius} fill="var(--color-paper)" stroke="var(--color-ocean)" strokeWidth={8} />
+          <text x={labelX(node, index, ourNodes.length)} y={y + 58} textAnchor={labelAnchor(index, ourNodes.length)} className="text-caption font-bold" fill="var(--color-ink)">
             {node.label}
           </text>
         </motion.g>
@@ -97,15 +110,15 @@ function Track({ nodes, y, tone, delay }: { nodes: TrackNode[]; y: number; tone:
 
 function JumpDiagram() {
   return (
-    <svg viewBox="0 0 760 310" className="w-[760px] overflow-visible" role="img" aria-label="A solution jump goes from AI glasses straight to building it. Our path went from turnover to evidence to noncustomers before arriving at Understudy.">
-      <motion.text variants={fadeReveal(0.5)} x={PATHS.left - PATHS.nodeRadius} y={PATHS.jumpY - 38} className="text-caption font-semibold" fill="var(--color-rival)">
+    <svg viewBox="0 0 760 370" className="w-[760px] overflow-visible" role="img" aria-label="A solution jump leaps straight to building AI glasses. Our path went from turnover to evidence to noncustomers before arriving at Understudy.">
+      <motion.text variants={fadeReveal(0.5)} x={PATHS.left - PATHS.nodeRadius} y={JUMP.start.y + 56} className="text-caption font-semibold" fill="var(--color-rival)">
         Solution jump
       </motion.text>
-      <Track nodes={jumpNodes} y={PATHS.jumpY} tone="rival" delay={0.6} />
+      <SolutionJump delay={0.6} />
       <motion.text variants={fadeReveal(1.2)} x={PATHS.left - PATHS.nodeRadius} y={PATHS.ourY - 38} className="text-caption font-semibold" fill="var(--color-ocean)">
         Our path
       </motion.text>
-      <Track nodes={ourNodes} y={PATHS.ourY} tone="ocean" delay={1.3} />
+      <OurPath delay={1.3} />
     </svg>
   );
 }
