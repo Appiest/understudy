@@ -5,7 +5,7 @@ import { appendix } from "@/content/content";
 import { sources, type Source } from "@/content/sources";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 
-const entries: Source[] = Object.values(sources);
+const entries: Source[] = Object.values(sources).filter((source: Source) => !source.factsOnly);
 
 export function SourcesSlide() {
   return (

@@ -163,6 +163,7 @@ Leave the command window open while you use the deck, because closing it stops t
 | Show or hide the speaker notes | N |
 | Enter or leave full screen | F |
 | Open the print version | P |
+| Open the facts behind the current slide | D |
 | Jump to the first or last slide | Home or End |
 | Close the notes | Escape |
 
@@ -171,6 +172,14 @@ Most slides build in steps, called beats, so each press brings in the next part.
 ### Speaker notes
 
 Press **N** to open the speaker script for the current slide at the bottom of the screen. The notes appear on the same screen as the slides, so if you're projecting, open them on your laptop before you mirror the display, or keep a printed copy.
+
+### Facts behind each slide
+
+Every slide has a fact page for preparing Q&A. It lists each number on the slide with where it came from, a short quote from the source, and whether it matches the source, is a team estimate or is only an illustration. It also covers what to say if someone pushes back, background numbers like market size, and the questions an investor is likely to ask. The strategy canvas page shows every score and the reasoning behind it.
+
+Press **D** during the deck, click **Facts behind this slide** in the speaker notes, or add `/data` to a slide's address: `http://localhost:3000/#5/data` (or **https://appiest.github.io/understudy/#5/data** on the live site). Press **Escape** to go back to the slide.
+
+The facts live in `src/content/facts.ts`. If you change a number on a slide, update its entry there too.
 
 ### Jump to a slide
 
@@ -398,6 +407,7 @@ understudy/
     │   └── print/page.tsx             The print version, at /print
     ├── content/
     │   ├── config.ts                  Team placeholders: name, members, Figma link, mind map
+    │   ├── facts.ts                   The fact pages: sources, quotes, statuses and Q&A for each slide
     │   ├── content.ts                 Every slide's words, numbers, scores and notes
     │   └── sources.ts                 Every source, with its citation and link
     ├── components/deck/
