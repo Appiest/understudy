@@ -47,7 +47,7 @@ export const turnover = {
     industryLabel: "The training industry asks",
     ourLabel: "We ask",
     industryQuestion: "How do we build better training content?",
-    ourQuestion: "How does a new hire do the job right on day 3, with an expert over their shoulder, without the expert being there?",
+    ourQuestion: "How can a new hire learn from the expert without the expert being there?",
   },
   noncustomers: {
     heading: "Our buyers are today’s noncustomers",
@@ -62,21 +62,22 @@ export const turnover = {
     "In 2025, retail separations averaged 3.8 percent of the workforce every month, and restaurants and hotels averaged 5.5 percent. Over a year, that adds up to separations equal to about 46 percent of retail jobs and 66 percent of restaurant and hotel jobs. These are Bureau of Labor Statistics numbers.",
     "Every one of those departures means training someone new. A 2017 estimate for independent grocers put the cost of replacing one part-time worker at about 4,200 dollars. With 16 part-timers leaving a typical store each year, that adds up to about 67 thousand dollars per store. The figure is dated, so we label it that way.",
     "Walmart has a whole learning department and still had to send three or four people to a store to train associates. A corner grocer has nobody to send.",
-    "Like Casella did with [yellow tail], we reframed the question. The industry asks how to make better training content. We ask how a new hire can do the job right on day three with an expert over their shoulder who is not actually there.",
+    "Like Casella did with [yellow tail], we reframed the question. The industry asks how to make better training content. We ask how a new hire can learn from the store’s expert without the expert being there.",
     "Our customers are the noncustomers today’s training industry ignores, the way Casella went after beer and cocktail drinkers instead of wine connoisseurs.",
   ],
 };
 
 export const drivers = {
-  headline: "Two curves just crossed.",
   ai: {
-    name: "Multimodal AI",
-    claim: "Models that understand first-person video and speech can turn a recorded shift into step-by-step procedures and answer questions in real time.",
+    heading: "Driver 1: AI can now turn a recorded shift into step-by-step instructions",
+    recordedLabel: "What the glasses record",
+    writtenLabel: "What the AI writes",
+    proof: "Meta’s Live AI already does part of this on Ray-Ban glasses: it sees what the wearer sees and talks about it as it happens.",
     frames: ["Unloads the dairy delivery", "Checks dates, oldest to the front", "Faces the oat milk left of almond"],
     steps: ["Receive dairy delivery", "Rotate stock by date", "Shelve to the planogram"],
   },
   glasses: {
-    name: "Cheap, socially acceptable AI glasses",
+    heading: "Driver 2: AI glasses now outsell headsets",
     share: {
       periods: ["Q2 2025", "Q2 2026"],
       glasses: [72.9, 84.6],
@@ -87,7 +88,7 @@ export const drivers = {
     soldIn2025: { value: 7, unit: "million", caption: "Ray-Ban Meta and Oakley Meta AI glasses sold in 2025", source: "essilorResults" as SourceId },
   },
   retreat: {
-    heading: "Big players are leaving enterprise headsets",
+    heading: "Why now: big players are leaving enterprise headsets",
     today: "Today",
     events: [
       { when: "Feb 20, 2026", what: "Meta stopped selling Quest for Business and Horizon managed services", source: "metaForWork" as SourceId },

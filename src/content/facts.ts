@@ -316,8 +316,8 @@ const drivers: SlideFacts = {
       answer: "They sell the platform, and they’re focused on consumers. Meta just stopped selling its enterprise headset program. Store-by-store training for small businesses is a narrow, hands-on market, which suits a startup that builds on their hardware.",
     },
     {
-      question: "What does “two curves just crossed” mean?",
-      answer: "It’s a figure of speech for two trends arriving together: AI that understands first-person video, and glasses cheap and normal enough to wear at work. The chart shows the second one, glasses overtaking headsets. Neither line is AI capability.",
+      question: "Why are these “exponential” drivers?",
+      answer: "Both are improving fast enough to change what’s possible in a year or two. Glasses went from 72.9% to 84.6% of XR shipments in a single year, and AI that understands live video went from a demo to a feature on consumer glasses in December 2024. Together they make a product that would have needed custom hardware and a research lab a few years ago.",
     },
   ],
 };

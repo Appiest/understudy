@@ -1,45 +1,51 @@
 "use client";
 
-import { ArrowRight, CheckCircle, Record } from "@phosphor-icons/react";
+import { ArrowRight, CalendarCheck, CheckCircle, Package, Record, Sparkle, Truck, type Icon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { drivers } from "@/content/content";
-import { CountUp, MaskedLines, StepView, fadeReveal, strokeDraw, useProgress } from "../primitives";
+import { CountUp, StepView, fadeReveal, strokeDraw, useProgress } from "../primitives";
 import type { SlideProps } from "../slides";
 
-function DriverHeading({ name }: { name: string }) {
+function DriverHeading({ heading }: { heading: string }) {
   return (
-    <div>
-      <h2 className="text-title font-extrabold">
-        <MaskedLines lines={[drivers.headline]} delay={0.1} />
-      </h2>
-      <p className="mt-2 text-lede font-bold text-ocean">
-        <MaskedLines lines={[name]} delay={0.3} />
-      </p>
-    </div>
+    <motion.h2 variants={fadeReveal(0.1, 24)} className="max-w-[1500px] text-title font-extrabold">
+      {heading}
+    </motion.h2>
   );
 }
 
+const frameIcons: Icon[] = [Truck, CalendarCheck, Package];
+
 function Filmstrip() {
   return (
-    <motion.ol variants={fadeReveal(0.5, 20)} className="flex bg-ink p-4" aria-label="Frames from a recorded shift">
-      {drivers.ai.frames.map((frame, index) => (
-        <li key={frame} className="flex h-[300px] w-[300px] flex-col justify-between bg-paper-sunken p-5 not-first:ml-4">
-          <span className="flex items-center gap-2 text-fineprint font-semibold text-rival">
-            <Record weight="fill" size={20} aria-hidden />
-            Shift recording {index + 1}
-          </span>
-          <span className="text-body font-semibold">{frame}</span>
-        </li>
-      ))}
-    </motion.ol>
+    <motion.div variants={fadeReveal(0.5, 20)}>
+      <p className="mb-4 flex items-center gap-2 text-caption font-semibold text-ink-muted">
+        <Record weight="fill" size={22} className="text-rival" aria-hidden />
+        {drivers.ai.recordedLabel}
+      </p>
+      <ol className="flex bg-ink p-4" aria-label={drivers.ai.recordedLabel}>
+        {drivers.ai.frames.map((frame, index) => {
+          const FrameIcon = frameIcons[index];
+          return (
+            <li key={frame} className="flex h-[300px] w-[300px] flex-col justify-between bg-paper-sunken p-6 not-first:ml-4">
+              <FrameIcon size={96} weight="duotone" className="text-ink-muted" aria-hidden />
+              <span className="text-body font-semibold">{frame}</span>
+            </li>
+          );
+        })}
+      </ol>
+    </motion.div>
   );
 }
 
 function Procedure() {
   return (
-    <motion.div variants={fadeReveal(1.3, 20)} className="flex w-[520px] flex-col rounded-card bg-paper-raised p-10 shadow-lift">
-      <p className="text-caption font-semibold text-ink-muted">Procedure</p>
-      <ol className="mt-6 flex flex-col gap-5">
+    <motion.div variants={fadeReveal(1.3, 20)}>
+      <p className="mb-4 flex items-center gap-2 text-caption font-semibold text-ink-muted">
+        <Sparkle weight="fill" size={22} className="text-ocean" aria-hidden />
+        {drivers.ai.writtenLabel}
+      </p>
+      <ol className="flex w-[520px] flex-col gap-5 rounded-card bg-paper-raised p-10 shadow-lift">
         {drivers.ai.steps.map((step, index) => (
           <motion.li key={step} variants={fadeReveal(1.6 + index * 0.25)} className="flex items-center gap-4 text-body font-semibold">
             <CheckCircle weight="fill" size={36} className="shrink-0 text-ocean" aria-hidden />
@@ -54,16 +60,16 @@ function Procedure() {
 function AiView() {
   return (
     <StepView className="flex flex-col justify-between">
-      <DriverHeading name={drivers.ai.name} />
-      <div className="flex items-center gap-10">
+      <DriverHeading heading={drivers.ai.heading} />
+      <div className="flex items-end gap-10">
         <Filmstrip />
-        <motion.span variants={fadeReveal(1)}>
+        <motion.span variants={fadeReveal(1)} className="pb-32">
           <ArrowRight size={64} weight="bold" aria-hidden />
         </motion.span>
         <Procedure />
       </div>
-      <motion.p variants={fadeReveal(0.8)} className="max-w-[1400px] text-lede font-semibold">
-        {drivers.ai.claim}
+      <motion.p variants={fadeReveal(2.2)} className="max-w-[1400px] text-body text-ink-muted">
+        {drivers.ai.proof}
       </motion.p>
     </StepView>
   );
@@ -115,7 +121,7 @@ function GlassesView() {
   const progress = useProgress(1.6, 1.2);
   return (
     <StepView className="flex flex-col">
-      <DriverHeading name={drivers.glasses.name} />
+      <DriverHeading heading={drivers.glasses.heading} />
       <div className="mt-auto grid grid-cols-[900px_1fr] items-end gap-gap">
         <div>
           <motion.p variants={fadeReveal(0.4)} className="mb-6 text-caption font-semibold text-ink-muted">
@@ -152,7 +158,7 @@ function RetreatView() {
   const { retreat } = drivers;
   return (
     <StepView className="flex flex-col">
-      <DriverHeading name={retreat.heading} />
+      <DriverHeading heading={retreat.heading} />
       <div className="relative mt-auto mb-auto">
         <svg aria-hidden viewBox="0 0 1696 10" className="absolute inset-x-0 top-0 h-2.5 w-full -translate-y-1/2 overflow-visible">
           <motion.line x1={0} x2={1696} y1={5} y2={5} stroke="var(--color-ink)" strokeWidth={4} variants={strokeDraw(0.4, 1.4)} />
