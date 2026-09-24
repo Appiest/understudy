@@ -282,6 +282,7 @@ export type MindMapBranch = { name: string; leaves: string[] };
 
 export const mindMap = {
   headline: "Mind map of the problem space",
+  headlineLines: ["Mind map of", "the problem", "space"],
   center: "Constant retraining in high-turnover businesses",
   branches: [
     { name: "Causes of turnover", leaves: ["Low pay", "Scheduling", "Poor onboarding", "Burnout"] },

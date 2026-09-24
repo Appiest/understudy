@@ -52,7 +52,9 @@ function DrawnMindMap() {
 
 function MindMapImage() {
   return (
-    <motion.img variants={fadeReveal(0.3)} src={asset(team.mindMapImage)} alt={`Mind map centered on ${mindMap.center}`} className="max-h-[640px] w-full object-contain" />
+    <motion.a variants={fadeReveal(0.3)} href={asset(team.mindMapImage)} target="_blank" rel="noreferrer" className="block h-full min-h-0" aria-label="Open the full-size mind map">
+      <motion.img src={asset(team.mindMapImage)} alt={`Our Figma mind map, from the UN Sustainable Development Goals through the industries we looked at to high turnover and AI glasses`} className="h-full w-auto object-contain" />
+    </motion.a>
   );
 }
 
@@ -79,7 +81,35 @@ function FigmaButton() {
   );
 }
 
-export function MindMapSlide() {
+function NextSteps() {
+  return (
+    <motion.div variants={fadeReveal(2)} className="flex items-center gap-8">
+      <VoiceWave width={220} height={60} delay={2.2} fadeTowards="end" />
+      <p className="text-lede font-bold">{mindMap.next}</p>
+    </motion.div>
+  );
+}
+
+function ImageLayout() {
+  return (
+    <StepView className="grid grid-cols-[1fr_auto] grid-rows-[minmax(0,1fr)] gap-gap">
+      <div className="flex flex-col">
+        <h2 className="text-headline font-extrabold">
+          <MaskedLines lines={mindMap.headlineLines} delay={0.1} />
+        </h2>
+        <motion.div variants={fadeReveal(0.5)} className="mt-10 self-start">
+          <FigmaButton />
+        </motion.div>
+        <div className="mt-auto">
+          <NextSteps />
+        </div>
+      </div>
+      <MindMapImage />
+    </StepView>
+  );
+}
+
+function DrawnLayout() {
   return (
     <StepView className="flex flex-col justify-between">
       <div className="flex items-center justify-between gap-gap">
@@ -90,11 +120,12 @@ export function MindMapSlide() {
           <FigmaButton />
         </motion.div>
       </div>
-      {team.mindMapImage ? <MindMapImage /> : <DrawnMindMap />}
-      <motion.div variants={fadeReveal(2)} className="flex items-center gap-8">
-        <VoiceWave width={220} height={60} delay={2.2} fadeTowards="end" />
-        <p className="text-lede font-bold">{mindMap.next}</p>
-      </motion.div>
+      <DrawnMindMap />
+      <NextSteps />
     </StepView>
   );
+}
+
+export function MindMapSlide() {
+  return team.mindMapImage ? <ImageLayout /> : <DrawnLayout />;
 }

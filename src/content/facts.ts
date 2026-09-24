@@ -602,23 +602,33 @@ const landscape: SlideFacts = {
 };
 
 const mindMapFacts: SlideFacts = {
-  summary: "The mind map lays out the problem space around constant retraining. It’s our team’s map, and the branches are hypotheses to test, not findings.",
+  summary: "This slide shows our team’s Figma board. It starts from the UN Sustainable Development Goals, branches into the industries we looked at, converges on high employee turnover as the shared problem, and ends at AI glasses as the idea. Click the board or the button to open it full size.",
   facts: [
     {
-      figure: "8 branches",
-      claim: "Causes of turnover, cost of training, what new hires struggle with, tacit knowledge, noncustomers, alternatives, enabling tech and risks.",
+      figure: "5 industries",
+      claim: "Healthcare, fast food, retail, restaurants and construction, which all showed staff shortages or high turnover on our board.",
       status: "estimate",
-      caveat: "The causes and struggles listed are our hypotheses. The owner interviews should confirm or cut each one.",
+      caveat: "These are the team’s brainstormed problems, not researched findings. Slide 2 has the data for retail and restaurants.",
+    },
+    {
+      figure: "Overlap",
+      claim: "The board’s key insight is the overlap between unrelated industries: all of them struggle to train people when turnover is high and workers are overworked.",
+      status: "estimate",
+      caveat: "It’s the question that led us to the product: “How can we train employees when the turnover rate is so high and workers are overworked?”",
     },
   ],
   questions: [
     {
-      question: "Which parts of the map have you validated?",
-      answer: "The cost and turnover branches are backed by the data on slide 2. The rest are hypotheses. The five owner interviews will focus on what new hires struggle with and whether owners would record their best employee.",
+      question: "Why did you start from the UN Sustainable Development Goals?",
+      answer: "It gave us a structured way to scan for big problems before picking one. Industry, innovation and infrastructure got the most votes on our board, and looking at industries under it showed the same turnover problem in very different businesses.",
+    },
+    {
+      question: "Why didn’t you pick education?",
+      answer: "We explored it on the board, but the space already has many established tools like Khan Academy, Duolingo and Canvas. Frontline training in small businesses had a clearer gap.",
     },
     {
       question: "What are you doing next?",
-      answer: "Interview five owners, test capture during one real shift, and redraw the strategy canvas with the owners’ own scores.",
+      answer: "Interview five owners, test capture during one real shift, and redraw the strategy canvas with the owners’ own scores. The board lists some first contacts: family members, a village store and managers at local fast food chains.",
     },
   ],
 };

@@ -222,7 +222,7 @@ You never have to touch the slide layout code to change what the deck says. All 
 
 ### Fill in the placeholders
 
-Open `src/content/config.ts`. Everything that names our team, or that we still have to fill in, is in this one file. The Figma link and the mind map image are the two still missing.
+Open `src/content/config.ts`. Everything that names our team, links to our Figma board or points to the mind map image is in this one file.
 
 | Placeholder | What to put there | Where it shows up |
 | --- | --- | --- |
