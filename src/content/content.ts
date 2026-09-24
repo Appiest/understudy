@@ -111,17 +111,17 @@ export const drivers = {
     leaving: {
       label: "Leaving headsets",
       moves: [
-        { when: "Dec 2024", who: "Microsoft", what: "Stopped making HoloLens, then handed its Army headset program to Anduril", source: "hololensEnd" as SourceId },
-        { when: "Feb 2026", who: "Meta", what: "Stopped selling Quest headsets to businesses", source: "metaForWork" as SourceId },
+        { when: "Dec 2024", who: "Microsoft", what: "Stopped making HoloLens", source: "hololensEnd" as SourceId },
+        { when: "Feb 2026", who: "Meta", what: "Stopped selling Quest to businesses", source: "metaForWork" as SourceId },
       ],
     },
     betting: {
       label: "Betting on glasses",
       moves: [
-        { when: "Jan 2026", who: "Meta", what: "“Directing most of our investment towards glasses and wearables”", source: "metaQ4Call" as SourceId },
-        { when: "May 2025", who: "Google", what: "Committed up to $150M to build AI glasses with Warby Parker, launching with Samsung this fall", source: "googleWarbyParker" as SourceId },
-        { when: "Oct 2025", who: "Apple", what: "Reportedly paused a headset to speed up its glasses", source: "appleGlassesReport" as SourceId },
-        { when: "Since Oct 2025", who: "Amazon", what: "AI glasses guided 500+ delivery drivers through 275,000 deliveries", source: "amazonGlasses" as SourceId },
+        { when: "Jan 2026", who: "Meta", what: "“Most of our investment” now goes to glasses", source: "metaQ4Call" as SourceId },
+        { when: "May 2025", who: "Google", what: "Up to $150M into AI glasses with Warby Parker", source: "googleWarbyParker" as SourceId },
+        { when: "Oct 2025", who: "Apple", what: "Reportedly paused a headset for glasses", source: "appleGlassesReport" as SourceId },
+        { when: "2025–2026", who: "Amazon", what: "AI glasses guide 500+ delivery drivers", source: "amazonGlasses" as SourceId },
       ],
     },
     analyst: { quote: "Among businesses, training and design use cases will keep driving adoption", who: "IDC, September 2026", source: "idcTraining" as SourceId },
@@ -171,39 +171,11 @@ export const solution = {
       { key: "Who we sell to", value: "Small businesses first, with a scrappier product. Bigger players will chase large enterprises, and we grow from there." },
     ],
   },
-  privacy: {
-    heading: "Privacy is the risk we have to solve",
-    concernLabel: "The concern",
-    planLabel: "Our plan",
-    concerns: [
-      {
-        concern: "Recording conversations",
-        evidence: "11 states require everyone’s consent to record a conversation.",
-        plan: "Keep only the wearer’s voice and discard everyone else’s audio.",
-      },
-      {
-        concern: "Faces in the footage",
-        evidence: "The FTC banned Rite Aid from facial recognition for five years.",
-        plan: "Blur faces on the glasses before anything is saved.",
-      },
-      {
-        concern: "Who sees the footage",
-        evidence: "Meta is being sued after contractors saw intimate glasses footage.",
-        plan: "Footage stays with the store, with no human review and no outside AI training.",
-      },
-      {
-        concern: "Telling staff and shoppers",
-        evidence: "72% of Americans worry about being secretly recorded by wearables.",
-        plan: "Signs at the door, written notice for staff, and capture off in restrooms and back offices.",
-      },
-    ],
-  },
   notes: [
     "Here is how it works. In capture, the owner or the store’s best employee wears the glasses through about a week of normal shifts. They do not have to do anything extra.",
     "In learn, AI turns that footage and audio into a playbook for this specific store: where things go, how the register works, the house rules, and the judgment calls.",
     "In coach, the new hire wears the glasses. The AI talks them through tasks, answers questions like where does this go, and flags mistakes on a few key tasks such as stocking to the planogram, food safety steps, and closing the register. The owner sees who is ready for what.",
     "We are honest about scope. Version one is the procedure library, voice guidance and Q&A. Mistake detection starts with a few well-defined tasks. We use off-the-shelf glasses, not custom hardware. We start with small businesses and a scrappier product, because bigger players will go after large enterprises first.",
-    "Privacy is the risk we have to solve. Store security cameras record silent video in public areas, but glasses add a microphone, follow the employee into back rooms, and feed AI. So we keep only the wearer’s voice, blur faces on the glasses, keep footage with the store with no human review, and post clear notice for staff and shoppers.",
   ],
 };
 

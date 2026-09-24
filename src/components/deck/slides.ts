@@ -53,9 +53,9 @@ export const slides: SlideDefinition[] = [
   {
     id: "solution",
     name: "The solution",
-    steps: 5,
-    printSteps: [0, 1, 2, 3, 4],
-    sourcesByStep: [[], [], [], ["metaGlassesPrices", "retrocausal", "mentra"], ["recordingConsent", "ftcRiteAid", "metaGlassesLawsuit", "wearableSurvey", "connecticutMonitoring"]],
+    steps: 4,
+    printSteps: [0, 1, 2, 3],
+    sourcesByStep: [[], [], [], ["metaGlassesPrices", "retrocausal", "mentra"]],
     notes: solution.notes,
     Content: SolutionSlide,
   },
