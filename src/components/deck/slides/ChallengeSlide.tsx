@@ -66,7 +66,9 @@ function Seat({ index, isReplaced, rowDelay }: { index: number; isReplaced: bool
   );
 }
 
-function SectorRow({ name, monthlySeparationRate, rowIndex }: { name: string; monthlySeparationRate: number; rowIndex: number }) {
+type SectorRowProps = { name: string; caption: string; monthlySeparationRate: number; rowIndex: number };
+
+function SectorRow({ name, caption, monthlySeparationRate, rowIndex }: SectorRowProps) {
   const annualRate = monthlySeparationRate * MONTHS_PER_YEAR;
   const rowDelay = 0.8 + rowIndex * 0.5;
   const progress = useProgress(1.8, rowDelay);
@@ -78,11 +80,11 @@ function SectorRow({ name, monthlySeparationRate, rowIndex }: { name: string; mo
           <CountUp progress={progress} total={annualRate} format={percent} />
         </p>
         <p className="mt-2 text-caption">
-          <span className="block font-bold">{name}</span>
+          <span className="block font-bold">{caption}</span>
           <span className="text-ink-muted">{monthlySeparationRate}% a month × 12 months</span>
         </p>
       </div>
-      <svg viewBox={`0 0 ${turnover.seatsPerRow * 62} 84`} className="mb-3 w-full overflow-visible" role="img" aria-label={`${replaced.size} of ${turnover.seatsPerRow} ${name.toLowerCase()} workers replaced in a year`}>
+      <svg viewBox={`0 0 ${turnover.seatsPerRow * 62} 84`} className="mb-3 w-full overflow-visible" role="img" aria-label={`${replaced.size} of every ${turnover.seatsPerRow} ${name.toLowerCase()} jobs refilled in a year`}>
         {Array.from({ length: turnover.seatsPerRow }, (_, index) => (
           <Seat key={index} index={index} isReplaced={replaced.has(index)} rowDelay={rowDelay + 0.4} />
         ))}
@@ -101,12 +103,18 @@ function TurnoverView() {
         {turnover.sectors.map((sector, rowIndex) => (
           <SectorRow key={sector.name} {...sector} rowIndex={rowIndex} />
         ))}
-        <motion.p variants={fadeReveal(2.6)} className="flex items-center gap-4 text-caption text-ink-muted">
-          <svg aria-hidden viewBox="0 0 40 84" className="h-9 w-auto">
-            <Person tone="ocean" />
-          </svg>
-          A new hire who has to be trained
-        </motion.p>
+        <motion.dl variants={fadeReveal(2.6)} className="flex items-center gap-12 text-caption text-ink-muted">
+          {(["stayed", "replaced"] as const).map((kind) => (
+            <div key={kind} className="flex items-center gap-4">
+              <dt>
+                <svg aria-hidden viewBox="0 0 40 84" className="h-9 w-auto">
+                  <Person tone={kind === "replaced" ? "ocean" : "ink"} />
+                </svg>
+              </dt>
+              <dd>{turnover.legend[kind]}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </StepView>
   );
