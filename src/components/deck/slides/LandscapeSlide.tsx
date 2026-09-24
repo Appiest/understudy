@@ -19,7 +19,7 @@ function positionOf(player: LandscapePlayer) {
 const markerClass: Record<LandscapePlayer["kind"], string> = {
   rival: "h-7 w-7 rounded-full bg-rival",
   us: "h-12 w-12 rounded-full bg-ocean shadow-[0_0_0_10px_var(--color-ocean-wash)]",
-  platform: "h-7 w-7 bg-paper ring-[5px] ring-ink ring-inset",
+  platform: "h-7 w-7 border-[5px] border-ink bg-paper",
 };
 
 const labelClass: Record<LandscapePlayer["kind"], string> = {
