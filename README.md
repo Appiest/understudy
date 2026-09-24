@@ -407,7 +407,7 @@ understudy/
     │   ├── primitives.tsx             Shared animation pieces (text reveals, count-ups)
     │   ├── VoiceWave.tsx              The animated voice line that recurs through the deck
     │   ├── GlassesRender.tsx          Shows a rendered view of the glasses
-    │   ├── SlideFooter.tsx            Sources and rubric tag
+    │   ├── SlideFooter.tsx            Sources for the current step
     │   ├── NotesPanel.tsx             The speaker notes panel (N)
     │   ├── PrintDeck.tsx              Lays every slide out for printing
     │   ├── useDeckNavigation.ts       Keyboard, click, swipe and address bar navigation
@@ -422,7 +422,6 @@ Every slide is drawn on a fixed 1920 by 1080 stage that scales to fit the window
 `src/components/deck/slides.ts` lists the slides in order. Each entry sets:
 
 - `name`: shown in the speaker notes panel and read out by screen readers
-- `rubric`: which rubric items it covers, shown in the footer
 - `steps`: how many presses the slide takes before moving on
 - `printSteps`: which steps get their own page in the PDF. By default only the last step is printed.
 - `sourcesByStep`: which sources the footer shows at each step
@@ -444,7 +443,7 @@ The glasses images are real 3D renders. `art/glasses.py` builds the model in [Bl
 | (f) Blue Ocean value map | 5, supported by 6 | The strategy canvas, the ERRC grid, the three characteristics, the landscape map |
 | (g) Mind map of the problem space | 7 | The mind map and the link to our Figma board |
 
-The footer of every slide names the rubric item it covers.
+The slides don't label rubric items, so use this table when you check the deck against the assignment.
 
 ---
 
