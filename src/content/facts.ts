@@ -312,7 +312,7 @@ const drivers: SlideFacts = {
       status: "verified",
       source: "idcTraining",
       quote: "Among businesses, training and design use cases will keep driving adoption",
-      caveat: "The same IDC post names the lack of notice and consent while recording as a risk, which is why privacy gets its own beat on slide 4.",
+      caveat: "The same IDC post names the lack of notice and consent while recording as a risk. The privacy research is on the slide 4 fact page.",
     },
   ],
   background: [
@@ -362,7 +362,7 @@ const drivers: SlideFacts = {
 };
 
 const solution: SlideFacts = {
-  summary: "This slide explains how the product works in three stages: capture, learn and coach. It also shows a realistic first version and how we’d handle privacy. The coaching example and the dashboard are illustrations, not real data.",
+  summary: "This slide explains how the product works in three stages: capture, learn and coach. It also shows a realistic first version. Privacy isn’t on the slide, but the research behind it is below for questions. The coaching example and the dashboard are illustrations, not real data.",
   facts: [
     {
       figure: "$249–$449",
@@ -387,6 +387,20 @@ const solution: SlideFacts = {
       source: "retrocausal",
       quote: "No-code configuration for quick setup from a single recorded example.",
     },
+    {
+      figure: "About a week",
+      claim: "How long the best employee wears the glasses to capture a store’s playbook.",
+      status: "estimate",
+      caveat: "This is our assumption. The test on one real shift will tell us how much footage a useful playbook really needs.",
+    },
+    {
+      figure: "Maya, Jordan, Luis",
+      claim: "The coaching conversation, the playbook tasks and the readiness dashboard.",
+      status: "illustrative",
+      caveat: "These show what the product would look like. The people and numbers are made up, and nothing has been built yet.",
+    },
+  ],
+  background: [
     {
       figure: "11 states",
       claim: "States that require everyone in a conversation to consent before it’s recorded: California, Delaware, Florida, Illinois, Maryland, Massachusetts, Michigan, Montana, New Hampshire, Pennsylvania and Washington.",
@@ -427,18 +441,6 @@ const solution: SlideFacts = {
       claim: "Keep only the wearer’s voice, blur faces on the glasses, keep footage with the store, and post signs and staff notice.",
       status: "estimate",
       caveat: "These are design proposals, not built features. Regulators recommend similar steps: the UK’s privacy regulator says to keep audio off unless needed, and EU guidance recommends masking what isn’t needed and deleting footage within days.",
-    },
-    {
-      figure: "About a week",
-      claim: "How long the best employee wears the glasses to capture a store’s playbook.",
-      status: "estimate",
-      caveat: "This is our assumption. The test on one real shift will tell us how much footage a useful playbook really needs.",
-    },
-    {
-      figure: "Maya, Jordan, Luis",
-      claim: "The coaching conversation, the playbook tasks and the readiness dashboard.",
-      status: "illustrative",
-      caveat: "These show what the product would look like. The people and numbers are made up, and nothing has been built yet.",
     },
   ],
   questions: [

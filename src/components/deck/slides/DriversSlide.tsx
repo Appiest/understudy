@@ -245,21 +245,20 @@ function GlassesView() {
 
 type Move = (typeof drivers.shift.betting.moves)[number];
 
-function MoveList({ moves, tone, delay }: { moves: Move[]; tone: "rival" | "ocean"; delay: number }) {
+const moveCardTone = {
+  leaving: "bg-paper-sunken",
+  betting: "bg-paper-raised shadow-lift",
+};
+
+function MoveCard({ move, tone, delay }: { move: Move; tone: keyof typeof moveCardTone; delay: number }) {
   return (
-    <ol className="flex flex-col gap-7">
-      {moves.map((move, index) => (
-        <motion.li key={move.who + move.when} variants={fadeReveal(delay + index * 0.18, 16)} className="grid grid-cols-[28px_1fr] items-baseline">
-          <span aria-hidden className={`h-4 w-4 -translate-y-0.5 rounded-full ${tone === "ocean" ? "bg-ocean" : "bg-rival"}`} />
-          <div>
-            <p className="text-point">
-              <span className="font-extrabold">{move.who}</span> <span className="text-caption font-semibold text-ink-muted">{move.when}</span>
-            </p>
-            <p className="mt-1 text-body">{move.what}</p>
-          </div>
-        </motion.li>
-      ))}
-    </ol>
+    <motion.li variants={fadeReveal(delay, 16)} className={`flex flex-col justify-between rounded-card px-8 py-6 ${moveCardTone[tone]}`}>
+      <div className="flex items-baseline justify-between gap-4">
+        <p className={`text-lede font-extrabold ${tone === "leaving" ? "text-ink-muted" : "text-ink"}`}>{move.who}</p>
+        <p className="shrink-0 text-caption font-semibold text-ink-muted">{move.when}</p>
+      </div>
+      <p className="mt-3 text-body font-semibold">{move.what}</p>
+    </motion.li>
   );
 }
 
@@ -268,23 +267,31 @@ function ShiftView() {
   return (
     <StepView className="flex flex-col">
       <DriverHeading heading={shift.heading} />
-      <div className="mt-10 grid grid-cols-[560px_auto_1fr] items-start gap-12">
+      <div className="mt-10 grid grid-cols-[500px_auto_1fr] items-start gap-10">
         <section>
-          <h3 className="mb-7 text-lede font-extrabold text-ink-muted">{shift.leaving.label}</h3>
-          <MoveList moves={shift.leaving.moves} tone="rival" delay={0.5} />
-          <motion.figure variants={fadeReveal(2.4)} className="mt-14 rounded-card bg-paper-raised p-8 shadow-lift">
-            <blockquote className="text-point font-bold">“{shift.analyst.quote}”</blockquote>
-            <figcaption className="mt-3 text-caption text-ink-muted">{shift.analyst.who}</figcaption>
-          </motion.figure>
+          <h3 className="mb-5 text-point font-extrabold text-ink-muted">{shift.leaving.label}</h3>
+          <ol className="flex flex-col gap-4">
+            {shift.leaving.moves.map((move, index) => (
+              <MoveCard key={move.who} move={move} tone="leaving" delay={0.5 + index * 0.15} />
+            ))}
+          </ol>
         </section>
-        <motion.span variants={fadeReveal(1)} className="pt-24">
+        <motion.span variants={fadeReveal(1)} className="pt-40">
           <ArrowRight size={72} weight="bold" aria-hidden />
         </motion.span>
         <section>
-          <h3 className="mb-7 text-lede font-extrabold text-ocean">{shift.betting.label}</h3>
-          <MoveList moves={shift.betting.moves} tone="ocean" delay={1.2} />
+          <h3 className="mb-5 text-point font-extrabold text-ocean">{shift.betting.label}</h3>
+          <ol className="grid grid-cols-2 gap-4">
+            {shift.betting.moves.map((move, index) => (
+              <MoveCard key={move.who + move.when} move={move} tone="betting" delay={1.2 + index * 0.15} />
+            ))}
+          </ol>
         </section>
       </div>
+      <motion.p variants={fadeReveal(2.3)} className="mt-auto flex items-baseline gap-5 text-lede font-bold">
+        “{shift.analyst.quote}”
+        <span className="shrink-0 text-caption font-semibold text-ink-muted">{shift.analyst.who}</span>
+      </motion.p>
     </StepView>
   );
 }

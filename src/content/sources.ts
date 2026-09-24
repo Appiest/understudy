@@ -208,27 +208,32 @@ export const sources = {
     cite: "Reporters Committee for Freedom of the Press",
     title: "Reporters Committee for Freedom of the Press: Reporter’s Recording Guide, consent laws by state",
     url: "https://www.rcfp.org/introduction-to-reporters-recording-guide/",
-  },
+
+    factsOnly: true,  },
   ftcRiteAid: {
     cite: "FTC, Dec 2023",
     title: "FTC: Rite Aid banned from using AI facial recognition (Dec 19, 2023)",
     url: "https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without",
-  },
+
+    factsOnly: true,  },
   metaGlassesLawsuit: {
     cite: "TechCrunch, Mar 2026",
     title: "TechCrunch: Meta sued over AI smart glasses privacy after workers reviewed intimate footage (Mar 5, 2026)",
     url: "https://techcrunch.com/2026/03/05/meta-sued-over-ai-smartglasses-privacy-concerns-after-workers-reviewed-nudity-sex-and-other-footage/",
-  },
+
+    factsOnly: true,  },
   connecticutMonitoring: {
     cite: "Workplace Privacy Report, Sept 2026",
     title: "Workplace Privacy Report: deadline imminent for Connecticut’s expanded electronic monitoring law (Sept 2026)",
     url: "https://www.workplaceprivacyreport.com/2026/09/articles/monitoring-2/deadline-imminent-for-connecticuts-expanded-electronic-monitoring-law/",
-  },
+
+    factsOnly: true,  },
   wearableSurvey: {
     cite: "Security.org survey, Aug 2026",
     title: "Security.org survey of 1,000+ US adults on camera-equipped wearables (Aug 2026), via Apple World Today",
     url: "https://appleworld.today/2026/08/study-72-of-americans-surveyed-are-worried-about-being-secretly-recorded-by-camera-equipped-wearables/",
-  },
+
+    factsOnly: true,  },
   targetBipa: {
     cite: "Top Class Actions",
     title: "Top Class Actions: Arnold v. Target, class action over in-store facial geometry capture (filed June 6, 2024)",
