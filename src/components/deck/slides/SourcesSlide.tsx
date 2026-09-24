@@ -3,18 +3,22 @@
 import { motion } from "motion/react";
 import { appendix } from "@/content/content";
 import { sources, type Source } from "@/content/sources";
+import { AnimatePresence } from "motion/react";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
+import type { SlideProps } from "../slides";
 
 const entries: Source[] = Object.values(sources).filter((source: Source) => !source.factsOnly);
+const pageSize = Math.ceil(entries.length / 2);
+export const sourcePages = [entries.slice(0, pageSize), entries.slice(pageSize)];
 
-export function SourcesSlide() {
+function SourcesPage({ page }: { page: number }) {
   return (
     <StepView className="flex flex-col gap-10">
       <h2 className="text-title font-extrabold">
-        <MaskedLines lines={[appendix.headline]} delay={0.05} />
+        <MaskedLines lines={[`${appendix.headline} (${page + 1} of ${sourcePages.length})`]} delay={0.05} />
       </h2>
       <motion.ol variants={fadeReveal(0.3)} className="columns-2 gap-gap text-fineprint">
-        {entries.map((source) => (
+        {sourcePages[page].map((source) => (
           <li key={source.title} className="mb-4 break-inside-avoid">
             <p className="font-semibold">{source.title}</p>
             {source.url && (
@@ -26,5 +30,13 @@ export function SourcesSlide() {
         ))}
       </motion.ol>
     </StepView>
+  );
+}
+
+export function SourcesSlide({ step }: SlideProps) {
+  return (
+    <AnimatePresence mode="wait">
+      <SourcesPage key={step} page={step} />
+    </AnimatePresence>
   );
 }

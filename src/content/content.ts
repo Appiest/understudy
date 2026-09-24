@@ -47,7 +47,7 @@ export const turnover = {
     industryLabel: "The training industry asks",
     ourLabel: "We ask",
     industryQuestion: "How do we build better training content?",
-    ourQuestion: "How does a new hire do the job right on day 3, with an expert over their shoulder, without the expert being there?",
+    ourQuestion: "How can a new hire learn from the expert without the expert being there?",
   },
   noncustomers: {
     heading: "Our buyers are today’s noncustomers",
@@ -62,44 +62,74 @@ export const turnover = {
     "In 2025, retail separations averaged 3.8 percent of the workforce every month, and restaurants and hotels averaged 5.5 percent. Over a year, that adds up to separations equal to about 46 percent of retail jobs and 66 percent of restaurant and hotel jobs. These are Bureau of Labor Statistics numbers.",
     "Every one of those departures means training someone new. A 2017 estimate for independent grocers put the cost of replacing one part-time worker at about 4,200 dollars. With 16 part-timers leaving a typical store each year, that adds up to about 67 thousand dollars per store. The figure is dated, so we label it that way.",
     "Walmart has a whole learning department and still had to send three or four people to a store to train associates. A corner grocer has nobody to send.",
-    "Like Casella did with [yellow tail], we reframed the question. The industry asks how to make better training content. We ask how a new hire can do the job right on day three with an expert over their shoulder who is not actually there.",
+    "Like Casella did with [yellow tail], we reframed the question. The industry asks how to make better training content. We ask how a new hire can learn from the store’s expert without the expert being there.",
     "Our customers are the noncustomers today’s training industry ignores, the way Casella went after beer and cocktail drinkers instead of wine connoisseurs.",
   ],
 };
 
+export type ShipmentQuarter = { quarter: string; glasses?: number; other?: number; glassesGrowth?: number; otherSplit?: string };
+
 export const drivers = {
-  headline: "Two curves just crossed.",
   ai: {
-    name: "Multimodal AI",
-    claim: "Models that understand first-person video and speech can turn a recorded shift into step-by-step procedures and answer questions in real time.",
+    heading: "Driver 1: AI can now turn a recorded shift into step-by-step instructions",
+    recordedLabel: "What the glasses record",
+    writtenLabel: "What the AI writes",
+    proof: "Meta’s Live AI already does part of this on Ray-Ban glasses: it sees what the wearer sees and talks about it as it happens.",
     frames: ["Unloads the dairy delivery", "Checks dates, oldest to the front", "Faces the oat milk left of almond"],
     steps: ["Receive dairy delivery", "Rotate stock by date", "Shelve to the planogram"],
   },
   glasses: {
-    name: "Cheap, socially acceptable AI glasses",
-    share: {
-      periods: ["Q2 2025", "Q2 2026"],
-      glasses: [72.9, 84.6],
-      headsets: [27.1, 15.4],
-      caption: "Share of all XR shipments. Glasses include audio and camera glasses without a display.",
-      source: "idcShipments" as SourceId,
+    heading: "Driver 2: AI glasses now outsell headsets",
+    chart: {
+      caption: "Worldwide shipments each quarter, in thousands",
+      glassesLabel: "Glasses without a display",
+      otherLabel: "Headsets and display glasses",
+      unpublishedLabel: "Full-year data only",
+      source: "idcTracker" as SourceId,
+      quarters: [
+        { quarter: "Q1 2025", glasses: 831, other: 656, glassesGrowth: 219.5 },
+        { quarter: "Q2 2025", glasses: 1618, other: 937, glassesGrowth: 256.8 },
+        { quarter: "Q3 2025", glasses: 2994, other: 1302, glassesGrowth: 287.5 },
+        { quarter: "Q4 2025" },
+        { quarter: "Q1 2026", glasses: 2248, other: 1318, glassesGrowth: 167.4 },
+        { quarter: "Q2 2026", glasses: 2494, other: 1053, glassesGrowth: 54, otherSplit: "505 display glasses and 548 headsets" },
+      ] as ShipmentQuarter[],
     },
-    soldIn2025: { value: 7, unit: "million", caption: "Ray-Ban Meta and Oakley Meta AI glasses sold in 2025", source: "essilorResults" as SourceId },
+    metaSales: {
+      value: 7,
+      caption: "Ray-Ban Meta and Oakley Meta glasses sold in 2025, up from about 2 million across 2023 and 2024 combined",
+      source: "essilorResults" as SourceId,
+    },
+    questDecline: {
+      value: 42,
+      caption: "drop in Meta Quest headset shipments in 2025",
+      source: "idcXr2025" as SourceId,
+    },
   },
-  retreat: {
-    heading: "Big players are leaving enterprise headsets",
-    today: "Today",
-    events: [
-      { when: "Feb 20, 2026", what: "Meta stopped selling Quest for Business and Horizon managed services", source: "metaForWork" as SourceId },
-      { when: "Q2 2026", what: "Reality Labs lost $4.6B as Meta pivots to AI glasses", source: "techSpot" as SourceId },
-      { when: "Fall 2026", what: "Google and Samsung launch Android XR audio glasses with Warby Parker and Gentle Monster", source: "googleXr" as SourceId },
-      { when: "Dec 31, 2027", what: "HoloLens 2 security updates end after Microsoft discontinued it", source: "roadToVr" as SourceId },
-    ],
+  shift: {
+    heading: "Why now: the big players are moving from headsets to glasses",
+    leaving: {
+      label: "Leaving headsets",
+      moves: [
+        { when: "Dec 2024", who: "Microsoft", what: "Stopped making HoloLens, then handed its Army headset program to Anduril", source: "hololensEnd" as SourceId },
+        { when: "Feb 2026", who: "Meta", what: "Stopped selling Quest headsets to businesses", source: "metaForWork" as SourceId },
+      ],
+    },
+    betting: {
+      label: "Betting on glasses",
+      moves: [
+        { when: "Jan 2026", who: "Meta", what: "“Directing most of our investment towards glasses and wearables”", source: "metaQ4Call" as SourceId },
+        { when: "May 2025", who: "Google", what: "Committed up to $150M to build AI glasses with Warby Parker, launching with Samsung this fall", source: "googleWarbyParker" as SourceId },
+        { when: "Oct 2025", who: "Apple", what: "Reportedly paused a headset to speed up its glasses", source: "appleGlassesReport" as SourceId },
+        { when: "Since Oct 2025", who: "Amazon", what: "AI glasses guided 500+ delivery drivers through 275,000 deliveries", source: "amazonGlasses" as SourceId },
+      ],
+    },
+    analyst: { quote: "Among businesses, training and design use cases will keep driving adoption", who: "IDC, September 2026", source: "idcTraining" as SourceId },
   },
   notes: [
     "Two things changed at the same time. First, multimodal AI can now watch first-person video, listen to what someone says, and turn it into procedures. A week of recorded shifts becomes a playbook without anyone writing it.",
-    "Second, glasses won. In one year, glasses went from 72.9 to 84.6 percent of XR shipments while headsets fell from 27 to about 15 percent. Most of those glasses have a camera and speakers but no display, which is exactly what voice coaching needs. EssilorLuxottica reported more than 7 million Ray-Ban Meta and Oakley Meta glasses sold in 2025.",
-    "Meanwhile the enterprise headset players are retreating. HoloLens 2 is discontinued, Quest for Business is gone, and Reality Labs lost 4.6 billion dollars last quarter while pivoting to AI glasses. That leaves a gap for affordable, glasses-based training.",
+    "Second, glasses are winning. Shipments of glasses without a display, the kind with a camera and speakers like Ray-Ban Meta, grew between 167 and 288 percent year over year in every quarter IDC published since early 2025. Meta and EssilorLuxottica sold more than 7 million pairs in 2025 alone, compared with about 2 million across the two years before. Meanwhile Meta’s Quest headset shipments fell 42 percent.",
+    "So why did big companies stop selling headsets to businesses? Because they’re moving to glasses. Microsoft stopped making HoloLens and Meta stopped selling Quest to businesses, and Meta now says most of its hardware investment goes to glasses. Google, Apple and Amazon are all building or testing AI glasses, and Amazon already uses them to guide its delivery drivers. IDC expects training to be one of the uses that drives glasses in business, which is exactly our bet.",
   ],
 };
 
@@ -138,14 +168,42 @@ export const solution = {
       { key: "Mistake checks", value: "A few well-defined tasks at first, the approach Retrocausal uses in factories" },
       { key: "Hardware", value: "Off-the-shelf AI glasses ($249 to $449 from Meta), or open platforms like Mentra’s SDK" },
       { key: "Business model", value: "Per-store monthly subscription plus glasses, developed in later weeks" },
+      { key: "Who we sell to", value: "Small businesses first, with a scrappier product. Bigger players will chase large enterprises, and we grow from there." },
     ],
   },
-  risks: ["Customer privacy and recording consent", "Battery life (VITURE Helix quotes 60+ minutes, charging while in use)", "Bigger players moving into retail"],
+  privacy: {
+    heading: "Privacy is the risk we have to solve",
+    concernLabel: "The concern",
+    planLabel: "Our plan",
+    concerns: [
+      {
+        concern: "Recording conversations",
+        evidence: "11 states require everyone’s consent to record a conversation.",
+        plan: "Keep only the wearer’s voice and discard everyone else’s audio.",
+      },
+      {
+        concern: "Faces in the footage",
+        evidence: "The FTC banned Rite Aid from facial recognition for five years.",
+        plan: "Blur faces on the glasses before anything is saved.",
+      },
+      {
+        concern: "Who sees the footage",
+        evidence: "Meta is being sued after contractors saw intimate glasses footage.",
+        plan: "Footage stays with the store, with no human review and no outside AI training.",
+      },
+      {
+        concern: "Telling staff and shoppers",
+        evidence: "72% of Americans worry about being secretly recorded by wearables.",
+        plan: "Signs at the door, written notice for staff, and capture off in restrooms and back offices.",
+      },
+    ],
+  },
   notes: [
     "Here is how it works. In capture, the owner or the store’s best employee wears the glasses through about a week of normal shifts. They do not have to do anything extra.",
     "In learn, AI turns that footage and audio into a playbook for this specific store: where things go, how the register works, the house rules, and the judgment calls.",
     "In coach, the new hire wears the glasses. The AI talks them through tasks, answers questions like where does this go, and flags mistakes on a few key tasks such as stocking to the planogram, food safety steps, and closing the register. The owner sees who is ready for what.",
-    "We are honest about scope. Version one is the procedure library, voice guidance and Q&A. Mistake detection starts with a few well-defined tasks. We use off-the-shelf glasses, not custom hardware. The risks we will have to solve are privacy and consent, battery life, and bigger players entering retail.",
+    "We are honest about scope. Version one is the procedure library, voice guidance and Q&A. Mistake detection starts with a few well-defined tasks. We use off-the-shelf glasses, not custom hardware. We start with small businesses and a scrappier product, because bigger players will go after large enterprises first.",
+    "Privacy is the risk we have to solve. Store security cameras record silent video in public areas, but glasses add a microphone, follow the employee into back rooms, and feed AI. So we keep only the wearer’s voice, blur faces on the glasses, keep footage with the store with no human review, and post clear notice for staff and shoppers.",
   ],
 };
 
@@ -261,7 +319,7 @@ export const mindMap = {
     { name: "Noncustomers", leaves: ["Independent grocers", "Franchisees", "Local restaurants"] },
     { name: "Alternatives", leaves: ["Shadowing", "Binders", "Phone apps", "VR", "Industrial AI glasses"] },
     { name: "Enabling tech", leaves: ["Multimodal AI", "AI glasses", "Open SDKs"] },
-    { name: "Risks", leaves: ["Privacy and consent", "Battery life", "Adoption by older owners", "Big players entering"] },
+    { name: "Risks", leaves: ["Privacy and consent", "Adoption by older owners", "Big players entering"] },
   ] satisfies MindMapBranch[],
   figmaButton: "Open our Figma board",
   next: "Next: interview 5 owners, test capture on one real shift, then refine the canvas.",

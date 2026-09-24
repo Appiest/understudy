@@ -10,6 +10,7 @@ import type { SlideProps } from "../slides";
 
 const CHART = { width: 1696, height: 560, left: 96, right: 330, top: 24, bottom: 520, labelGap: 38 };
 const MAX_SCORE = 10;
+const US_DRAW_DELAY = 2.2;
 const plotWidth = CHART.width - CHART.left - CHART.right;
 const columnWidth = plotWidth / (canvas.factors.length - 1);
 
@@ -37,16 +38,16 @@ function spreadLabels(players: CanvasPlayer[]) {
 
 type Emphasis = "hero" | "normal" | "dimmed" | "hidden";
 
-function emphasisFor(player: CanvasPlayer, focus: string | null, hidden: Set<string>, usRevealed: boolean): Emphasis {
-  if (hidden.has(player.name) || (player.isUs && !usRevealed)) return "hidden";
+function emphasisFor(player: CanvasPlayer, focus: string | null, hidden: Set<string>): Emphasis {
+  if (hidden.has(player.name)) return "hidden";
   if (focus) return focus === player.name ? "hero" : "dimmed";
   if (player.isUs) return "hero";
-  return usRevealed ? "dimmed" : "normal";
+  return "normal";
 }
 
 const lineStyle: Record<Emphasis, { opacity: number; width: number }> = {
   hero: { opacity: 1, width: 10 },
-  normal: { opacity: 0.85, width: 4 },
+  normal: { opacity: 0.55, width: 4 },
   dimmed: { opacity: 0.32, width: 3 },
   hidden: { opacity: 0, width: 3 },
 };
@@ -55,7 +56,7 @@ function Curve({ player, index, emphasis, onFocus }: { player: CanvasPlayer; ind
   const color = player.isUs ? "var(--color-ocean)" : "var(--color-rival)";
   const style = lineStyle[emphasis];
   const width = player.isUs ? Math.max(style.width, 10) : style.width;
-  const delay = player.isUs ? 0.2 : 0.5 + index * 0.25;
+  const delay = player.isUs ? US_DRAW_DELAY : 0.5 + index * 0.25;
   return (
     <g
       style={{ opacity: style.opacity }}
@@ -135,7 +136,7 @@ function GroupBrackets() {
   );
 }
 
-function StrategyCanvas({ usRevealed }: { usRevealed: boolean }) {
+function StrategyCanvas() {
   const [focus, setFocus] = useState<string | null>(null);
   const [hidden, setHidden] = useState<Set<string>>(() => new Set());
   const labelY = spreadLabels(canvas.players);
@@ -146,19 +147,19 @@ function StrategyCanvas({ usRevealed }: { usRevealed: boolean }) {
       else next.add(name);
       return next;
     });
-  const drawn = canvas.players.filter((player) => usRevealed || !player.isUs);
+  const drawn = canvas.players;
 
   return (
     <div className="relative" style={{ width: CHART.width, height: CHART.height + 170 }}>
       <svg viewBox={`0 0 ${CHART.width} ${CHART.height}`} width={CHART.width} height={CHART.height} className="overflow-visible" role="img" aria-label="Strategy canvas comparing each training option's offering level across ten factors">
         <Grid />
         {drawn.map((player, index) => (
-          <Curve key={player.name} player={player} index={index} emphasis={emphasisFor(player, focus, hidden, usRevealed)} onFocus={setFocus} />
+          <Curve key={player.name} player={player} index={index} emphasis={emphasisFor(player, focus, hidden)} onFocus={setFocus} />
         ))}
       </svg>
       {drawn.map((player) => (
-        <motion.div key={player.name} variants={fadeReveal(player.isUs ? 1.6 : 1.2)}>
-          <LabelButton player={player} y={labelY.get(player.name) ?? 0} emphasis={emphasisFor(player, focus, hidden, usRevealed)} onToggle={() => toggle(player.name)} onFocus={setFocus} />
+        <motion.div key={player.name} variants={fadeReveal(player.isUs ? US_DRAW_DELAY + 1.2 : 1.2)}>
+          <LabelButton player={player} y={labelY.get(player.name) ?? 0} emphasis={emphasisFor(player, focus, hidden)} onToggle={() => toggle(player.name)} onFocus={setFocus} />
         </motion.div>
       ))}
       <FactorLabels />
@@ -167,7 +168,7 @@ function StrategyCanvas({ usRevealed }: { usRevealed: boolean }) {
   );
 }
 
-function CanvasView({ usRevealed }: { usRevealed: boolean }) {
+function CanvasView() {
   return (
     <StepView className="flex flex-col justify-between">
       <div className="flex items-end justify-between gap-gap">
@@ -179,7 +180,7 @@ function CanvasView({ usRevealed }: { usRevealed: boolean }) {
           {canvas.estimateLabel}
         </motion.p>
       </div>
-      <StrategyCanvas usRevealed={usRevealed} />
+      <StrategyCanvas />
     </StepView>
   );
 }
@@ -239,5 +240,5 @@ function ErrcView() {
 }
 
 export function CanvasSlide({ step }: SlideProps) {
-  return <AnimatePresence mode="wait">{step < 2 ? <CanvasView key="canvas" usRevealed={step >= 1} /> : <ErrcView key="errc" />}</AnimatePresence>;
+  return <AnimatePresence mode="wait">{step === 0 ? <CanvasView key="canvas" /> : <ErrcView key="errc" />}</AnimatePresence>;
 }
