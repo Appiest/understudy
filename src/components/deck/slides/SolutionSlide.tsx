@@ -1,6 +1,6 @@
 "use client";
 
-import { Eyeglasses, Warning } from "@phosphor-icons/react";
+import { Eyeglasses, ShieldCheck, Warning } from "@phosphor-icons/react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { team } from "@/content/config";
 import { solution } from "@/content/content";
@@ -171,22 +171,38 @@ function ScopePanel() {
           ))}
         </dl>
       </div>
-      <motion.div variants={fadeReveal(1)}>
-        <p className="text-lede font-extrabold text-rival">Risks we have to solve</p>
-        <ul className="mt-5 flex flex-col gap-3">
-          {solution.risks.map((risk) => (
-            <li key={risk} className="flex items-baseline gap-4 text-body">
-              <span aria-hidden className="h-3 w-3 shrink-0 translate-y-[-3px] rounded-full bg-rival" />
-              {risk}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
     </Panel>
   );
 }
 
-const panels = [CapturePanel, LearnPanel, CoachPanel, ScopePanel];
+function PrivacyPanel() {
+  const { privacy } = solution;
+  return (
+    <Panel className="flex flex-col justify-center">
+      <p className="text-lede font-extrabold">{privacy.heading}</p>
+      <div className="mt-4 grid grid-cols-2 gap-x-10 text-caption font-semibold text-ink-muted">
+        <span>{privacy.concernLabel}</span>
+        <span>{privacy.planLabel}</span>
+      </div>
+      <ol className="mt-3 flex flex-col gap-3">
+        {privacy.concerns.map((item, index) => (
+          <motion.li key={item.concern} variants={fadeReveal(0.3 + index * 0.2, 16)} className="grid grid-cols-2 gap-x-10 rounded-card bg-paper-raised px-7 py-4 shadow-lift">
+            <div>
+              <p className="text-body font-bold">{item.concern}</p>
+              <p className="mt-1 text-caption text-ink-muted">{item.evidence}</p>
+            </div>
+            <p className="flex items-start gap-3 text-caption font-semibold">
+              <ShieldCheck size={30} weight="fill" className="mt-0.5 shrink-0 text-ocean" aria-hidden />
+              {item.plan}
+            </p>
+          </motion.li>
+        ))}
+      </ol>
+    </Panel>
+  );
+}
+
+const panels = [CapturePanel, LearnPanel, CoachPanel, ScopePanel, PrivacyPanel];
 
 export function SolutionSlide({ step }: SlideProps) {
   const ActivePanel = panels[step];
