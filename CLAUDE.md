@@ -13,7 +13,19 @@ A web slide deck for our USC Iovine and Young Academy Blue Ocean Strategy projec
 
 The visual reference is the Standard Physics deck: one full-bleed stage, huge display type, drawn SVG diagrams that animate in, paper grain, a neutral palette with one accent, and fine-print sources.
 
-Keep the slides clean: no progress bar, dots or rubric labels. This overrides the brief, which asks for them. Each slide's footer carries its sources on the left and a small, faint "Slide x, beat y" label on the right, which the team uses to coordinate during rehearsal. The print version leaves the label out.
+Keep the slides clean: no progress bar, dots, slide counter or rubric labels. This overrides the brief, which asks for them. Each slide's footer carries its sources on the left and a small, faint "Slide x, beat y" label on the right, which the team uses to coordinate during rehearsal. Pressing B shows or hides the label, the browser remembers the choice, and the print version always leaves it out.
+
+## Content rules from our reviews
+
+- **Back up every number.** Every figure on a slide has an entry in `src/content/facts.ts` with its source, a short quote and a status (matches the source, corrected, team estimate or illustration). It shows on that slide's fact page at `#x/data`. Check a figure against the source itself, not someone's summary of it, and when a number can't be traced to an original report, say so. If you change a number on a slide, update its fact entry in the same pull request.
+- **Every beat has to make sense on its own.** Headings state the point literally ("Driver 1: AI can now turn a recorded shift into step-by-step instructions"), never a metaphor the slide doesn't explain ("Two curves just crossed").
+- **Say what a number counts, right beside it.** "46%" alone is meaningless. "46% of retail jobs turned over in 2025" isn't.
+- **Keep on-slide text short enough to read at a glance.** Questions fit on one line or two. When a slide lists parallel items, give each its own card with the name large and one short line of detail instead of full sentences.
+- **Charts need enough data to show a trend.** Two data points don't persuade anyone, so find a longer series. Mark missing data in the chart rather than hiding it.
+- **Don't raise a doubt the slide doesn't answer.** For example, "big companies left enterprise headsets" invites "why?", so the slide shows the answer: they're moving to glasses.
+- **Don't split one idea across beats that don't need it.** Stage the reveal with animation inside a single beat instead.
+- **Battery life isn't something we raise or solve right now.** Don't mention it on slides or fact pages.
+- **Our answer on competition:** bigger players will go after large enterprises first, so we start with a scrappier product for small businesses and grow from there.
 
 ## General
 
