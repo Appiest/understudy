@@ -357,7 +357,7 @@ This repo has a [`CLAUDE.md`](CLAUDE.md) file that Claude Code reads automatical
 - **Start Claude Code in the repo folder** (`cd understudy`, then `claude`) so it picks up `CLAUDE.md`.
 - **The brief is the source for content.** `claude-code-prompt-blue-ocean-presentation.md` is the original assignment brief. When the brief and `CLAUDE.md` disagree about design or tools, `CLAUDE.md` wins. When they disagree about content or the rubric, the brief wins.
 - **Ask for a branch and a pull request,** not a direct push to `main`.
-- **Ask it to run `npm run check`** before it says it's done, and check the result in the browser yourself.
+- **`npm run check` runs automatically.** The repo has a Claude Code hook in `.claude/settings.json`. Whenever Claude finishes a turn with uncommitted changes in `src`, `public` or `scripts`, the hook runs the check, and if it fails, Claude has to fix the problems before it can stop. You'll see "Running npm run check on changed files" when it happens. Still check the result in the browser yourself.
 - If you change a team rule, update `CLAUDE.md` in the same pull request so everyone's Claude learns it.
 
 ---
