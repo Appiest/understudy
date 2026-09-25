@@ -12,6 +12,7 @@ const shortcuts = [
   ["Back", "←"],
   ["Notes", "N"],
   ["Full screen", "F"],
+  ["Slide and beat label", "B"],
   ["Print", "P"],
   ["Facts", "D"],
 ];

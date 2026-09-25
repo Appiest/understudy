@@ -6,7 +6,7 @@ import { NotesPanel } from "./NotesPanel";
 import { SlideFooter } from "./SlideFooter";
 import { slides } from "./slides";
 import { useDeckNavigation } from "./useDeckNavigation";
-import { useIdleCursor, usePresenterKeys, useStageScale } from "./usePresenterKeys";
+import { useBeatLabelVisible, useIdleCursor, usePresenterKeys, useStageScale } from "./usePresenterKeys";
 
 const slideStepCounts = slides.map((slide) => slide.steps);
 
@@ -17,6 +17,7 @@ const slideFrame: Variants = {
 export function Deck() {
   const { index, step, ready, handlePointerDown, handlePointerUp, handleContextMenu } = useDeckNavigation(slideStepCounts);
   const { notesOpen, toggleNotes } = usePresenterKeys(index + 1);
+  const beatLabelVisible = useBeatLabelVisible();
   const cursorIsIdle = useIdleCursor();
   const scale = useStageScale();
   const slide = slides[index];
@@ -45,7 +46,7 @@ export function Deck() {
               </motion.section>
             )}
           </AnimatePresence>
-          <SlideFooter slide={slide} step={step} slideNumber={index + 1} />
+          <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
         <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} onClose={toggleNotes} />

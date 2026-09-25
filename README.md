@@ -162,12 +162,13 @@ Leave the command window open while you use the deck, because closing it stops t
 | Swipe on a touchscreen or trackpad | Drag left to go forward, right to go back |
 | Show or hide the speaker notes | N |
 | Enter or leave full screen | F |
+| Show or hide the “Slide x, beat y” label | B |
 | Open the print version | P |
 | Open the facts behind the current slide | D |
 | Jump to the first or last slide | Home or End |
 | Close the notes | Escape |
 
-Most slides build in steps, called beats, so each press brings in the next part. The small label in the bottom right corner, like "Slide 2, beat 3", tells you exactly where you are, which makes it easy to call out hand-offs between speakers. The label doesn't appear in the printed PDF.
+Most slides build in steps, called beats, so each press brings in the next part. The small label in the bottom right corner, like "Slide 2, beat 3", tells you exactly where you are, which makes it easy to call out hand-offs between speakers. Press **B** to hide or show it. Your browser remembers the choice, so hide it once on the presenting laptop and it stays hidden. The label never appears in the printed PDF.
 
 ### Speaker notes
 
