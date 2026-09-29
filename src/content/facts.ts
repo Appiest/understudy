@@ -769,6 +769,10 @@ const marketFacts: SlideFacts = {
       answer: "It’s the latest year of the Census table that splits locations by company size for each state and detailed industry, and it came out in April 2025. BLS counts of the same kinds of locations grew 2.2% from 2022 to 2025, so today’s numbers are probably a little higher than ours.",
     },
     {
+      question: "Are the circles drawn to scale?",
+      answer: "No. At true scale the SOM circle would be less than a thousandth of the TAM circle’s area and too small to see. The circles show which market sits inside which, and the numbers beside them carry the sizes.",
+    },
+    {
       question: "Do the glasses count toward these numbers?",
       answer: "No. These are subscription dollars only. Stores buy the glasses, $249 to $449 from Meta, and we don’t count that as our revenue.",
     },
