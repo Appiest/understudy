@@ -278,6 +278,56 @@ export const landscape = {
   ],
 };
 
+export type MarketRing = {
+  acronym: string;
+  name: string;
+  covers: string;
+  locations: number;
+};
+
+const marketPricePerMonth = 149;
+const firstMarket = { name: "California", smallBusinessLocations: 130_536, share: 0.01, years: 3 };
+const obtainableLocations = Math.round(firstMarket.smallBusinessLocations * firstMarket.share);
+const wholeDollars = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+export const annualPricePerLocation = marketPricePerMonth * 12;
+
+export function yearlyRevenue(locations: number) {
+  return locations * annualPricePerLocation;
+}
+
+export function revenueFormatter(scaleTo: number) {
+  const [divisor, suffix] = scaleTo >= 1e9 ? [1e9, "B"] : [1e6, "M"];
+  return (dollars: number) => `$${(dollars / divisor).toFixed(1)}${suffix}`;
+}
+
+const serviceableLocations = 1_125_574;
+const serviceableBillions = (yearlyRevenue(serviceableLocations) / 1e9).toFixed(1).replace(/\.0$/, "");
+
+export const market = {
+  headline: `Small US stores and restaurants are a $${serviceableBillions} billion a year market`,
+  pricePerMonth: marketPricePerMonth,
+  firstMarket,
+  rings: [
+    { acronym: "TAM", name: "Total addressable market", covers: "Every US store, restaurant and bar with employees", locations: 1_655_368 },
+    { acronym: "SAM", name: "Serviceable available market", covers: "Stores, restaurants and bars owned by businesses under 100 employees", locations: serviceableLocations },
+    {
+      acronym: "SOM",
+      name: "Serviceable obtainable market",
+      covers: `Year ${firstMarket.years} goal: ${firstMarket.share * 100}% of small-business locations in ${firstMarket.name}, where we’re based`,
+      locations: obtainableLocations,
+    },
+  ] satisfies MarketRing[],
+  locationsUnit: "locations",
+  priceNote: `Each dollar figure uses our estimated price of ${wholeDollars.format(marketPricePerMonth)} a month per location.`,
+  notes: [
+    "Here’s how big the market is. We count locations, not companies, because we charge per store and every store trains its own new hires. Census Bureau counts add up to 1,655,368 US stores, restaurants and bars with employees. At our estimated price of 149 dollars a month per location, that’s about 3 billion dollars a year. That’s our total addressable market.",
+    "Our serviceable market is the 1,125,574 of those locations owned by businesses with fewer than 100 employees. We drew the line at 100 because Training Magazine’s annual survey of the training industry only includes companies with 100 or more employees. The businesses below that line are the noncustomers from slide 2, and they add up to about 2 billion dollars a year.",
+    "We start in California, where we are. It has 130,536 of these small locations, and winning 1 percent of them within three years means 1,305 stores and about 2.3 million dollars a year. For comparison, Trainual, a training app for small businesses, launched in 2018 and now supports more than 7,500 of them. Reaching 1,305 stores in three years is a slower pace than Trainual has averaged since its launch.",
+    "These numbers count only the subscription. Stores also buy the glasses, which run 249 to 449 dollars from Meta, and we left that out.",
+  ],
+};
+
 export type MindMapBranch = { name: string; leaves: string[] };
 
 export const mindMap = {
