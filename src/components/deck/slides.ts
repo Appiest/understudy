@@ -1,10 +1,11 @@
 import type { ComponentType } from "react";
-import { appendix, canvas, drivers, landscape, mindMap, solution, title, turnover } from "@/content/content";
+import { appendix, canvas, drivers, landscape, market, mindMap, solution, title, turnover } from "@/content/content";
 import type { SourceId } from "@/content/sources";
 import { CanvasSlide } from "./slides/CanvasSlide";
 import { ChallengeSlide } from "./slides/ChallengeSlide";
 import { DriversSlide } from "./slides/DriversSlide";
 import { LandscapeSlide } from "./slides/LandscapeSlide";
+import { MarketSlide } from "./slides/MarketSlide";
 import { MindMapSlide } from "./slides/MindMapSlide";
 import { SolutionSlide } from "./slides/SolutionSlide";
 import { SourcesSlide } from "./slides/SourcesSlide";
@@ -75,6 +76,14 @@ export const slides: SlideDefinition[] = [
     sourcesByStep: [["strivrWalmart", "walmartVr", "yoobic", "viture", "retrocausal", "airwave", "augmentir"]],
     notes: landscape.notes,
     Content: LandscapeSlide,
+  },
+  {
+    id: "market",
+    name: "Market size",
+    steps: 1,
+    sourcesByStep: [["censusSusb"]],
+    notes: market.notes,
+    Content: MarketSlide,
   },
   {
     id: "mind-map",

@@ -167,7 +167,7 @@ export function FactsPage({ slideNumber }: { slideNumber: number }) {
           </div>
         </section>
 
-        <p className="mt-14 text-sm text-ink-muted">Every sourced figure on this page was checked against its source on {factsCheckedOn}.</p>
+        <p className="mt-14 text-sm text-ink-muted">Every sourced figure on this page was checked against its source on {facts.checkedOn ?? factsCheckedOn}.</p>
       </main>
     </div>
   );

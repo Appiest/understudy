@@ -1,3 +1,4 @@
+import { annualPricePerLocation, market, revenueFormatter, yearlyRevenue } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -14,9 +15,18 @@ export type Fact = {
 
 export type Question = { question: string; answer: string };
 
-export type SlideFacts = { summary: string; facts: Fact[]; background?: Fact[]; questions: Question[] };
+export type SlideFacts = { summary: string; facts: Fact[]; background?: Fact[]; questions: Question[]; checkedOn?: string };
 
 export const factsCheckedOn = "September 24, 2026";
+
+const [totalRing, serviceableRing, obtainableRing] = market.rings;
+const wholeNumber = new Intl.NumberFormat("en-US");
+const wholeDollars = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+const count = (value: number) => wholeNumber.format(value);
+const exactRevenue = (locations: number) => wholeDollars.format(yearlyRevenue(locations));
+const revenue = (locations: number) => revenueFormatter(yearlyRevenue(locations))(yearlyRevenue(locations));
+const monthlyPrice = wholeDollars.format(market.pricePerMonth);
+const yearlyPrice = wholeDollars.format(annualPricePerLocation);
 
 export const canvasMethod = [
   "Each line is one way a store can train a new hire today, plus ours. For every factor along the bottom, each option gets a score from 0 to 10, where a higher score means the option offers more of that factor. The chart plots those scores and connects them from left to right, which is how Kim and Mauborgne draw a strategy canvas.",
@@ -76,7 +86,7 @@ const title: SlideFacts = {
       figure: "5 rules",
       claim: "Our rules against solution jumping, written by the team for this project.",
       status: "estimate",
-      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 7 are how we’ll live up to it.",
+      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 8 are how we’ll live up to it.",
     },
   ],
   questions: [
@@ -206,7 +216,7 @@ const challenge: SlideFacts = {
     },
     {
       question: "How big is the market?",
-      answer: "There are about 58,800 grocery establishments and 627,000 restaurants in the US. Independent grocers alone are 38.4% of food retail sales. We haven’t set a price yet, so we don’t claim a dollar market size. That comes when we build the business model in later weeks.",
+      answer: `Slide 7 sizes it. Census Bureau counts add up to ${count(totalRing.locations)} US stores, restaurants and bars with employees, and ${count(serviceableRing.locations)} of them are owned by businesses with fewer than 100 employees. At our estimated ${monthlyPrice} a month per location, the small ones add up to about ${revenue(serviceableRing.locations)} a year. The price is our estimate until we test it with owners.`,
     },
     {
       question: "Why wouldn’t Walmart or a big chain just build this?",
@@ -454,7 +464,7 @@ const solution: SlideFacts = {
     },
     {
       question: "How much will it cost?",
-      answer: "We haven’t set a price. The plan is a monthly subscription per store plus glasses, and we’ll build that model in the coming weeks. The target is to cost less than what one replacement hire costs an owner today.",
+      answer: `We haven’t tested a price with owners yet. For the market size on slide 7 we assume ${monthlyPrice} a month per store, which is ${yearlyPrice} a year and less than the $2,305 it costs to replace one hourly restaurant worker. Stores also buy the glasses, $249 to $449 from Meta. We’ll build the full business model in the coming weeks.`,
     },
     {
       question: "What stops a competitor from copying this?",
@@ -601,6 +611,170 @@ const landscape: SlideFacts = {
   ],
 };
 
+const locationsUnderFiveEmployees = 517_936;
+const locationsFiveToNinetyNine = serviceableRing.locations - locationsUnderFiveEmployees;
+const firstMarketShare = `${market.firstMarket.share * 100}%`;
+
+const marketFacts: SlideFacts = {
+  checkedOn: "September 28, 2026",
+  summary: "This slide sizes the market by counting locations, because we charge per store and every store trains its own new hires. The location counts come straight from the Census Bureau. The price and the 1% share are team estimates, so every dollar figure is an estimate built on real counts.",
+  facts: [
+    {
+      figure: count(totalRing.locations),
+      claim: "US store and food service locations with paid employees at any time in 2022. This is our total addressable market (TAM).",
+      status: "verified",
+      derivation: "The Census Bureau counts 1,045,890 retail locations and 700,469 food service and drinking place locations. We subtracted the 90,991 nonstore retailers (online sellers, vending machine operators and direct sellers like heating oil dealers) because they have no store floor to train anyone on: 1,045,890 − 90,991 + 700,469 = 1,655,368.",
+      source: "censusSusb",
+      quote: "Retail Trade, total: 1,045,890. Nonstore Retailers, total: 90,991. Food Services and Drinking Places, total: 700,469.",
+      caveat: "2022 is the latest year of Statistics of U.S. Businesses, the Census table that splits locations by company size for each state and detailed industry. BLS counts of the same kinds of locations grew 2.2% from 2022 to 2025 (see the background numbers), so today’s count is probably a little higher. Businesses with no employees aren’t counted. Retail includes car dealers and gas stations, and food service includes caterers, food trucks and contract cafeterias. Hotels aren’t included.",
+    },
+    {
+      figure: revenue(totalRing.locations),
+      claim: `Our total addressable market in dollars: every US store and food service location with employees paying ${monthlyPrice} a month.`,
+      status: "estimate",
+      derivation: `${count(totalRing.locations)} locations × ${yearlyPrice} a year = ${exactRevenue(totalRing.locations)}.`,
+      caveat: "The locations are counted and the price is ours. Every dollar figure on the slide moves with the price, so say that first if someone questions the size.",
+    },
+    {
+      figure: count(serviceableRing.locations),
+      claim: "US store and food service locations owned by businesses with fewer than 100 employees in total. This is our serviceable available market (SAM).",
+      status: "verified",
+      derivation: "Retail locations of businesses under 100 employees: 599,640 (under 20) + 78,568 (20 to 99) = 678,208. Removing the 81,477 nonstore ones leaves 596,731. Food service: 403,071 + 125,772 = 528,843. Together that’s 1,125,574, from the same Census table as the TAM.",
+      source: "censusSusbGlossary",
+      quote: "Enterprise size designations are determined by the summed employment of all associated establishments.",
+      caveat: `Company size counts every employee across all of a business’s locations, so a Walmart store is out even though it’s one location, and a family that owns two cafés is in. Census groups locations by common ownership or control, so we read a franchisee who owns a few shops as its own small business rather than part of the brand. Census doesn’t say that about this table directly. ${Math.round((locationsUnderFiveEmployees / serviceableRing.locations) * 100)}% of these locations belong to businesses with fewer than 5 employees (328,071 retail and 189,865 food service). Leave those out and the SAM is ${count(locationsFiveToNinetyNine)} locations, about ${revenue(locationsFiveToNinetyNine)} a year.`,
+    },
+    {
+      figure: revenue(serviceableRing.locations),
+      claim: "Our serviceable available market in dollars, and the number in the slide’s heading.",
+      status: "estimate",
+      derivation: `${count(serviceableRing.locations)} locations × ${yearlyPrice} a year = ${exactRevenue(serviceableRing.locations)}.`,
+    },
+    {
+      figure: "100 employees",
+      claim: "Training Magazine’s annual survey of US training spending only includes companies with 100 or more employees. That’s where we draw the line for our serviceable market.",
+      status: "verified",
+      source: "trainingIndustryReport",
+      quote: "Only U.S.-based corporations and educational institutions with 100 or more employees were included in the analysis.",
+      caveat: "The cutoff is our choice. The survey’s scope shows who the training industry measures, not that smaller businesses never buy training. The same report puts US training spending at $102.8 billion in 2025.",
+    },
+    {
+      figure: count(market.firstMarket.smallBusinessLocations),
+      claim: "California store and food service locations owned by businesses with fewer than 100 employees.",
+      status: "verified",
+      derivation: "Retail: 65,460 (under 20) + 8,195 (20 to 99) = 73,655, minus 11,524 nonstore = 62,131. Food service: 51,978 + 16,427 = 68,405. Together that’s 130,536.",
+      source: "censusSusb",
+      caveat: `California holds ${((market.firstMarket.smallBusinessLocations / serviceableRing.locations) * 100).toFixed(1)}% of the US serviceable market, and it’s where we can meet owners in person.`,
+    },
+    {
+      figure: count(obtainableRing.locations),
+      claim: `Our serviceable obtainable market (SOM): ${firstMarketShare} of California’s small store and food service locations, won within ${market.firstMarket.years} years.`,
+      status: "estimate",
+      derivation: `${count(market.firstMarket.smallBusinessLocations)} × ${firstMarketShare} = ${count(obtainableRing.locations)}.`,
+      caveat: "The 1% is our target, not a forecast from data. For comparison, Trainual, a training app for small businesses, launched in January 2018 and says it supports more than 7,500 of them. Toast, the restaurant point-of-sale system, launched in 2013 and had 19,891 locations by June 2019. Our target is a slower pace than either.",
+    },
+    {
+      figure: revenue(obtainableRing.locations),
+      claim: "Our serviceable obtainable market in dollars.",
+      status: "estimate",
+      derivation: `${count(obtainableRing.locations)} locations × ${yearlyPrice} a year = ${exactRevenue(obtainableRing.locations)}.`,
+    },
+    {
+      figure: `${monthlyPrice} a month`,
+      claim: `The price per location we assume for every dollar figure, which is ${yearlyPrice} a year.`,
+      status: "estimate",
+      derivation: `We picked a price in the range 7shifts quotes for standalone training tools and kept it under the cost of one replacement hire: ${yearlyPrice} a year is less than the $2,305 it costs to replace one hourly restaurant worker (Black Box Intelligence, 2024, on the slide 2 fact page).`,
+      source: "sevenShiftsTraining",
+      quote: "Standalone LMS tools charge $100–$200/month per location",
+      caveat: "7shifts sells scheduling software with training built in, so that range is its own marketing claim about competitors. Homebase’s per-location prices are in the background numbers for comparison. We haven’t tested our price with owners yet.",
+    },
+  ],
+  background: [
+    {
+      figure: "+2.2%",
+      claim: "Growth in the BLS count of US retail and food service locations from 2022 to 2025, from 1,743,893 to 1,783,136.",
+      status: "verified",
+      derivation: "Private retail trade went from 1,058,672 to 1,061,340 locations (+0.25%), and food services and drinking places went from 685,221 to 721,796 (+5.3%). These are the BLS annual averages for industries 44-45 and 722.",
+      source: "blsQcewSlices",
+      caveat: "BLS counts locations differently from the Census Bureau, so compare BLS with itself across years, not with the Census count. Retail peaked in 2023 and has dipped since, and food service drove most of the growth.",
+    },
+    {
+      figure: "$30–$120",
+      claim: "What Homebase charges per location per month for its paid scheduling plans, billed monthly.",
+      status: "verified",
+      source: "homebasePricing",
+      quote: "/ location / month unlimited employees",
+      caveat: "Annual billing runs $24 to $96, and a free plan covers one location with up to 10 employees. Homebase sells scheduling, payroll, and hiring and onboarding tools rather than on-the-job coaching, so use it as a price comparison only.",
+    },
+    {
+      figure: "76%",
+      claim: "Small employers (5 to 250 employees) who train their most common hires most often do it by having someone in the business work with them.",
+      status: "verified",
+      source: "nfibTraining",
+      quote: "the most frequent method of training them is to have someone in the firm work with them",
+      caveat: "It’s a 2005 poll, so it’s old, and the 76% comes from the 382 employers in it who expect new hires to learn at least partly on the job. It’s still the only primary survey we found on how small businesses train, and it matches the shadowing line on our strategy canvas.",
+    },
+    {
+      figure: "29%",
+      claim: "Restaurants that filled a job in 2025 and use a training and development platform for new hires.",
+      status: "verified",
+      source: "nraHiring",
+      quote: "29% utilize training and development platforms",
+      caveat: "Respondents picked from a list of tools, so the other 71% didn’t pick this one. The report doesn’t give a sample size, and the National Restaurant Association is an industry group. The same report found that 26% of restaurants use any tools with AI.",
+    },
+    {
+      figure: "7,500+",
+      claim: "Small businesses using Trainual, a training and documentation app that launched in January 2018.",
+      status: "verified",
+      source: "trainualAbout",
+      quote: "In January of 2018, Trainual was officially launched and today supports more than 7,500 small businesses in over 180 countries.",
+      caveat: "The page isn’t dated and the count is worldwide. Trainual stores written procedures and doesn’t coach anyone live, so use it to show how fast small businesses adopt training software, not as a direct competitor.",
+    },
+    {
+      figure: "6%",
+      claim: "Toast’s share of US restaurant locations in June 2021, eight years after it launched in 2013. It had 47,942 locations.",
+      status: "verified",
+      source: "toastProspectus",
+      quote: "the locations on our platform represented only about 6% of the approximately 860,000 restaurant locations in the United States",
+      caveat: "Toast sells the system restaurants use to take payments, which every restaurant needs, so it spreads faster than training software would. It still took eight years to reach 6%.",
+    },
+  ],
+  questions: [
+    {
+      question: "Why count locations instead of companies?",
+      answer: "We charge per store, and every store trains its own new hires. A business with three shops is three subscriptions.",
+    },
+    {
+      question: "Why draw the line at 100 employees?",
+      answer: "Training Magazine’s annual survey of the training industry only includes companies with 100 or more employees, so businesses below that line don’t show up in how the industry measures itself. They’re the noncustomers from slide 2. The cutoff is our choice, and the owner interviews will test it.",
+    },
+    {
+      question: "Isn’t that too broad? A lot of these must be tiny shops.",
+      answer: `Yes, ${Math.round((locationsUnderFiveEmployees / serviceableRing.locations) * 100)}% of those locations belong to businesses with fewer than 5 employees. If you leave them out, the serviceable market is ${count(locationsFiveToNinetyNine)} locations and about ${revenue(locationsFiveToNinetyNine)} a year.`,
+    },
+    {
+      question: `Where does ${monthlyPrice} a month come from?`,
+      answer: `It’s our estimate. 7shifts says standalone training tools charge $100 to $200 a month per location, and ${yearlyPrice} a year is less than the $2,305 it costs to replace one hourly restaurant worker. We’ll test it in the owner interviews.`,
+    },
+    {
+      question: "Is 1% realistic?",
+      answer: "We think so. Trainual, a training app for small businesses, reached more than 7,500 of them after launching in 2018. Toast had 19,891 restaurant locations six years after launching. We’re aiming for 1,305 locations in three years, a slower pace than either.",
+    },
+    {
+      question: "Why start in California?",
+      answer: "We’re at USC in Los Angeles, so we can visit owners, set up the glasses and watch real shifts ourselves. California has 130,536 small store and food service locations, more than a tenth of the US total.",
+    },
+    {
+      question: "The data is from 2022. Isn’t that stale?",
+      answer: "It’s the latest year of the Census table that splits locations by company size for each state and detailed industry, and it came out in April 2025. BLS counts of the same kinds of locations grew 2.2% from 2022 to 2025, so today’s numbers are probably a little higher than ours.",
+    },
+    {
+      question: "Do the glasses count toward these numbers?",
+      answer: "No. These are subscription dollars only. Stores buy the glasses, $249 to $449 from Meta, and we don’t count that as our revenue.",
+    },
+  ],
+};
+
 const mindMapFacts: SlideFacts = {
   summary: "This slide shows our team’s Figma board. It starts from the UN Sustainable Development Goals, branches into the industries we looked at, converges on high employee turnover as the shared problem, and ends at AI glasses as the idea. Click the board or the button to open it full size.",
   facts: [
@@ -651,6 +825,7 @@ export const factsBySlide: Record<string, SlideFacts> = {
   solution,
   canvas: canvasFacts,
   landscape,
+  market: marketFacts,
   "mind-map": mindMapFacts,
   sources: sourcesFacts,
 };
