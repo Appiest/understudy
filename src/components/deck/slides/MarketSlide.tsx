@@ -8,13 +8,26 @@ const CENTER = DIAGRAM_SIZE / 2;
 const wholeNumber = new Intl.NumberFormat("en-US");
 const roundedNumber = new Intl.NumberFormat("en-US", { notation: "compact", maximumSignificantDigits: 3 });
 
-type Circle = { radius: number; fill: string; text: string; labelY: number };
+const LABEL_LIFT = 6;
+
+type Circle = { radius: number; fill: string; text: string };
 
 const circles: Circle[] = [
-  { radius: 320, fill: "var(--color-paper-sunken)", text: "var(--color-ink)", labelY: 48 },
-  { radius: 220, fill: "var(--color-ocean-wash)", text: "var(--color-ocean-deep)", labelY: 148 },
-  { radius: 120, fill: "var(--color-ocean)", text: "var(--color-paper)", labelY: 314 },
+  { radius: 320, fill: "var(--color-paper-sunken)", text: "var(--color-ink)" },
+  { radius: 220, fill: "var(--color-ocean-wash)", text: "var(--color-ocean-deep)" },
+  { radius: 120, fill: "var(--color-ocean)", text: "var(--color-paper)" },
 ];
+
+function centerY(circle: Circle) {
+  return DIAGRAM_SIZE - circle.radius;
+}
+
+function labelBaseline(index: number) {
+  const circle = circles[index];
+  const inner = circles[index + 1];
+  const visibleMiddle = inner ? DIAGRAM_SIZE - circle.radius - inner.radius : centerY(circle);
+  return visibleMiddle - LABEL_LIFT;
+}
 
 const rowValueStyles = ["text-headline text-ink-muted", "text-headline text-ink", "text-title text-ink"];
 
@@ -23,9 +36,9 @@ function formatLocations(locations: number) {
   return `${figure} ${market.locationsUnit}`;
 }
 
-function CircleLabel({ ring, circle }: { ring: MarketRing; circle: Circle }) {
+function CircleLabel({ ring, index }: { ring: MarketRing; index: number }) {
   return (
-    <text x={CENTER} y={circle.labelY} textAnchor="middle" fill={circle.text}>
+    <text x={CENTER} y={labelBaseline(index)} textAnchor="middle" fill={circles[index].text}>
       <tspan className="text-point font-extrabold">{ring.acronym}</tspan>
       <tspan x={CENTER} dy={34} className="text-caption font-medium">
         {formatLocations(ring.locations)}
@@ -41,13 +54,13 @@ function MarketCircles() {
       className="shrink-0"
       style={{ width: DIAGRAM_SIZE, height: DIAGRAM_SIZE }}
       role="img"
-      aria-label="Three nested circles: SOM inside SAM inside TAM. They show which market sits inside which, not relative size."
+      aria-label="Three nested circles that touch at the bottom, SOM inside SAM inside TAM. They show which market sits inside which, not relative size."
     >
       {circles.map((circle) => (
-        <circle key={circle.radius} cx={CENTER} cy={CENTER} r={circle.radius} fill={circle.fill} />
+        <circle key={circle.radius} cx={CENTER} cy={centerY(circle)} r={circle.radius} fill={circle.fill} />
       ))}
       {market.rings.map((ring, index) => (
-        <CircleLabel key={ring.acronym} ring={ring} circle={circles[index]} />
+        <CircleLabel key={ring.acronym} ring={ring} index={index} />
       ))}
     </svg>
   );
@@ -61,7 +74,7 @@ function RingRow({ ring, index }: { ring: MarketRing; index: number }) {
         <abbr title={ring.name} className="font-bold no-underline">
           {ring.acronym}
         </abbr>
-        <span>{ring.covers}</span>
+        <span className="text-balance">{ring.covers}</span>
       </dt>
       <dd className="mt-1 flex items-baseline gap-4">
         <span className={`font-black ${rowValueStyles[index]}`}>{revenueFormatter(revenue)(revenue)}</span>

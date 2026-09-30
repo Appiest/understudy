@@ -310,7 +310,7 @@ export const market = {
   firstMarket,
   rings: [
     { acronym: "TAM", name: "Total addressable market", covers: "Every US store, restaurant and bar with employees", locations: 1_655_368 },
-    { acronym: "SAM", name: "Serviceable available market", covers: "Stores, restaurants and bars owned by businesses under 100 employees", locations: serviceableLocations },
+    { acronym: "SAM", name: "Serviceable available market", covers: "Stores, restaurants and bars owned by small businesses with fewer than 100 employees", locations: serviceableLocations },
     {
       acronym: "SOM",
       name: "Serviceable obtainable market",
