@@ -320,6 +320,7 @@ export const market = {
   ] satisfies MarketRing[],
   locationsUnit: "locations",
   priceNote: `Each dollar figure uses our estimated price of ${wholeDollars.format(marketPricePerMonth)} a month per location.`,
+  docLink: "Open our market sizing doc",
   notes: [
     "Here’s how big the market is. We count locations, not companies, because we charge per store and every store trains its own new hires. Census Bureau counts add up to 1,655,368 US stores, restaurants and bars with employees. At our estimated price of 149 dollars a month per location, that’s about 3 billion dollars a year. That’s our total addressable market.",
     "Our serviceable market is the 1,125,574 of those locations owned by businesses with fewer than 100 employees. We drew the line at 100 because Training Magazine’s annual survey of the training industry only includes companies with 100 or more employees. The businesses below that line are the noncustomers from slide 2, and they add up to about 2 billion dollars a year.",
