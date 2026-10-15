@@ -215,6 +215,17 @@ The deck has a print version that puts each slide, and each build step that matt
 
 Use Chrome for this. Safari and Firefox handle custom page sizes less reliably.
 
+### The competitive analysis and value proposition decks
+
+Two more assignments live in their own decks, so each one exports as its own PDF:
+
+| Assignment | Deck | Print version |
+| --- | --- | --- |
+| Competitive analysis (A8) | **http://localhost:3000/competition** | **http://localhost:3000/competition/print** |
+| Value proposition and visual value proposition (A9) | **http://localhost:3000/value-proposition** | **http://localhost:3000/value-proposition/print** |
+
+They work exactly like the main deck: arrow keys, **N** for notes, **D** for the facts behind a slide and **P** to open that deck's print version. Competitor logos and footnotes stay clickable links in the saved PDF.
+
 ---
 
 ## Part 5: Change the words, numbers and names
@@ -397,6 +408,7 @@ understudy/
 ├── art/
 │   └── glasses.py                     Blender script that models and renders the glasses
 ├── public/
+│   ├── logos/                         Competitor logos, downloaded from each company's own site
 │   └── renders/                       Rendered glasses images used on the slides
 ├── scripts/
 │   └── check-em-dashes.mjs            Fails the check if an em dash sneaks in
@@ -407,7 +419,9 @@ understudy/
     │   ├── fonts.ts                   Loads Mona Sans from Google Fonts
     │   ├── layout.tsx                 The page wrapper and browser tab title
     │   ├── page.tsx                   The deck, at /
-    │   └── print/page.tsx             The print version, at /print
+    │   ├── print/page.tsx             The print version, at /print
+    │   ├── competition/               The competitive analysis deck and its print version
+    │   └── value-proposition/         The value proposition deck and its print version
     ├── content/
     │   ├── config.ts                  Team placeholders: name, members, Figma link, mind map
     │   ├── facts.ts                   The fact pages: sources, quotes, statuses and Q&A for each slide
@@ -415,7 +429,10 @@ understudy/
     │   └── sources.ts                 Every source, with its citation and link
     ├── components/deck/
     │   ├── Deck.tsx                   The slideshow frame: scaling, transitions, grain
-    │   ├── slides.ts                  The list of slides, their steps, sources and notes
+    │   ├── decks.ts                   The three decks, their addresses and their slide lists
+    │   ├── slides.ts                  The main deck's slides, their steps, sources and notes
+    │   ├── competitionSlides.ts       The competitive analysis deck's slides
+    │   ├── valuePropositionSlides.ts  The value proposition deck's slides
     │   ├── slides/                    One file per slide
     │   ├── primitives.tsx             Shared animation pieces (text reveals, count-ups)
     │   ├── VoiceWave.tsx              The animated voice line that recurs through the deck
@@ -457,6 +474,24 @@ The glasses images are real 3D renders. `art/glasses.py` builds the model in [Bl
 | (g) Mind map of the problem space | 7 | The mind map and the link to our Figma board |
 
 The slides don't label rubric items, so use this table when you check the deck against the assignment.
+
+### Competitive analysis (A8), at /competition
+
+| Rubric item | Slide | What shows it |
+| --- | --- | --- |
+| (a) Product definition | 1 | Two sentences on what Understudy is, who it's for and the problem, beside the glasses render |
+| (b) SWOT analysis | 2 | Internal row (strengths, weaknesses) and external row (opportunities, threats), with numbered footnotes |
+| (c) Competitive landscape | 3 | A 2x2 of on-the-job versus off-the-job and small businesses versus large enterprises, with Understudy alone in the top right |
+| (d) Comparison chart | 4 | Nine columns of filled, half and empty circles, with Understudy's column highlighted. The top row is the one every competitor fails. |
+
+Every competitor logo links to its website, and each footer lists the numbered sources.
+
+### Value proposition (A9), at /value-proposition
+
+| Rubric item | Slide | What shows it |
+| --- | --- | --- |
+| Written value proposition | 1 | Geoffrey Moore's template, with the benefit and our difference set largest |
+| Visual value proposition | 2 | The same store with and without Understudy, with callouts, a description, the owner's checklist sidebar and a hardware note |
 
 ---
 

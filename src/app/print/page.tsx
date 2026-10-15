@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrintPage() {
-  return <PrintDeck />;
+  return <PrintDeck deckId="pitch" />;
 }

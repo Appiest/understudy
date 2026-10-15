@@ -46,7 +46,7 @@ export function useBeatLabelVisible() {
   return useSyncExternalStore(subscribeToBeatLabel, readBeatLabelVisible, () => true);
 }
 
-export function usePresenterKeys(slideNumber: number) {
+export function usePresenterKeys(slideNumber: number, printPath: string) {
   const [notesOpen, setNotesOpen] = useState(false);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export function usePresenterKeys(slideNumber: number) {
       n: () => setNotesOpen((open) => !open),
       f: toggleFullscreen,
       b: toggleBeatLabel,
-      p: () => window.open(asset("/print"), "_blank"),
+      p: () => window.open(asset(printPath), "_blank"),
       d: () => {
         window.location.hash = factsHash(slideNumber);
       },
@@ -70,7 +70,7 @@ export function usePresenterKeys(slideNumber: number) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [slideNumber]);
+  }, [slideNumber, printPath]);
 
   return { notesOpen, toggleNotes: () => setNotesOpen((open) => !open) };
 }

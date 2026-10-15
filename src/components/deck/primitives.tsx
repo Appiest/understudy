@@ -71,3 +71,12 @@ export function StepView({ children, className = "" }: { children: ReactNode; cl
     </motion.div>
   );
 }
+
+export function FootnoteMark({ numbers }: { numbers: number[] }) {
+  if (numbers.length === 0) return null;
+  return <sup className="footnote-mark ml-1 font-semibold text-ink-muted figures-tabular">{numbers.join(",")}</sup>;
+}
+
+export function footnoteNumbers<Id>(cited: Id[], ids: Id[] = []) {
+  return ids.map((id) => cited.indexOf(id) + 1);
+}

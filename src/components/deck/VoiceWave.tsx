@@ -8,12 +8,12 @@ type VoiceWaveProps = {
   height: number;
   delay?: number;
   strokeWidth?: number;
-  tone?: "ocean" | "ink" | "rival";
+  tone?: "ocean" | "ink" | "rival" | "paper";
   fadeTowards?: "start" | "end" | "none";
 };
 
 const SAMPLE_COUNT = 180;
-const toneColor = { ocean: "var(--color-ocean)", ink: "var(--color-ink)", rival: "var(--color-rival)" };
+const toneColor = { ocean: "var(--color-ocean)", ink: "var(--color-ink)", rival: "var(--color-rival)", paper: "var(--color-paper)" };
 
 function speechEnvelope(position: number, seconds: number) {
   const syllables = 0.55 + 0.45 * Math.sin(position * 9 - seconds * 2.1) * Math.sin(position * 3.7 + seconds * 0.8);

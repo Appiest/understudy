@@ -2,12 +2,12 @@
 
 import { motion } from "motion/react";
 import { appendix } from "@/content/content";
-import { sources, type Source } from "@/content/sources";
+import { pitchSources, type Source } from "@/content/sources";
 import { AnimatePresence } from "motion/react";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
 
-const entries: Source[] = Object.values(sources).filter((source: Source) => !source.factsOnly);
+const entries: Source[] = Object.values(pitchSources).filter((source: Source) => !source.factsOnly);
 const pageSize = Math.ceil(entries.length / 2);
 export const sourcePages = [entries.slice(0, pageSize), entries.slice(pageSize)];
 

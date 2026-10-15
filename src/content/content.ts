@@ -248,33 +248,35 @@ export const canvas = {
 export type LandscapePlayer = {
   name: string;
   offToOn: number;
-  industrialToRetail: number;
+  enterpriseToSmall: number;
   description: string;
   kind: "rival" | "us" | "platform";
   source?: SourceId;
 };
 
 export const landscape = {
-  headline: "Live coaching exists for factories. Retail still trains off the floor.",
+  headline: "Big companies get live coaching. Small stores train off the floor.",
   axes: {
     x: ["Off-the-job training", "On-the-job guidance"],
-    y: ["Industrial and enterprise", "Retail and small business"],
+    y: ["Large enterprises", "Small businesses"],
   },
   players: [
-    { name: "Strivr", offToOn: 0.16, industrialToRetail: 0.7, kind: "rival", source: "strivrWalmart", description: "VR training. Walmart put 17,000 headsets in its US stores and cut Pickup Tower training from 8 hours to 15 minutes." },
-    { name: "YOOBIC", offToOn: 0.3, industrialToRetail: 0.88, kind: "rival", source: "yoobic", description: "Phone microlearning and task apps for retail teams, used away from the work itself." },
-    { name: "Axonify", offToOn: 0.12, industrialToRetail: 0.9, kind: "rival", source: "yoobic", description: "Short daily phone lessons and quizzes for frontline retail staff." },
-    { name: "VITURE Helix", offToOn: 0.84, industrialToRetail: 0.24, kind: "rival", source: "viture", description: "AI safety glasses for industrial, lab and clinical work. Announced June 2026, ships Q1 2027, from $599." },
-    { name: "Retrocausal", offToOn: 0.92, industrialToRetail: 0.07, kind: "rival", source: "retrocausal", description: "Standard cameras on factory lines that set up live guidance from a single recorded example." },
-    { name: "Airwave", offToOn: 0.7, industrialToRetail: 0.38, kind: "rival", source: "airwave", description: "Captures field technicians’ fixes and judgment calls, then answers their questions on the job." },
-    { name: "Augmentir", offToOn: 0.56, industrialToRetail: 0.2, kind: "rival", source: "augmentir", description: "AI turns documents and video into work instructions for industrial crews." },
-    { name: "Mentra", offToOn: 0.94, industrialToRetail: 0.58, kind: "platform", source: "mentra", description: "An open-source AI glasses SDK. It is a platform we can build on, not a competitor." },
-    { name: team.productName, offToOn: 0.8, industrialToRetail: 0.84, kind: "us", description: "Retail and small business, on the job. This corner is empty today." },
+    { name: "Strivr", offToOn: 0.62, enterpriseToSmall: 0.12, kind: "rival", source: "strivrRetail", description: "Made its name with VR training at Walmart. Its new early-access product coaches retail and restaurant workers by voice through smart glasses, built for enterprise operations." },
+    { name: "YOOBIC", offToOn: 0.3, enterpriseToSmall: 0.22, kind: "rival", source: "yoobic", description: "Phone microlearning and task apps for big retail chains, used away from the work itself." },
+    { name: "Axonify", offToOn: 0.1, enterpriseToSmall: 0.1, kind: "rival", source: "yoobic", description: "Short daily phone lessons and quizzes for frontline staff at large retailers." },
+    { name: "Trainual", offToOn: 0.12, enterpriseToSmall: 0.72, kind: "rival", source: "trainualPricing", description: "A training app where owners of small and mid-size companies write down their processes for new hires to read." },
+    { name: "Connecteam", offToOn: 0.32, enterpriseToSmall: 0.88, kind: "rival", source: "connecteamPricing", description: "Phone courses for small deskless teams, free for up to 10 users." },
+    { name: "VITURE Helix", offToOn: 0.9, enterpriseToSmall: 0.28, kind: "rival", source: "viture", description: "AI safety glasses for industrial, lab and clinical work. Announced June 2026, ships Q1 2027, from $599." },
+    { name: "Retrocausal", offToOn: 0.94, enterpriseToSmall: 0.04, kind: "rival", source: "retrocausal", description: "Standard cameras on factory lines that set up live guidance from a single recorded example." },
+    { name: "Airwave", offToOn: 0.64, enterpriseToSmall: 0.4, kind: "rival", source: "airwave", description: "Captures field technicians’ fixes and judgment calls, then answers their questions on the job." },
+    { name: "Augmentir", offToOn: 0.52, enterpriseToSmall: 0.2, kind: "rival", source: "augmentir", description: "AI turns documents and video into work instructions for industrial crews." },
+    { name: "Mentra", offToOn: 0.94, enterpriseToSmall: 0.6, kind: "platform", source: "mentra", description: "An open-source AI glasses SDK. It is a platform we can build on, not a competitor." },
+    { name: team.productName, offToOn: 0.78, enterpriseToSmall: 0.84, kind: "us", description: "Small businesses, on the job. Nobody serves this corner today." },
   ] satisfies LandscapePlayer[],
   notes: [
-    "Here is the landscape. Left to right goes from training away from the job to guidance during the job. Bottom to top goes from industrial to retail and small business.",
-    "Live, on-the-job coaching already exists, but it is built for factories and field service: VITURE Helix, Retrocausal, Airwave and Augmentir. Retail tools like Strivr, YOOBIC and Axonify all train people away from the floor.",
-    "The top right corner, retail and small business with on-the-job guidance, is empty. That is where we sit. Mentra is not a competitor. It is an open glasses platform we could build on.",
+    "Here is the landscape. Left to right goes from training away from the job to guidance during the job. Bottom to top goes from large enterprises to small businesses.",
+    "Live, on-the-job coaching already exists, but it’s sold to big companies. Strivr, which made its name with VR training at Walmart, now coaches retail and restaurant workers by voice through smart glasses, and its platform is built for enterprise operations. VITURE Helix, Retrocausal, Airwave and Augmentir do the same for factories, labs and field service.",
+    "Small businesses only get apps that train people off the floor, like Trainual and Connecteam. The top right corner, on-the-job coaching for small businesses, is open. That is where we sit, because the bigger players are going after large enterprises first. Mentra is not a competitor. It is an open glasses platform we could build on.",
   ],
 };
 
@@ -357,4 +359,280 @@ export const mindMap = {
 export const appendix = {
   headline: "Sources",
   notes: ["Every statistic in the deck links back to one of these sources."],
+};
+
+export const productDefinition = {
+  definition: "Understudy is a pair of AI glasses that learns how a store’s best employee works, then coaches each new hire by voice during real shifts.",
+  audience: "It’s for independent grocers, franchisees and local restaurants, where 46% of retail jobs turned over in 2025 and someone is always being retrained.",
+  audienceSource: "blsJolts" as SourceId,
+  coaching: {
+    question: "Where does the oat milk go?",
+    answer: "Second shelf, left of the almond milk.",
+  },
+  notes: [
+    "Before we compare ourselves with anyone, here is what we are. Understudy is a pair of AI glasses. The store’s best employee wears them for about a week of normal shifts, and the AI learns how that store runs. After that, new hires wear the glasses and get coached by voice while they work.",
+    "We sell to independent grocers, franchisees and local restaurants. In 2025, separations equaled about 46 percent of retail jobs, according to the Bureau of Labor Statistics, so these owners are retraining someone almost all the time.",
+  ],
+};
+
+export type ValuePropositionPart = { templateWord: string; fill: string; emphasis?: boolean };
+
+export const valueProposition = {
+  heading: "Our value proposition",
+  parts: [
+    { templateWord: "For", fill: "owners of small stores and restaurants" },
+    { templateWord: "who", fill: "lose their best employee’s time whenever a new hire starts," },
+    { templateWord: team.productName, fill: "is a pair of AI coaching glasses" },
+    { templateWord: "that", fill: "trains every new hire on the job while their best employee keeps working.", emphasis: true },
+    { templateWord: "Unlike", fill: "shadowing a coworker or phone training apps," },
+    { templateWord: team.productName, fill: "learns each store from its own best employee and coaches new hires hands-free on the floor.", emphasis: true },
+  ] satisfies ValuePropositionPart[],
+  notes: [
+    "We wrote our value proposition with Geoffrey Moore’s template. Our customer is the owner of a small store or restaurant. Their problem is that every new hire costs them their best employee’s time.",
+    "The benefit comes first: every new hire gets trained on the job while the best employee keeps working. That’s what the owner is paying for.",
+    "Shadowing a coworker is the alternative we beat, and it comes straight from our comparison chart, where it’s the most common way small stores train today. Phone training apps are the closest products. What sets us apart matches the two axes of our competitive landscape: we work on the job, and we learn this particular store.",
+  ],
+};
+
+export type SceneCallout = { text: string; tone: "pain" | "gain" };
+
+export const visualValueProposition = {
+  tagline: "Your best employee, in every new hire’s ear.",
+  description: "Your best employee wears the glasses for a week of normal shifts. After that, Understudy coaches every new hire by voice while your best employee keeps working.",
+  without: {
+    label: "Training today",
+    callouts: [
+      { text: "Your best employee stops working to train", tone: "pain" },
+      { text: "Customers wait at the register", tone: "pain" },
+    ] satisfies SceneCallout[],
+  },
+  with: {
+    label: `With ${team.productName}`,
+    callouts: [{ text: "Your best employee stays on the register", tone: "gain" }] satisfies SceneCallout[],
+    question: "Where does the oat milk go?",
+    answer: "Second shelf, left of the almond milk.",
+  },
+  audience: "For small stores and restaurants",
+  hardwareNote: "Runs on off-the-shelf AI glasses that cost $249 to $449",
+  hardwareSource: "metaGlassesPrices" as SourceId,
+  readiness: {
+    heading: "Maya, week 1",
+    tasks: [
+      { name: "Open the register", ready: true },
+      { name: "Receive a delivery", ready: true },
+      { name: "Stock to the planogram", ready: true },
+      { name: "Close out the drawer", ready: false },
+    ],
+  },
+  notes: [
+    "This is the same store on two days. On the left is how small stores train today: the best employee stops working to shadow the new hire, and customers wait at the register.",
+    "On the right, the new hire wears Understudy. The glasses answer questions by voice, like where the oat milk goes, and the best employee stays on the register.",
+    "The checklist on the side is what the owner sees: which tasks each new hire can already do alone. Maya is an illustration, not a real employee.",
+  ],
+};
+
+export type SwotItem = { name: string; detail: string; sources?: SourceId[] };
+export type SwotQuadrant = { name: string; effect: "helps" | "hurts"; items: SwotItem[] };
+
+const swotQuadrants: SwotQuadrant[] = [
+  {
+    name: "Strengths",
+    effect: "helps",
+    items: [
+      { name: "Copies your best worker", detail: "An AI assistant raised new agents’ output 34%", sources: ["nberAiAssistant"] },
+      { name: "No content to write", detail: "The playbook comes from a week of recorded shifts" },
+      { name: "Cheap hardware", detail: "$249 to $449 glasses, not a $3,500 headset", sources: ["metaGlassesPrices", "hololensPrice"] },
+      { name: "Made for one small store", detail: "Rivals with glasses sell to big companies", sources: ["strivrRetail"] },
+    ],
+  },
+  {
+    name: "Weaknesses",
+    effect: "hurts",
+    items: [
+      { name: "AI still misreads video", detail: "Top AI models got 59% right on first-person video", sources: ["egoIllusion"] },
+      { name: "No product or customers", detail: "Four students, a concept and no pilot store yet" },
+      { name: "Limited mistake checks", detail: "Version one checks only a few tasks" },
+      { name: "Cameras worry people", detail: "72% of Americans worry about secret wearable recording", sources: ["wearableSurvey"] },
+    ],
+  },
+  {
+    name: "Opportunities",
+    effect: "helps",
+    items: [
+      { name: "Constant turnover", detail: "Separations equaled 46% of retail jobs in 2025", sources: ["blsJolts"] },
+      { name: "A market trainers skip", detail: "Training Magazine’s survey skips firms under 100 staff", sources: ["trainingIndustryReport"] },
+      { name: "Meta opened its glasses", detail: "Outside apps can now use the camera and audio", sources: ["metaDeviceToolkit"] },
+      { name: "AI glasses go mainstream", detail: "IDC expects 13.6M display-less glasses to ship in 2026", sources: ["idcBlog"] },
+    ],
+  },
+  {
+    name: "Threats",
+    effect: "hurts",
+    items: [
+      { name: "Meta owns our platform", detail: "It can end a developer’s license at any time", sources: ["metaWearablesTerms"] },
+      { name: "Strivr moved onto glasses", detail: "Its early-access product coaches retail staff by voice", sources: ["strivrRetail"] },
+      { name: "Walmart built its own", detail: "Its associate AI has 900,000+ weekly users", sources: ["walmartAssociateAi"] },
+      { name: "New rules for AI at work", detail: "From July 2027, California bans firing by software alone", sources: ["noRoboBosses"] },
+    ],
+  },
+];
+
+function uniqueSources(quadrants: SwotQuadrant[]) {
+  return [...new Set(quadrants.flatMap((quadrant) => quadrant.items.flatMap((item) => item.sources ?? [])))];
+}
+
+export const swot = {
+  heading: "SWOT analysis",
+  rows: ["Internal: our product and team", "External: market, rivals, laws"],
+  quadrants: swotQuadrants,
+  sources: uniqueSources(swotQuadrants),
+  notes: [
+    "The top row is internal, meaning our product and our team. The bottom row is external, meaning the market, competitors and regulation. The left column helps us and the right column hurts us.",
+    "Our strengths come from the design. The glasses learn from the store’s own best employee, nobody writes training content, and the hardware costs a few hundred dollars. A study of 5,179 support agents found that an AI assistant raised the productivity of new and less-skilled agents by 34 percent, and the authors suggest it worked by spreading the habits of the best workers. That’s the same idea as Understudy. The glasses-based rivals, like Strivr, sell to big companies, so we can be the one built for a single small store.",
+    "Our weaknesses are real. On a benchmark of first-person video, the best AI models answered only 59 percent of questions correctly, so v1 sticks to a few well-defined tasks. We don’t have a product or a pilot store yet, and cameras make some people uneasy.",
+    "The opportunities are outside us. Turnover is constant, the training industry doesn’t measure businesses under 100 employees, and Meta has opened its glasses’ camera and audio to outside developers. The threats are outside us too. Meta can end a developer’s license at any time, Strivr has an early-access product that coaches retail workers by voice through smart glasses, Walmart already built its own assistant for associates, and California’s No Robo Bosses Act starts in July 2027.",
+  ],
+};
+
+export type Verdict = "yes" | "partial" | "no";
+
+export type Competitor = {
+  name: string;
+  url?: string;
+  logo?: { file: string; height: number };
+  isUs?: boolean;
+  /** Left out of the comparison chart when another column already shows the same verdicts. */
+  mapOnly?: boolean;
+  source?: SourceId;
+  /** 0 is off-the-job training, 1 is on-the-job coaching. 0 is large enterprises, 1 is small businesses. */
+  map?: { onTheJob: number; smallBusiness: number };
+  verdicts: Verdict[];
+};
+
+export const comparisonRows = [
+  { feature: "Hands-free coaching for small stores", detail: "with no coworker standing by", isGap: true },
+  { feature: "Learns from your best employee" },
+  { feature: "Coaches during the real task" },
+  { feature: "Hands-free" },
+  { feature: "Knows your store’s own rules" },
+  { feature: "Catches mistakes as they happen" },
+  { feature: "Shows what each hire can do" },
+  { feature: "Self-serve for one small store" },
+];
+
+export const competitors: Competitor[] = [
+  { name: team.productName, isUs: true, map: { onTheJob: 0.78, smallBusiness: 0.76 }, verdicts: ["yes", "yes", "yes", "yes", "yes", "partial", "yes", "yes"] },
+  { name: "Shadowing a coworker", verdicts: ["no", "partial", "yes", "yes", "yes", "partial", "no", "yes"] },
+  {
+    name: "Strivr",
+    url: "https://www.strivr.com",
+    logo: { file: "/logos/strivr.svg", height: 28 },
+    source: "strivrRetail",
+    map: { onTheJob: 0.66, smallBusiness: 0.16 },
+    verdicts: ["no", "partial", "yes", "yes", "partial", "yes", "partial", "no"],
+  },
+  {
+    name: "YOOBIC",
+    url: "https://www.yoobic.com",
+    logo: { file: "/logos/yoobic.svg", height: 38 },
+    source: "yoobicLearning",
+    map: { onTheJob: 0.36, smallBusiness: 0.12 },
+    verdicts: ["no", "no", "partial", "no", "partial", "partial", "yes", "no"],
+  },
+  {
+    name: "Axonify",
+    url: "https://axonify.com",
+    logo: { file: "/logos/axonify.svg", height: 34 },
+    source: "axonify",
+    mapOnly: true,
+    map: { onTheJob: 0.14, smallBusiness: 0.14 },
+    verdicts: ["no", "no", "partial", "no", "partial", "no", "yes", "no"],
+  },
+  {
+    name: "Opus",
+    url: "https://www.opus.so",
+    logo: { file: "/logos/opus.svg", height: 32 },
+    source: "opusPricing",
+    map: { onTheJob: 0.3, smallBusiness: 0.4 },
+    verdicts: ["no", "no", "partial", "no", "partial", "partial", "yes", "partial"],
+  },
+  {
+    name: "Trainual",
+    url: "https://trainual.com",
+    logo: { file: "/logos/trainual.svg", height: 34 },
+    source: "trainualPricing",
+    map: { onTheJob: 0.12, smallBusiness: 0.7 },
+    verdicts: ["no", "no", "no", "no", "partial", "no", "partial", "partial"],
+  },
+  {
+    name: "Connecteam",
+    url: "https://connecteam.com",
+    logo: { file: "/logos/connecteam.svg", height: 22 },
+    source: "connecteamPricing",
+    map: { onTheJob: 0.3, smallBusiness: 0.88 },
+    verdicts: ["no", "no", "no", "no", "partial", "no", "partial", "yes"],
+  },
+  {
+    name: "Augmentir",
+    url: "https://www.augmentir.ai",
+    logo: { file: "/logos/augmentir.png", height: 26 },
+    source: "augmentir",
+    map: { onTheJob: 0.6, smallBusiness: 0.32 },
+    verdicts: ["no", "partial", "yes", "partial", "partial", "partial", "yes", "no"],
+  },
+  {
+    name: "Retrocausal",
+    url: "https://retrocausal.ai",
+    logo: { file: "/logos/retrocausal.png", height: 30 },
+    source: "retrocausal",
+    map: { onTheJob: 0.9, smallBusiness: 0.14 },
+    verdicts: ["no", "partial", "yes", "no", "yes", "yes", "partial", "no"],
+  },
+  {
+    name: "VITURE Helix",
+    url: "https://www.viture.com/blog/viture-unveils-helix-the-first-ai-safety-glasses-built-on-nvidia-s-xr-ai-solution-at-awe-2026",
+    logo: { file: "/logos/viture.png", height: 20 },
+    source: "viture",
+    map: { onTheJob: 0.88, smallBusiness: 0.3 },
+    verdicts: ["no", "partial", "yes", "yes", "partial", "partial", "no", "no"],
+  },
+];
+
+function sourcesOf(list: Competitor[]) {
+  return list.flatMap((competitor) => (competitor.source ? [competitor.source] : []));
+}
+
+export const chartCompetitors = competitors.filter((competitor) => !competitor.mapOnly);
+export const competitorSources = sourcesOf(competitors);
+export const chartSources = sourcesOf(chartCompetitors);
+
+export const competitorMap = {
+  headline: "Only big companies get on-the-job AI coaching today",
+  axes: {
+    x: ["Off-the-job training", "On-the-job coaching"],
+    y: ["Large enterprises", "Small businesses"],
+  },
+  quadrants: {
+    smallOff: "Training apps for small teams",
+    largeOff: "Training apps for big chains",
+    largeOn: "AI coaching for factories and big chains",
+    smallOn: "Open today",
+  },
+  strivrMove: "Strivr moved from VR to glasses",
+  notes: [
+    "Left to right goes from training that happens away from the job to coaching during the job. Bottom to top goes from large enterprises to small businesses.",
+    "On-the-job AI coaching is real, but it’s being sold to big companies. Strivr, which made its name with VR training at Walmart, now has an early-access product that coaches retail and restaurant workers by voice through smart glasses, and its platform page says it’s built for enterprise operations. Augmentir, Retrocausal and VITURE Helix do the same for factories and labs.",
+    "Small businesses only get apps that train people off the floor, like Trainual and Connecteam. The top right corner, on-the-job coaching for small businesses, is open. That’s where we start, because the bigger players are going after large enterprises first.",
+  ],
+};
+
+export const comparisonChart = {
+  headline: "Only Understudy coaches hands-free in a small store",
+  legend: { yes: "Yes", partial: "Partly", no: "No" },
+  teamJudgment: "Team judgment",
+  notes: [
+    "Each column is one way a new hire gets trained today, and each row is something an owner of a small store would want. A full circle means yes, a half circle means partly, and an empty circle means no.",
+    "The top row is the gap. Strivr and the factory tools coach hands-free but sell to large companies. Shadowing works in a small store but needs a coworker standing next to the new hire. Nobody else does both.",
+    "We give ourselves a half circle on catching mistakes, because version one only checks a few well-defined tasks. Shadowing’s column is our team’s judgment. Every other column comes from the company’s own website.",
+  ],
 };
