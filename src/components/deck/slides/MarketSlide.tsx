@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowSquareOut } from "@phosphor-icons/react";
+import { team } from "@/content/config";
 import { market, revenueFormatter, yearlyRevenue, type MarketRing } from "@/content/content";
 import { MaskedLines, StepView } from "../primitives";
 
@@ -84,6 +86,15 @@ function RingRow({ ring, index }: { ring: MarketRing; index: number }) {
   );
 }
 
+function MarketSizingDocLink() {
+  return (
+    <a href={team.marketSizingDocLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 self-start text-caption font-bold text-ocean underline decoration-1 underline-offset-4">
+      {market.docLink}
+      <ArrowSquareOut size={24} weight="bold" aria-hidden />
+    </a>
+  );
+}
+
 export function MarketSlide() {
   return (
     <StepView className="flex flex-col gap-14">
@@ -97,7 +108,10 @@ export function MarketSlide() {
               <RingRow key={ring.acronym} ring={ring} index={index} />
             ))}
           </dl>
-          <p className="text-caption text-ink-muted">{market.priceNote}</p>
+          <div className="flex flex-col gap-3">
+            <p className="text-caption text-ink-muted">{market.priceNote}</p>
+            <MarketSizingDocLink />
+          </div>
         </div>
         <MarketCircles />
       </div>

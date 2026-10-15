@@ -18,6 +18,9 @@
   --color-ocean-chart: #2a6fb0;
   --color-rival: #a8544a;
   --color-rival-wash: #e2cfcb;
+  --color-skin-light: #e6c3a6;
+  --color-skin-deep: #a8714f;
+  --color-shelf: #c9cfce;
 
   --text-poster: 232px;
   --text-poster--line-height: 0.86;
@@ -102,6 +105,17 @@
 
 @utility figures-tabular {
   font-variant-numeric: tabular-nums;
+}
+
+@utility footnote-mark {
+  font-size: 0.55em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+@utility logo-ink {
+  filter: brightness(0);
+  opacity: 0.68;
 }
 
 @utility line-mask {

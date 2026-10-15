@@ -2,15 +2,16 @@
 
 import { MotionGlobalConfig } from "motion/react";
 import { SlideFooter } from "./SlideFooter";
-import { slides } from "./slides";
+import { decks, type DeckId } from "./decks";
 
 MotionGlobalConfig.skipAnimations = true;
 
-const pages = slides.flatMap((slide) =>
-  (slide.printSteps ?? [slide.steps - 1]).map((step) => ({ slide, step })),
-);
+function printedPages(deckId: DeckId) {
+  return decks[deckId].slides.flatMap((slide) => (slide.printSteps ?? [slide.steps - 1]).map((step) => ({ slide, step })));
+}
 
-export function PrintDeck() {
+export function PrintDeck({ deckId }: { deckId: DeckId }) {
+  const pages = printedPages(deckId);
   return (
     <main>
       {pages.map(({ slide, step }) => (

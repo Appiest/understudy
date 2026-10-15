@@ -444,7 +444,7 @@ const solution: SlideFacts = {
       claim: "Connecticut’s expanded monitoring law takes effect, requiring employers to name each location where they monitor workers, including with cameras.",
       status: "verified",
       source: "connecticutMonitoring",
-      caveat: "Rules differ by state. New York and Delaware require notice for electronic monitoring. A pending California bill, SB 1130, would require employees with work wearables to tell customers they’re being recorded.",
+      caveat: "Rules differ by state. New York and Delaware require notice for electronic monitoring. California’s SB 1130, which would have required employees with work wearables to tell customers they’re being recorded, was vetoed on September 30, 2026 (The Next Web, Oct 2026).",
     },
     {
       figure: "Our plan",
@@ -544,28 +544,36 @@ const canvasFacts: SlideFacts = {
 };
 
 const landscape: SlideFacts = {
-  summary: "This slide maps who does what: live, on-the-job coaching exists for factories and field service, and retail tools train people away from the floor. The positions on the map are our judgment, and the descriptions come from each company’s own pages.",
+  checkedOn: "October 14, 2026",
+  summary: "This slide maps who does what: live, on-the-job coaching exists for big companies, and the tools built for small businesses train people away from the floor. The positions on the map are our judgment, and the descriptions come from each company’s own pages.",
   facts: [
     {
       figure: "Positions",
       claim: "Where each company sits on the map.",
       status: "estimate",
-      caveat: "Placement is our reading of each company’s marketing, not a measurement.",
+      caveat: "Placement is our reading of each company’s marketing, not a measurement. Bottom to top reflects who the company says it sells to.",
     },
     {
-      figure: "17,000",
-      claim: "VR headsets Walmart put in its US stores for Strivr training, for more than 1 million associates.",
-      status: "adjusted",
-      derivation: "The slide first said Walmart trained 2.2 million associates across 4,700 stores. Strivr’s page describes that as a plan, so we used Walmart’s own 2018 figures.",
-      source: "walmartVr",
-    },
-    {
-      figure: "8 h → 15 min",
-      claim: "Walmart cut Pickup Tower training from 8 hours to 15 minutes with Strivr.",
+      figure: "Strivr",
+      claim: "Strivr’s early-access Frontline Intelligence coaches retail associates by voice through smart glasses, including Ray-Ban Meta, and its platform page says it’s built for enterprise operations.",
       status: "verified",
-      source: "strivrWalmart",
-      quote: "reduce Pickup Tower training time by 96%, from 8 hours to just 15 minutes",
-      caveat: "It’s from Strivr’s own case study and gives no method.",
+      source: "strivrRetail",
+      quote: "delivers voice-based, audio guidance via the built-in speakers on your workers’ smart glasses",
+      caveat: "It’s early access only, with no public price. Strivr’s own team captures footage and trains a model for each company.",
+    },
+    {
+      figure: "Trainual",
+      claim: "Trainual is a training app for small and mid-size companies.",
+      status: "verified",
+      source: "trainualPricing",
+      quote: "Trainual is best suited for companies with 25 - 1000 employees.",
+    },
+    {
+      figure: "Free",
+      claim: "Connecteam’s small-business plan is free for small teams, and its training runs as phone courses.",
+      status: "verified",
+      source: "connecteamPricing",
+      quote: "entirely free for up to 10 users",
     },
     {
       figure: "$599",
@@ -580,7 +588,7 @@ const landscape: SlideFacts = {
       status: "verified",
       source: "airwave",
       quote: "captures their fixes, judgment calls and shortcuts so the next tech gets onboarded faster",
-      caveat: "Airwave doesn’t say what device it runs on, so don’t describe it as glasses.",
+      caveat: "Airwave says it’s built for field service teams, so it sits with the enterprise tools.",
     },
     {
       figure: "Augmentir",
@@ -599,13 +607,29 @@ const landscape: SlideFacts = {
       caveat: "YOOBIC describes itself as “microlearning in the flow of work,” so it edges toward on-the-job. It’s still lessons on a phone, not live coaching during a task.",
     },
   ],
+  background: [
+    {
+      figure: "17,000",
+      claim: "VR headsets Walmart put in its US stores for Strivr training, for more than 1 million associates.",
+      status: "verified",
+      source: "walmartVr",
+    },
+    {
+      figure: "8 h → 15 min",
+      claim: "Walmart cut Pickup Tower training from 8 hours to 15 minutes with Strivr VR.",
+      status: "verified",
+      source: "strivrWalmart",
+      quote: "reduce Pickup Tower training time by 96%, from 8 hours to just 15 minutes",
+      caveat: "It’s from Strivr’s own case study and gives no method.",
+    },
+  ],
   questions: [
     {
       question: "Is the top-right corner really empty?",
-      answer: "We found no product that coaches retail or small-business workers live, hands-free, during real tasks. Our search was limited to public websites, so an investor may know something we don’t. The closest is YOOBIC, which calls itself learning in the flow of work but still delivers phone lessons.",
+      answer: "We found no product that coaches small-business workers live, hands-free, during real tasks. The closest is Strivr’s early-access Frontline Intelligence, which coaches retail and restaurant workers by voice through smart glasses, but its platform page says it’s built for enterprise operations. Our search was limited to public websites, so an investor may know something we don’t.",
     },
     {
-      question: "What if an industrial player like VITURE or Augmentir moves into retail?",
+      question: "What if Strivr or an industrial player moves down to small stores?",
       answer: "They’ll likely go after large enterprises first, where the contracts are biggest. Their products are built for factories, with safety hardware and existing documents. We start with a scrappier, cheaper product for small businesses that learns from the owner instead of from manuals, and grow from there.",
     },
   ],
@@ -822,7 +846,317 @@ const sourcesFacts: SlideFacts = {
   ],
 };
 
+const definitionFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "This slide defines the product before the competitive analysis starts: what Understudy is, who it’s for and the problem it solves. Its one number comes from the Bureau of Labor Statistics.",
+  facts: [
+    {
+      figure: "46%",
+      claim: "Separations in US retail added up to about 46% of jobs in 2025.",
+      status: "verified",
+      derivation: "BLS reports a 3.8% average monthly separations rate for retail in 2025, and 3.8% × 12 months ≈ 46%.",
+      source: "blsJolts",
+      caveat: "Separations count every departure, so one job that turns over twice counts twice. Don’t say 46% of workers quit.",
+    },
+    {
+      figure: "Coaching example",
+      claim: "The oat milk question and answer show the kind of exchange the glasses would have.",
+      status: "illustrative",
+    },
+  ],
+  questions: [
+    {
+      question: "Is it a hardware product?",
+      answer: "No. We use off-the-shelf AI glasses, like Meta’s $249 to $449 models or open platforms like Mentra’s. Understudy is the software that learns the store and coaches the new hire.",
+    },
+    {
+      question: "Why independent grocers, franchisees and local restaurants?",
+      answer: "They have the highest turnover, no training department and no budget for VR or enterprise software. The training industry’s main survey doesn’t even count businesses with fewer than 100 employees.",
+    },
+  ],
+};
+
+const swotFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "The top row is internal (our product and team) and the bottom row is external (market, competitors and regulation), following the lecture’s definitions. Every number was checked against its source. Items without a number describe our own design and stage.",
+  facts: [
+    {
+      figure: "34%",
+      claim: "A generative AI assistant raised issues resolved per hour by 14% on average, and by 34% for novice and low-skilled support agents.",
+      status: "verified",
+      source: "nberAiAssistant",
+      quote: "including a 34% improvement for novice and low-skilled workers",
+      caveat: "It’s a study of 5,179 customer support agents, not store workers. The authors give suggestive evidence that the AI “disseminates the best practices of more able workers,” which is the idea behind Understudy.",
+    },
+    {
+      figure: "$249 to $449",
+      claim: "Meta’s AI glasses prices, compared with HoloLens 2’s $3,500 launch price.",
+      status: "verified",
+      source: "metaGlassesPrices",
+      quote: "Ray-Ban Meta (Gen 3) is available today, with prices starting at $449 USD.",
+      caveat: "The $3,500 is HoloLens 2’s 2019 launch price (TechCrunch, May 2019), and HoloLens 2 is discontinued.",
+    },
+    {
+      figure: "Rivals sell to big companies",
+      claim: "Strivr, the glasses-based rival closest to us, describes its platform as built for enterprise operations.",
+      status: "verified",
+      source: "strivrRetail",
+      quote: "Built for enterprise operations",
+    },
+    {
+      figure: "59%",
+      claim: "On the EgoIllusion benchmark of 1,400 first-person videos and 8,000 questions, strong models like GPT-4o and Gemini reached only 59% accuracy.",
+      status: "verified",
+      source: "egoIllusion",
+      quote: "powerful models like GPT-4o and Gemini, achieving only 59% accuracy",
+      caveat: "The benchmark was built to provoke mistakes, so routine tasks may go better. That’s why v1 checks only a few well-defined tasks.",
+    },
+    {
+      figure: "72%",
+      claim: "Americans who worry about being secretly recorded by camera-equipped wearables.",
+      status: "verified",
+      source: "wearableSurvey",
+      caveat: "It’s one survey of about 1,000 US adults.",
+    },
+    {
+      figure: "46%",
+      claim: "Retail separations in 2025 as a share of jobs.",
+      status: "verified",
+      derivation: "3.8% average monthly separations rate × 12 months ≈ 46%.",
+      source: "blsJolts",
+    },
+    {
+      figure: "100+ staff",
+      claim: "Training Magazine’s annual industry report only includes organizations with 100 or more employees.",
+      status: "verified",
+      source: "trainingIndustryReport",
+      quote: "Only U.S.-based corporations and educational institutions with 100 or more employees were included in the analysis.",
+    },
+    {
+      figure: "Camera and audio",
+      claim: "Meta’s Wearables Device Access Toolkit lets outside developers use its glasses’ camera and audio, with public publishing promised for 2026.",
+      status: "verified",
+      source: "metaDeviceToolkit",
+      quote: "Developers can start accessing the camera and audio functionality of our growing portfolio of AI glasses.",
+      caveat: "Meta said general publishing would open in 2026. As of late September 2026, trade press reported it still wasn’t open, so check before presenting.",
+    },
+    {
+      figure: "13.6M",
+      claim: "IDC’s 2026 forecast for display-less smart glasses shipments.",
+      status: "verified",
+      source: "idcBlog",
+    },
+    {
+      figure: "Any time",
+      claim: "Meta’s Wearables Developer Terms let Meta end a developer’s license at any time.",
+      status: "verified",
+      source: "metaWearablesTerms",
+      quote: "Meta reserves the right to terminate the License at any time, in our sole discretion, without notice to you",
+      caveat: "Mentra’s open-source SDK is our fallback platform, so we aren’t locked into Meta.",
+    },
+    {
+      figure: "Early access",
+      claim: "Strivr’s Frontline Intelligence coaches retail associates by voice through smart glasses, including Ray-Ban Meta.",
+      status: "verified",
+      source: "strivrRetail",
+      quote: "delivers voice-based, audio guidance via the built-in speakers on your workers’ smart glasses",
+    },
+    {
+      figure: "900,000+",
+      claim: "Weekly users of Walmart’s in-house AI assistant for associates, which Walmart is upgrading to turn process guides into step-by-step instructions.",
+      status: "verified",
+      source: "walmartAssociateAi",
+      quote: "With more than 900,000 weekly users and over 3 million queries per day",
+    },
+    {
+      figure: "July 1, 2027",
+      claim: "California’s No Robo Bosses Act (SB 947) takes effect. Employers can’t discipline or fire workers based only on an automated decision system and must tell workers when they use one.",
+      status: "verified",
+      source: "noRoboBosses",
+      caveat: "This is a secondary source. Our mistake flags go to the owner as coaching information, never as automatic discipline.",
+    },
+  ],
+  background: [
+    {
+      figure: "$9M",
+      claim: "Opus Training raised a Series B for AI training aimed at multi-unit restaurant, retail and fitness brands.",
+      status: "verified",
+      source: "opusSeriesB",
+      quote: "Opus will use $9 million in funding to accelerate product innovation and go-to-market efforts.",
+    },
+    {
+      figure: "SB 1130 vetoed",
+      claim: "California’s governor vetoed the bill that would have penalized secret recording with smart glasses, saying its definition was too broad.",
+      status: "verified",
+      source: "noRoboBosses",
+      caveat: "California’s two-party consent law for recording private conversations still applies.",
+    },
+  ],
+  questions: [
+    {
+      question: "Isn’t depending on Meta a weakness, not a threat?",
+      answer: "Building on someone else’s hardware is our choice, so the dependency is internal. What Meta decides to do with its developer terms is outside our control, which is why it sits under threats. Our answer is that we can also run on Mentra’s open-source platform.",
+    },
+    {
+      question: "What stops Strivr from coming down to small stores?",
+      answer: "Nothing permanent. Today Strivr captures footage and trains a model for each company with its own team, which only pays off for big customers. We start with a scrappier, self-serve product for small businesses and grow from there.",
+    },
+    {
+      question: "Won’t the AI make mistakes?",
+      answer: "Yes, sometimes. That’s why version one focuses on a procedure library, voice guidance and Q&A, and checks for mistakes on only a few well-defined tasks.",
+    },
+  ],
+};
+
+const competitorMapFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "This 2x2 shows who offers on-the-job coaching and who they sell to. Positions are our judgment from each company’s own website. Each logo links to that site.",
+  facts: [
+    {
+      figure: "Positions",
+      claim: "Where each company sits on the map.",
+      status: "estimate",
+      caveat: "Placement is our reading of each company’s website. Left to right reflects how close the product gets to the real task. Bottom to top reflects who the company says it sells to.",
+    },
+    {
+      figure: "Strivr",
+      claim: "Strivr moved from VR training to an early-access smart-glasses product for retail and restaurants, and says its platform is built for enterprise operations.",
+      status: "verified",
+      source: "strivrRetail",
+      quote: "Built for enterprise operations",
+    },
+    {
+      figure: "Opus",
+      claim: "Opus trains restaurant and multi-unit teams on phones and is typically priced per location.",
+      status: "verified",
+      source: "opusPricing",
+      quote: "Opus is typically priced per location.",
+    },
+    {
+      figure: "Trainual",
+      claim: "Trainual is a training app for small and mid-size companies.",
+      status: "verified",
+      source: "trainualPricing",
+      quote: "Trainual is best suited for companies with 25 - 1000 employees.",
+    },
+    {
+      figure: "Connecteam",
+      claim: "Connecteam’s small-business plan is free for small teams, and its training runs as phone courses.",
+      status: "verified",
+      source: "connecteamPricing",
+      quote: "entirely free for up to 10 users",
+    },
+    {
+      figure: "Factories and labs",
+      claim: "Augmentir, Retrocausal and VITURE Helix offer on-the-job guidance for industrial, lab and clinical work.",
+      status: "verified",
+      source: "viture",
+      caveat: "Retrocausal uses fixed cameras at a workstation, not glasses. VITURE Helix ships in Q1 2027.",
+    },
+  ],
+  questions: [
+    {
+      question: "Why isn’t Meta on the map?",
+      answer: "Meta makes the glasses we build on. Its Meta AI assistant answers general questions, but it doesn’t know a store’s procedures, track new hires or sell to businesses yet. We list Meta’s control of its platform as a threat on the SWOT.",
+    },
+    {
+      question: "Where would shadowing go?",
+      answer: "Shadowing is on the job and works in small stores, but it isn’t a product. It costs the best employee’s time, which is the problem we solve, so it’s a column on the comparison chart instead.",
+    },
+  ],
+};
+
+const comparisonFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "Each competitor’s column comes from its own website, read in October 2026. Shadowing’s column is our team’s judgment. Our own column describes the product we plan to build.",
+  facts: [
+    {
+      figure: "Top row",
+      claim: "No one else offers hands-free coaching for small stores without a coworker beside the new hire.",
+      status: "estimate",
+      caveat: "The hands-free tools (Strivr, VITURE Helix, Augmentir on RealWear) sell to enterprises or factories. Shadowing is hands-free and works in small stores but needs a coworker. Our search was limited to public websites.",
+    },
+    {
+      figure: "Half circle",
+      claim: "We rate our own mistake catching as partial, because v1 only checks a few well-defined tasks.",
+      status: "estimate",
+    },
+    {
+      figure: "Free",
+      claim: "Connecteam is the only product we found with public, self-serve small-business pricing.",
+      status: "verified",
+      source: "connecteamPricing",
+      quote: "entirely free for up to 10 users",
+    },
+    {
+      figure: "Strivr",
+      claim: "Strivr detects mistakes in real time and guides associates by voice through smart glasses, which is why it scores well on the middle rows.",
+      status: "verified",
+      source: "strivrRetail",
+      quote: "delivers voice-based, audio guidance via the built-in speakers on your workers’ smart glasses",
+    },
+  ],
+  questions: [
+    {
+      question: "Why does shadowing score so well?",
+      answer: "Because it really is good at learning on the job. Its problem is cost: it pulls the best employee off the floor for every new hire, and nothing gets recorded or tracked. Understudy keeps what works about shadowing without the coworker standing there.",
+    },
+    {
+      question: "Did you leave out competitors?",
+      answer: "We left out Airwave, which captures field technicians’ work for reports, and NSF EyeSucceed, a 2019 smart-glasses training program for foodservice that ran on Google Glass Enterprise, which Google stopped selling in 2023. We couldn’t confirm EyeSucceed is still sold.",
+    },
+  ],
+};
+
+const valuePropositionFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "Our written value proposition follows Geoffrey Moore’s template from Crossing the Chasm. The alternative we name comes from the comparison chart, and our differentiation matches the two axes of the competitive landscape.",
+  facts: [],
+  questions: [
+    {
+      question: "Why shadowing as the main alternative?",
+      answer: "It’s what most small stores do today. It’s a column on our comparison chart, and it’s the method that costs the owner their best employee’s time.",
+    },
+    {
+      question: "How does this connect to the landscape?",
+      answer: "The landscape’s axes are on the job versus off the job and small businesses versus large enterprises. Our differentiation says we coach on the floor and that we learn each small store from its own best employee.",
+    },
+  ],
+};
+
+const visualValuePropositionFacts: SlideFacts = {
+  checkedOn: "October 14, 2026",
+  summary: "This page shows the value proposition as one scene: the same store with and without Understudy. The people, the dialogue and Maya’s checklist are illustrations, not data.",
+  facts: [
+    {
+      figure: "$249 to $449",
+      claim: "The price range of Meta’s AI glasses.",
+      status: "verified",
+      source: "metaGlassesPrices",
+      quote: "Ray-Ban Meta (Gen 3) is available today, with prices starting at $449 USD.",
+      caveat: "Prices change quickly. Check again the week you present.",
+    },
+    {
+      figure: "Scene and checklist",
+      claim: "The store, the coaching exchange and Maya’s week 1 checklist.",
+      status: "illustrative",
+    },
+  ],
+  questions: [
+    {
+      question: "Why only two callouts on the left?",
+      answer: "Following Librande’s one-page design, the scene carries most of the message. The callouts mark the two costs owners feel: the best employee stops working, and customers wait.",
+    },
+  ],
+};
+
 export const factsBySlide: Record<string, SlideFacts> = {
+  definition: definitionFacts,
+  swot: swotFacts,
+  "competitor-map": competitorMapFacts,
+  comparison: comparisonFacts,
+  "value-proposition": valuePropositionFacts,
+  "visual-value-proposition": visualValuePropositionFacts,
   title,
   challenge,
   drivers,

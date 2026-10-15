@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, ArrowSquareOut, ArrowsClockwise, CheckCircle, Pa
 import { useEffect } from "react";
 import { factsBySlide, factsCheckedOn, type Fact, type FactStatus } from "@/content/facts";
 import { sources, type Source } from "@/content/sources";
-import { slides } from "../deck/slides";
+import { decks, type DeckId } from "../deck/decks";
 import { factsHash } from "../useHashRoute";
 import { CanvasScores } from "./CanvasScores";
 
@@ -68,9 +68,9 @@ function FactCard({ fact }: { fact: Fact }) {
   );
 }
 
-function PageNav({ slideNumber }: { slideNumber: number }) {
+function PageNav({ slideNumber, slideCount }: { slideNumber: number; slideCount: number }) {
   const previous = slideNumber > 1 ? slideNumber - 1 : null;
-  const next = slideNumber < slides.length ? slideNumber + 1 : null;
+  const next = slideNumber < slideCount ? slideNumber + 1 : null;
   const linkClass = "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold hover:bg-paper-sunken";
   return (
     <nav aria-label="Fact pages" className="sticky top-0 z-10 bg-paper/90 backdrop-blur">
@@ -110,7 +110,8 @@ function useEscapeBackToSlide(slideNumber: number) {
   }, [slideNumber]);
 }
 
-export function FactsPage({ slideNumber }: { slideNumber: number }) {
+export function FactsPage({ deckId, slideNumber }: { deckId: DeckId; slideNumber: number }) {
+  const slides = decks[deckId].slides;
   const clampedNumber = Math.min(Math.max(slideNumber, 1), slides.length);
   const slide = slides[clampedNumber - 1];
   const facts = factsBySlide[slide.id];
@@ -118,7 +119,7 @@ export function FactsPage({ slideNumber }: { slideNumber: number }) {
 
   return (
     <div className="min-h-full bg-paper text-ink">
-      <PageNav slideNumber={clampedNumber} />
+      <PageNav slideNumber={clampedNumber} slideCount={slides.length} />
       <main className="mx-auto max-w-5xl px-4 pt-10 pb-24 md:px-8">
         <header className="max-w-3xl">
           <h1 className="text-4xl leading-tight font-extrabold md:text-5xl">

@@ -17,7 +17,9 @@ const shortcuts = [
   ["Facts", "D"],
 ];
 
-export function NotesPanel({ open, slide, slideNumber, onClose }: { open: boolean; slide: SlideDefinition; slideNumber: number; onClose: () => void }) {
+type NotesPanelProps = { open: boolean; slide: SlideDefinition; slideNumber: number; printPath: string; onClose: () => void };
+
+export function NotesPanel({ open, slide, slideNumber, printPath, onClose }: NotesPanelProps) {
   return (
     <AnimatePresence>
       {open && (
@@ -36,7 +38,7 @@ export function NotesPanel({ open, slide, slideNumber, onClose }: { open: boolea
                 <ListMagnifyingGlass size={18} weight="bold" aria-hidden />
                 Facts behind this slide
               </a>
-              <a href={asset("/print")} target="_blank" className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
+              <a href={asset(printPath)} target="_blank" className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
                 <Printer size={18} weight="bold" aria-hidden />
                 Print or save as PDF
               </a>

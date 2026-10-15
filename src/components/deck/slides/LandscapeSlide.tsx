@@ -13,7 +13,7 @@ const players: LandscapePlayer[] = landscape.players;
 const us = players.find((player) => player.kind === "us")!;
 
 function positionOf(player: LandscapePlayer) {
-  return { left: player.offToOn * MAP.width, top: (1 - player.industrialToRetail) * MAP.height };
+  return { left: player.offToOn * MAP.width, top: (1 - player.enterpriseToSmall) * MAP.height };
 }
 
 const markerClass: Record<LandscapePlayer["kind"], string> = {

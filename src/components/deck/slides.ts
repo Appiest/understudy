@@ -19,6 +19,8 @@ export type SlideDefinition = {
   steps: number;
   printSteps?: number[];
   sourcesByStep: SourceId[][];
+  /** Numbers each source in the footer so the slide can mark claims with matching superscripts. */
+  footnotes?: boolean;
   notes: string[];
   Content: ComponentType<SlideProps>;
 };
@@ -73,7 +75,7 @@ export const slides: SlideDefinition[] = [
     id: "landscape",
     name: "Competitive landscape",
     steps: 1,
-    sourcesByStep: [["strivrWalmart", "walmartVr", "yoobic", "viture", "retrocausal", "airwave", "augmentir"]],
+    sourcesByStep: [["strivrRetail", "yoobic", "trainualPricing", "connecteamPricing", "viture", "retrocausal", "airwave", "augmentir"]],
     notes: landscape.notes,
     Content: LandscapeSlide,
   },

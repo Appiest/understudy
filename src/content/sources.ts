@@ -6,7 +6,7 @@ export type Source = {
   factsOnly?: boolean;
 };
 
-export const sources = {
+export const pitchSources = {
   kimMauborgne: {
     cite: "Kim and Mauborgne, California Management Review, 2005",
     title: "Kim, W.C. and Mauborgne, R. (2005). “Blue Ocean Strategy: From Theory to Practice.” California Management Review 47(3), 105–121.",
@@ -454,6 +454,75 @@ export const sources = {
     url: "http://411sbfacts.com/sbpoll-tables-res.php?POLLID=0051&QID=00000001534",
     factsOnly: true,
   },
+  strivrRetail: {
+    cite: "Strivr retail and platform pages, Oct 2026",
+    title: "Strivr: Frontline Intelligence for retail, delivered through smart glasses (early access)",
+    url: "https://www.strivr.com/use-cases/retail",
+  },
+  trainualPricing: {
+    cite: "Trainual pricing",
+    title: "Trainual: pricing, best suited for companies with 25 to 1,000 employees",
+    url: "https://trainual.com/pricing",
+  },
+  connecteamPricing: {
+    cite: "Connecteam pricing",
+    title: "Connecteam: pricing, free for up to 10 users",
+    url: "https://connecteam.com/pricing/",
+  },
 } satisfies Record<string, Source>;
+
+const analysisSources = {
+  mooreChasm: {
+    cite: "Geoffrey Moore, Crossing the Chasm, 1991",
+    title: "Moore, G.A. (1991). Crossing the Chasm: Marketing and Selling High-Tech Products to Mainstream Customers. HarperBusiness.",
+  },
+  nberAiAssistant: {
+    cite: "Brynjolfsson, Li and Raymond, NBER, 2023",
+    title: "Brynjolfsson, E., Li, D. and Raymond, L. (2023). Generative AI at Work. NBER Working Paper 31161.",
+    url: "https://www.nber.org/papers/w31161",
+  },
+  egoIllusion: {
+    cite: "EgoIllusion benchmark, Aug 2025",
+    title: "EgoIllusion: Benchmarking Hallucinations in Egocentric Video Understanding (arXiv 2508.12687, Aug 2025)",
+    url: "https://arxiv.org/abs/2508.12687v2",
+  },
+  metaDeviceToolkit: {
+    cite: "Meta for Developers, Sept 2025",
+    title: "Meta for Developers: Introducing the Meta Wearables Device Access Toolkit (Sept 18, 2025)",
+    url: "https://developers.meta.com/blog/introducing-meta-wearables-device-access-toolkit/",
+  },
+  metaWearablesTerms: {
+    cite: "Meta Wearables Developer Terms, Oct 2025",
+    title: "Meta Wearables Developer Terms, section 13.1 (last updated Oct 6, 2025)",
+    url: "https://wearables.developer.meta.com/terms/",
+  },
+  walmartAssociateAi: {
+    cite: "Walmart, June 2025",
+    title: "Walmart: Walmart unveils new AI-powered tools to empower 1.5 million associates (June 24, 2025)",
+    url: "https://corporate.walmart.com/news/2025/06/24/walmart-unveils-new-ai-powered-tools-to-empower-1-5-million-associates/",
+  },
+  opusSeriesB: {
+    cite: "Opus Training, Feb 2026",
+    title: "EIN Presswire: Opus Training raises Series B to scale AI-powered training and operations for the frontline workforce (Feb 24, 2026)",
+    url: "https://www.einpresswire.com/article/894629143/opus-training-raises-series-b-to-scale-ai-powered-training-and-operations-for-the-frontline-workforce",
+  },
+  yoobicLearning: {
+    cite: "YOOBIC Learning",
+    title: "YOOBIC: Learning, AI-generated training for frontline retail teams",
+    url: "https://yoobic.com/learning/",
+  },
+  opusPricing: {
+    cite: "Opus pricing",
+    title: "Opus: pricing, typically priced per location",
+    url: "https://www.opus.so/pricing",
+  },
+  noRoboBosses: {
+    cite: "The Next Web, Oct 2026",
+    title: "The Next Web: Newsom signs No Robo Bosses Act and vetoes smart glasses recording bill (Oct 2, 2026)",
+    url: "https://thenextweb.com/news/no-robo-bosses-act-newsom-ai-bills-smart-glasses-veto",
+  },
+} satisfies Record<string, Source>;
+
+export const sources = { ...pitchSources, ...analysisSources };
 
 export type SourceId = keyof typeof sources;

@@ -1,22 +1,24 @@
 "use client";
 
 import { AnimatePresence, MotionConfig, motion, type Variants } from "motion/react";
+import { useMemo } from "react";
 import { exitTransition } from "@/lib/motion";
 import { NotesPanel } from "./NotesPanel";
 import { SlideFooter } from "./SlideFooter";
-import { slides } from "./slides";
+import { decks, printPath, type DeckId } from "./decks";
 import { useDeckNavigation } from "./useDeckNavigation";
 import { useBeatLabelVisible, useIdleCursor, usePresenterKeys, useStageScale } from "./usePresenterKeys";
-
-const slideStepCounts = slides.map((slide) => slide.steps);
 
 const slideFrame: Variants = {
   exit: { opacity: 0, transition: exitTransition },
 };
 
-export function Deck() {
+export function Deck({ deckId }: { deckId: DeckId }) {
+  const deck = decks[deckId];
+  const slides = deck.slides;
+  const slideStepCounts = useMemo(() => slides.map((slide) => slide.steps), [slides]);
   const { index, step, ready, handlePointerDown, handlePointerUp, handleContextMenu } = useDeckNavigation(slideStepCounts);
-  const { notesOpen, toggleNotes } = usePresenterKeys(index + 1);
+  const { notesOpen, toggleNotes } = usePresenterKeys(index + 1, printPath(deck));
   const beatLabelVisible = useBeatLabelVisible();
   const cursorIsIdle = useIdleCursor();
   const scale = useStageScale();
@@ -49,7 +51,7 @@ export function Deck() {
           <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
-        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} onClose={toggleNotes} />
+        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} printPath={printPath(deck)} onClose={toggleNotes} />
       </main>
     </MotionConfig>
   );
