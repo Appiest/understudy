@@ -2,6 +2,7 @@
 
 import { AnimatePresence, MotionConfig, motion, type Variants } from "motion/react";
 import { useMemo } from "react";
+import { guideFor } from "@/content/guides";
 import { exitTransition } from "@/lib/motion";
 import { NotesPanel } from "./NotesPanel";
 import { SlideFooter } from "./SlideFooter";
@@ -18,11 +19,12 @@ export function Deck({ deckId }: { deckId: DeckId }) {
   const slides = deck.slides;
   const slideStepCounts = useMemo(() => slides.map((slide) => slide.steps), [slides]);
   const { index, step, ready, handlePointerDown, handlePointerUp, handleContextMenu } = useDeckNavigation(slideStepCounts);
-  const { notesOpen, toggleNotes } = usePresenterKeys(index + 1, printPath(deck));
+  const slide = slides[index];
+  const hasGuide = guideFor(slide.id) !== undefined;
+  const { notesOpen, toggleNotes } = usePresenterKeys(index + 1, printPath(deck), hasGuide);
   const beatLabelVisible = useBeatLabelVisible();
   const cursorIsIdle = useIdleCursor();
   const scale = useStageScale();
-  const slide = slides[index];
 
   return (
     <MotionConfig reducedMotion="user">
@@ -51,7 +53,7 @@ export function Deck({ deckId }: { deckId: DeckId }) {
           <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
-        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} printPath={printPath(deck)} onClose={toggleNotes} />
+        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} printPath={printPath(deck)} hasGuide={hasGuide} onClose={toggleNotes} />
       </main>
     </MotionConfig>
   );

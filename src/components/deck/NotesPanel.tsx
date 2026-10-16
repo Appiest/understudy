@@ -1,10 +1,10 @@
 "use client";
 
-import { ListMagnifyingGlass, Printer, X } from "@phosphor-icons/react";
+import { BookOpenText, ListMagnifyingGlass, Printer, X } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { asset } from "@/lib/asset";
 import { easeDrawn } from "@/lib/motion";
-import { factsHash } from "../useHashRoute";
+import { factsHash, guideHash } from "../useHashRoute";
 import type { SlideDefinition } from "./slides";
 
 const shortcuts = [
@@ -17,9 +17,14 @@ const shortcuts = [
   ["Facts", "D"],
 ];
 
-type NotesPanelProps = { open: boolean; slide: SlideDefinition; slideNumber: number; printPath: string; onClose: () => void };
+const guideShortcut = ["Explainer", "G"];
 
-export function NotesPanel({ open, slide, slideNumber, printPath, onClose }: NotesPanelProps) {
+const panelLinkClass = "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink";
+
+type NotesPanelProps = { open: boolean; slide: SlideDefinition; slideNumber: number; printPath: string; hasGuide: boolean; onClose: () => void };
+
+export function NotesPanel({ open, slide, slideNumber, printPath, hasGuide, onClose }: NotesPanelProps) {
+  const visibleShortcuts = hasGuide ? [...shortcuts, guideShortcut] : shortcuts;
   return (
     <AnimatePresence>
       {open && (
@@ -34,11 +39,17 @@ export function NotesPanel({ open, slide, slideNumber, printPath, onClose }: Not
           <div className="flex items-center justify-between gap-4 px-6 pt-5">
             <h2 className="text-lg font-bold">{slide.name}</h2>
             <div className="flex items-center gap-1">
-              <a href={factsHash(slideNumber)} className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
+              {hasGuide && (
+                <a href={guideHash(slideNumber)} className={panelLinkClass}>
+                  <BookOpenText size={18} weight="bold" aria-hidden />
+                  Explain this slide
+                </a>
+              )}
+              <a href={factsHash(slideNumber)} className={panelLinkClass}>
                 <ListMagnifyingGlass size={18} weight="bold" aria-hidden />
                 Facts behind this slide
               </a>
-              <a href={asset(printPath)} target="_blank" className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink">
+              <a href={asset(printPath)} target="_blank" className={panelLinkClass}>
                 <Printer size={18} weight="bold" aria-hidden />
                 Print or save as PDF
               </a>
@@ -53,7 +64,7 @@ export function NotesPanel({ open, slide, slideNumber, printPath, onClose }: Not
             ))}
           </div>
           <dl className="flex flex-wrap gap-x-5 gap-y-1 bg-paper px-6 py-3 text-sm text-ink-muted">
-            {shortcuts.map(([action, key]) => (
+            {visibleShortcuts.map(([action, key]) => (
               <div key={action} className="flex gap-1.5">
                 <dt>{action}</dt>
                 <dd className="font-semibold text-ink">{key}</dd>
