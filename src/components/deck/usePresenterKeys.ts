@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { asset } from "@/lib/asset";
-import { factsHash } from "../useHashRoute";
+import { factsHash, guideHash } from "../useHashRoute";
 
 function toggleFullscreen() {
   if (document.fullscreenElement) {
@@ -46,7 +46,7 @@ export function useBeatLabelVisible() {
   return useSyncExternalStore(subscribeToBeatLabel, readBeatLabelVisible, () => true);
 }
 
-export function usePresenterKeys(slideNumber: number, printPath: string) {
+export function usePresenterKeys(slideNumber: number, printPath: string, hasGuide: boolean) {
   const [notesOpen, setNotesOpen] = useState(false);
 
   useEffect(() => {
@@ -58,6 +58,11 @@ export function usePresenterKeys(slideNumber: number, printPath: string) {
       d: () => {
         window.location.hash = factsHash(slideNumber);
       },
+      ...(hasGuide && {
+        g: () => {
+          window.location.hash = guideHash(slideNumber);
+        },
+      }),
       Escape: () => setNotesOpen(false),
     };
 
@@ -70,7 +75,7 @@ export function usePresenterKeys(slideNumber: number, printPath: string) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [slideNumber, printPath]);
+  }, [slideNumber, printPath, hasGuide]);
 
   return { notesOpen, toggleNotes: () => setNotesOpen((open) => !open) };
 }

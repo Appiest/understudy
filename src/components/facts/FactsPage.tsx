@@ -1,11 +1,13 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ArrowSquareOut, ArrowsClockwise, CheckCircle, PaintBrush, Scales, Warning, type Icon } from "@phosphor-icons/react";
-import { useEffect } from "react";
+import { ArrowSquareOut, ArrowsClockwise, BookOpenText, CheckCircle, PaintBrush, Scales, Warning, type Icon } from "@phosphor-icons/react";
 import { factsBySlide, factsCheckedOn, type Fact, type FactStatus } from "@/content/facts";
+import { guideFor } from "@/content/guides";
 import { sources, type Source } from "@/content/sources";
 import { decks, type DeckId } from "../deck/decks";
-import { factsHash } from "../useHashRoute";
+import { PageNav, PageNavLink, clampSlideNumber, useEscapeBackToSlide } from "../PageNav";
+import { QuestionList } from "../QuestionList";
+import { factsHash, guideHash } from "../useHashRoute";
 import { CanvasScores } from "./CanvasScores";
 
 const statusStyle: Record<FactStatus, { label: string; Icon: Icon; className: string }> = {
@@ -68,59 +70,23 @@ function FactCard({ fact }: { fact: Fact }) {
   );
 }
 
-function PageNav({ slideNumber, slideCount }: { slideNumber: number; slideCount: number }) {
-  const previous = slideNumber > 1 ? slideNumber - 1 : null;
-  const next = slideNumber < slideCount ? slideNumber + 1 : null;
-  const linkClass = "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold hover:bg-paper-sunken";
-  return (
-    <nav aria-label="Fact pages" className="sticky top-0 z-10 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <a href={`#${slideNumber}`} className={`${linkClass} bg-ink text-paper hover:bg-ink`}>
-          <ArrowLeft size={16} weight="bold" aria-hidden />
-          Back to slide {slideNumber}
-        </a>
-        <div className="flex items-center gap-1">
-          {previous && (
-            <a href={factsHash(previous)} className={linkClass}>
-              <ArrowLeft size={16} weight="bold" aria-hidden />
-              Slide {previous}
-            </a>
-          )}
-          {next && (
-            <a href={factsHash(next)} className={linkClass}>
-              Slide {next}
-              <ArrowRight size={16} weight="bold" aria-hidden />
-            </a>
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-}
-
-function useEscapeBackToSlide(slideNumber: number) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key !== "Escape") return;
-      window.location.hash = `#${slideNumber}`;
-    }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [slideNumber]);
-}
-
 export function FactsPage({ deckId, slideNumber }: { deckId: DeckId; slideNumber: number }) {
   const slides = decks[deckId].slides;
-  const clampedNumber = Math.min(Math.max(slideNumber, 1), slides.length);
+  const clampedNumber = clampSlideNumber(slideNumber, slides.length);
   const slide = slides[clampedNumber - 1];
   const facts = factsBySlide[slide.id];
   useEscapeBackToSlide(clampedNumber);
 
   return (
     <div className="min-h-full bg-paper text-ink">
-      <PageNav slideNumber={clampedNumber} slideCount={slides.length} />
-      <main className="mx-auto max-w-5xl px-4 pt-10 pb-24 md:px-8">
+      <PageNav label="Fact pages" slideNumber={clampedNumber} slideCount={slides.length} hashFor={factsHash} widthClass="max-w-6xl">
+        {guideFor(slide.id) && (
+          <PageNavLink href={guideHash(clampedNumber)} icon={<BookOpenText size={16} weight="bold" aria-hidden />}>
+            Explain this slide
+          </PageNavLink>
+        )}
+      </PageNav>
+      <main className="mx-auto max-w-6xl px-4 pt-10 pb-24 md:px-8">
         <header className="max-w-3xl">
           <h1 className="text-4xl leading-tight font-extrabold md:text-5xl">
             Slide {clampedNumber}: {slide.name}
@@ -155,17 +121,7 @@ export function FactsPage({ deckId, slideNumber }: { deckId: DeckId; slideNumber
 
         <section className="mt-14">
           <h2 className="text-2xl font-extrabold">Questions to expect</h2>
-          <div className="mt-6 flex flex-col gap-3">
-            {facts.questions.map((item) => (
-              <details key={item.question} className="group rounded-2xl bg-paper-raised shadow-lift open:pb-2">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-lg font-semibold">
-                  {item.question}
-                  <ArrowRight size={18} weight="bold" aria-hidden className="shrink-0 transition-[rotate] duration-150 group-open:rotate-90" />
-                </summary>
-                <p className="max-w-prose px-6 pb-4 text-base leading-relaxed">{item.answer}</p>
-              </details>
-            ))}
-          </div>
+          <QuestionList questions={facts.questions} />
         </section>
 
         <p className="mt-14 text-sm text-ink-muted">Every sourced figure on this page was checked against its source on {facts.checkedOn ?? factsCheckedOn}.</p>

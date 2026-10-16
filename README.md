@@ -165,6 +165,7 @@ Leave the command window open while you use the deck, because closing it stops t
 | Show or hide the “Slide x, beat y” label | B |
 | Open the print version | P |
 | Open the facts behind the current slide | D |
+| Open the explainer for the current slide (competition and value proposition decks) | G |
 | Jump to the first or last slide | Home or End |
 | Close the notes | Escape |
 
@@ -179,6 +180,12 @@ Press **N** to open the speaker script for the current slide at the bottom of th
 Every slide has a fact page for preparing Q&A. It lists each number on the slide with where it came from, a short quote from the source, and whether it matches the source, is a team estimate or is only an illustration. It also covers what to say if someone pushes back, background numbers like market size, and the questions an investor is likely to ask. The strategy canvas page shows every score and the reasoning behind it.
 
 Press **D** during the deck, click **Facts behind this slide** in the speaker notes, or add `/data` to a slide's address: `http://localhost:3000/#5/data` (or **https://appiest.github.io/understudy/#5/data** on the live site). Press **Escape** to go back to the slide.
+
+### Slide explainers
+
+Each slide in the competition and value proposition decks also has an explainer for studying it. It shows the slide with numbered pins on each part and explains what that part means. It lists what Kanazawa grades on that slide and how the slide meets it, followed by the questions a VC or Kanazawa might ask, with answers. Hover or tab to a pin to highlight its explanation.
+
+Press **G** during the deck, click **Explain this slide** in the speaker notes or on the fact page, or add `/guide` to a slide's address: `http://localhost:3000/competition#2/guide`. The content lives in `src/content/guides.ts`. Each pin's position is a percentage of the slide's width and height, so move it there if a slide's layout changes.
 
 The facts live in `src/content/facts.ts`. If you change a number on a slide, update its entry there too.
 
@@ -425,6 +432,7 @@ understudy/
     ├── content/
     │   ├── config.ts                  Team placeholders: name, members, Figma link, mind map
     │   ├── facts.ts                   The fact pages: sources, quotes, statuses and Q&A for each slide
+    │   ├── guides.ts                  The slide explainers: pinned parts, rubric checks and VC and Kanazawa questions
     │   ├── content.ts                 Every slide's words, numbers, scores and notes
     │   └── sources.ts                 Every source, with its citation and link
     ├── components/deck/
