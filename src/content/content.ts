@@ -331,6 +331,42 @@ export const market = {
   ],
 };
 
+export type FundsCategory = { name: string; detail: string; fromRaise: number; planSpending: number };
+
+const fundsCategories: FundsCategory[] = [
+  { name: "Winning stores", detail: "Sales hires, local ads, store visits", fromRaise: 275_465, planSpending: 458_700 },
+  { name: "Building the product", detail: "Engineers, AI tools, pilot glasses", fromRaise: 221_056, planSpending: 368_100 },
+  { name: "Founding team pay", detail: "Stipends, then salaries, for four of us", fromRaise: 208_986, planSpending: 348_000 },
+  { name: "Serving stores", detail: "AI processing, hosting, support", fromRaise: 73_981, planSpending: 123_192 },
+  { name: "Legal, privacy and insurance", detail: "A lawyer reviews our consent plan", fromRaise: 26_904, planSpending: 44_800 },
+];
+
+const raiseAmount = 1_000_000;
+const raiseSpent = fundsCategories.reduce((sum, category) => sum + category.fromRaise, 0);
+const planSpending = fundsCategories.reduce((sum, category) => sum + category.planSpending, 0);
+
+export const useOfFunds = {
+  headline: "We’re raising $1 million to reach 450 paying stores by the end of 2028",
+  raiseAmount,
+  raiseSpent,
+  planSpending,
+  storeRevenue: planSpending - raiseSpent,
+  categories: fundsCategories,
+  reserve: { name: "Reserve", detail: "Covers slower store sign-ups", fromRaise: raiseAmount - raiseSpent },
+  reserveMonths: 4.1,
+  outcomes: [
+    { label: "Runway", value: "24 months", detail: "January 2027 to December 2028" },
+    { label: "Yearly recurring revenue", value: "$804,600", detail: `At the end of 2028, from 450 stores paying ${wholeDollars.format(marketPricePerMonth)} a month` },
+  ],
+  docLink: "Open our pro forma spreadsheet",
+  notes: [
+    "We’re raising 1 million dollars to carry us for 24 months, from January 2027 to December 2028. By the end of 2028 the plan has 450 stores paying 149 dollars a month. That’s about 805 thousand dollars a year in recurring revenue.",
+    "The biggest share, about 275 thousand dollars, goes to winning stores: sales and setup hires, local marketing and visits to stores. Building the product takes about 221 thousand for engineering hires, AI tools and pilot glasses. About 209 thousand pays the four of us, starting with small stipends.",
+    "Serving stores, meaning AI processing, hosting, support and card fees, takes about 74 thousand. About 27 thousand covers incorporation, insurance and a lawyer’s review of how we record and get consent, which we need before any pilot.",
+    "The plan spends about 1.34 million dollars over the two years. Stores pay for about 536 thousand of that. The raise covers the other 806 thousand. That leaves about 194 thousand, or 19 percent, as a reserve. It covers about four months of 2028 spending if stores sign up slower than we planned.",
+  ],
+};
+
 export type MindMapBranch = { name: string; leaves: string[] };
 
 export const mindMap = {

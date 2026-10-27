@@ -1,4 +1,4 @@
-import { annualPricePerLocation, market, revenueFormatter, yearlyRevenue } from "./content";
+import { annualPricePerLocation, market, revenueFormatter, useOfFunds, yearlyRevenue } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -86,7 +86,7 @@ const title: SlideFacts = {
       figure: "5 rules",
       claim: "Our rules against solution jumping, written by the team for this project.",
       status: "estimate",
-      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 8 are how we’ll live up to it.",
+      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 9 are how we’ll live up to it.",
     },
   ],
   questions: [
@@ -464,7 +464,7 @@ const solution: SlideFacts = {
     },
     {
       question: "How much will it cost?",
-      answer: `We haven’t tested a price with owners yet. For the market size on slide 7 we assume ${monthlyPrice} a month per store, which is ${yearlyPrice} a year and less than the $2,305 it costs to replace one hourly restaurant worker. Stores also buy the glasses, $249 to $449 from Meta. We’ll build the full business model in the coming weeks.`,
+      answer: `We haven’t tested a price with owners yet. For the market size on slide 7 we assume ${monthlyPrice} a month per store, which is ${yearlyPrice} a year and less than the $2,305 it costs to replace one hourly restaurant worker. Stores also buy the glasses, $249 to $449 from Meta. Slide 8 shows the business plan built on that price. It reaches 450 paying stores by the end of 2028.`,
     },
     {
       question: "What stops a competitor from copying this?",
@@ -799,6 +799,70 @@ const marketFacts: SlideFacts = {
     {
       question: "Do the glasses count toward these numbers?",
       answer: "No. These are subscription dollars only. Stores buy the glasses, $249 to $449 from Meta, and we don’t count that as our revenue.",
+    },
+  ],
+};
+
+const legalCategory = useOfFunds.categories[useOfFunds.categories.length - 1];
+
+const fundsRowFact = (category: (typeof useOfFunds.categories)[number]): Fact => ({
+  figure: wholeDollars.format(category.fromRaise),
+  claim: `The part of the raise that goes to ${category.name.toLowerCase()} over 2027 and 2028. ${category.detail}.`,
+  status: "estimate",
+  source: "proForma",
+  derivation: `The plan spends ${wholeDollars.format(category.planSpending)} on this over two years. Because store revenue pays for ${Math.round((useOfFunds.storeRevenue / useOfFunds.planSpending) * 100)}% of all spending, the raise covers the same share of every category: ${wholeDollars.format(category.planSpending)} × ${wholeDollars.format(useOfFunds.raiseSpent)} ÷ ${wholeDollars.format(useOfFunds.planSpending)} = ${wholeDollars.format(category.fromRaise)}.`,
+});
+
+const useOfFundsFacts: SlideFacts = {
+  checkedOn: "October 27, 2026",
+  summary: "This slide shows where our $1 million pre-seed raise goes over 24 months. Every number comes from our own pro forma spreadsheet and is a team estimate. The model uses the same $149 monthly price as the market slide.",
+  facts: [
+    {
+      figure: wholeDollars.format(useOfFunds.raiseAmount),
+      claim: "The pre-seed raise, which pays for January 2027 to December 2028.",
+      status: "estimate",
+      source: "proForma",
+      caveat: "The amount is our input to the model, not a raise we’ve started.",
+    },
+    ...useOfFunds.categories.map(fundsRowFact),
+    {
+      figure: wholeDollars.format(useOfFunds.reserve.fromRaise),
+      claim: "The reserve: the part of the raise the plan doesn’t spend by the end of 2028.",
+      status: "estimate",
+      source: "proForma",
+      derivation: `${wholeDollars.format(useOfFunds.raiseAmount)} − ${wholeDollars.format(useOfFunds.raiseSpent)} spent = ${wholeDollars.format(useOfFunds.reserve.fromRaise)}. That covers ${useOfFunds.reserveMonths} months of the plan’s 2028 spending.`,
+    },
+    {
+      figure: "450",
+      claim: "Paying stores at the end of 2028.",
+      status: "estimate",
+      source: "proForma",
+      caveat: "Store sign-ups are the model’s biggest assumption. We haven’t sold to a store yet, and the owner interviews come first.",
+    },
+    {
+      figure: "$804,600",
+      claim: "Yearly recurring revenue at the end of 2028.",
+      status: "estimate",
+      source: "proForma",
+      derivation: `450 stores × ${monthlyPrice} a month × 12 = $804,600.`,
+    },
+  ],
+  questions: [
+    {
+      question: "Why does the plan spend more than you’re raising?",
+      answer: `The plan spends ${wholeDollars.format(useOfFunds.planSpending)} over two years. Stores pay ${wholeDollars.format(useOfFunds.storeRevenue)} of it in subscriptions. The raise only has to cover the other ${wholeDollars.format(useOfFunds.raiseSpent)}.`,
+    },
+    {
+      question: "What happens if stores sign up slower than planned?",
+      answer: `The ${wholeDollars.format(useOfFunds.reserve.fromRaise)} reserve covers about ${useOfFunds.reserveMonths} months of 2028 spending. Because hiring for sales and engineering is the biggest cost, we’d slow those hires before cutting anything else.`,
+    },
+    {
+      question: "What does a hire cost in the model?",
+      answer: "$10,000 a month each, which is about $120,000 a year including payroll taxes and benefits. Winning each new store costs $350 in marketing: flyers, local ads, demo visits and referral credits.",
+    },
+    {
+      question: "Why does legal get its own line?",
+      answer: `Because glasses record audio and video in a store, a lawyer has to review our recording and consent plan before any pilot. That review, incorporation and insurance cost ${wholeDollars.format(legalCategory.planSpending)} over two years.`,
     },
   ],
 };
@@ -1164,6 +1228,7 @@ export const factsBySlide: Record<string, SlideFacts> = {
   canvas: canvasFacts,
   landscape,
   market: marketFacts,
+  "use-of-funds": useOfFundsFacts,
   "mind-map": mindMapFacts,
   sources: sourcesFacts,
 };

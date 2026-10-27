@@ -1,3 +1,5 @@
+import { team } from "./config";
+
 export type Source = {
   cite: string;
   title: string;
@@ -405,6 +407,11 @@ export const pitchSources = {
     title: "U.S. Census Bureau: Statistics of U.S. Businesses glossary",
     url: "https://www.census.gov/programs-surveys/susb/about/glossary.html",
     factsOnly: true,
+  },
+  proForma: {
+    cite: "Understudy pro forma, Group 15, Oct 2026",
+    title: "Group 15: Understudy pro forma and use of funds (Google Sheets, October 2026)",
+    url: team.proFormaLink,
   },
   trainingIndustryReport: {
     cite: "Training Magazine, Nov 2025",

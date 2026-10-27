@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowSquareOut } from "@phosphor-icons/react";
 import { animate, motion, useMotionValue, useTransform, type MotionValue, type Variants } from "motion/react";
 import { useEffect, type ReactNode } from "react";
 import { easeDrawn, exitTransition } from "@/lib/motion";
@@ -79,4 +80,13 @@ export function FootnoteMark({ numbers }: { numbers: number[] }) {
 
 export function footnoteNumbers<Id>(cited: Id[], ids: Id[] = []) {
   return ids.map((id) => cited.indexOf(id) + 1);
+}
+
+export function DocLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="flex items-center gap-2 self-start text-caption font-bold text-ocean underline decoration-1 underline-offset-4">
+      {children}
+      <ArrowSquareOut size={24} weight="bold" aria-hidden />
+    </a>
+  );
 }
