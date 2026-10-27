@@ -1,3 +1,5 @@
+import { team } from "./config";
+
 export type Source = {
   cite: string;
   title: string;
@@ -453,6 +455,11 @@ export const pitchSources = {
     title: "NFIB Research Foundation: National Small Business Poll, Training Employees, Volume 5, Issue 1 (2005)",
     url: "http://411sbfacts.com/sbpoll-tables-res.php?POLLID=0051&QID=00000001534",
     factsOnly: true,
+  },
+  proForma: {
+    cite: "Our pro forma, Oct 2026 (team estimates)",
+    title: "Understudy, Group 15: Guerilla Financial Pro Forma and Use of Funds, Google Sheets (Oct 27, 2026). Every figure is a team estimate.",
+    url: team.proFormaLink,
   },
   strivrRetail: {
     cite: "Strivr retail and platform pages, Oct 2026",
