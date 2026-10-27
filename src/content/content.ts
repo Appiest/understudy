@@ -331,6 +331,41 @@ export const market = {
   ],
 };
 
+export type FundUse = { name: string; detail: string; amount: number };
+export type FundMilestone = { value: string; label: string };
+
+const raiseAmount = 1_000_000;
+const storesAtEndOfRunway = 450;
+export const compactDollars = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 0 });
+
+export const useOfFunds = {
+  headline: `We’re raising ${compactDollars.format(raiseAmount)} to reach ${storesAtEndOfRunway} paying stores by the end of 2028`,
+  raise: raiseAmount,
+  storesAtEndOfRunway,
+  /** Dollar amounts come from the Use of Funds tab of our pro forma. Together with the reserve they add up to the raise. */
+  uses: [
+    { name: "Winning stores", detail: "Sales and setup hires, marketing, store visits", amount: 275_465 },
+    { name: "Building the product", detail: "Engineers, AI and software tools, pilot glasses", amount: 221_056 },
+    { name: "Founding team pay", detail: "Four founders, part-time at first", amount: 208_986 },
+    { name: "Serving stores", detail: "AI processing, hosting, support and card fees", amount: 73_981 },
+    { name: "Legal and privacy", detail: "Incorporation, consent review, insurance", amount: 26_904 },
+  ] satisfies FundUse[],
+  reserve: { name: "Reserve", detail: "4 months of spending if stores sign up slower", amount: 193_608 } satisfies FundUse,
+  milestones: [
+    { value: "24 months", label: "of runway, Jan 2027 to Dec 2028" },
+    { value: `${storesAtEndOfRunway} stores`, label: "paying in California by Dec 2028" },
+    { value: `${compactDollars.format(yearlyRevenue(storesAtEndOfRunway))} a year`, label: "in subscriptions from those stores" },
+    { value: "2030", label: "the first year with positive EBITDA" },
+  ] satisfies FundMilestone[],
+  spreadsheetLink: "Open our pro forma spreadsheet",
+  notes: [
+    "We’re raising a 1 million dollar pre-seed round. It pays for 24 months, from January 2027 to December 2028. Our pro forma says the business uses about 806 thousand dollars in that time, because store subscriptions pay for the rest of what we spend.",
+    "The biggest share, 28 percent, goes to winning stores. That pays for a sales and setup hire who visits each store and runs its capture week, plus local marketing. Building the product takes 22 percent, starting with our first AI engineer in July 2027. Founder pay is 21 percent, and the four of us stay on part-time stipends while we finish school.",
+    "Serving stores is only 7 percent of the money. Each store costs us about 30 dollars a month in AI processing, hosting, support and card fees, and it pays us 149. Stores buy their own glasses, so the only glasses in this budget are 10 pilot pairs.",
+    "We keep 19 percent in reserve, which covers about four months of 2028 spending if stores sign up slower than we plan. By December 2028 we expect 450 paying stores and about 805 thousand dollars a year in subscriptions, and that’s when we’d raise a seed round. In 2030 the plan’s EBITDA, its earnings before interest, taxes, depreciation and amortization, turns positive. Every number here is our estimate, and the spreadsheet linked on the slide shows each assumption.",
+  ],
+};
+
 export type MindMapBranch = { name: string; leaves: string[] };
 
 export const mindMap = {

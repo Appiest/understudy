@@ -249,6 +249,7 @@ Open `src/content/config.ts`. Everything that names our team, links to our Figma
 | `teamName` | Our team's name. It's "Group 15". | Title slide |
 | `teamMembers` | Our names, in quotes and separated by commas | Title slide |
 | `figmaBoardLink` | The full link to our Figma board, starting with `https://` | The "Open our Figma board" button on the mind map slide |
+| `proFormaLink` | The full link to our pro forma Google Sheet | The "Open our pro forma spreadsheet" link on the use of funds slide |
 | `mindMapImage` | The path to our exported mind map image, for example `"/mind-map.png"` | The mind map slide. Leave it as `""` to keep the drawn mind map. |
 
 To add the mind map image, export it from Figma as a PNG (select the frame, then **Export** in the right panel), put the file in the `public` folder, and set `mindMapImage` to `"/"` followed by the file name.
@@ -268,7 +269,8 @@ Open `src/content/content.ts`. It has one section per slide, in the order the sl
 | `canvas` | 5 | The ten factors, every player's scores, the ERRC grid, the three characteristics, notes |
 | `landscape` | 6 | Every company's position and description, notes |
 | `market` | 7 | The TAM, SAM and SOM location counts, the monthly price per location, the first market and its share, notes |
-| `mindMap` | 8 | The center, the branches and their leaves, the Figma button label, the closing line, notes |
+| `useOfFunds` | 8 | The raise, how each dollar is split, the reserve, the milestones, the spreadsheet link label, notes |
+| `mindMap` | 9 | The center, the branches and their leaves, the Figma button label, the closing line, notes |
 | `appendix` | Sources | Notes for the sources page |
 
 A few examples:
@@ -277,6 +279,7 @@ A few examples:
 - **Move a company on the landscape.** Find `landscape`, then `players`. `offToOn` runs from 0 (off the job, left) to 1 (on the job, right). `industrialToRetail` runs from 0 (industrial, bottom) to 1 (retail and small business, top).
 - **Edit the speaker notes.** Every section has a `notes` list. Each item is one paragraph.
 - **Change a turnover rate.** Find `turnover`, then `sectors`. The yearly figure is calculated from `monthlySeparationRate`, so you only change the monthly number.
+- **Change the use of funds.** Edit the spreadsheet first, then copy the dollar amounts from its Use of Funds tab into `useOfFunds.uses` and `useOfFunds.reserve`. The percentages on the slide and the fact page recalculate from them, and they should add up to `useOfFunds.raise`.
 - **Change the price in the market size.** Find `marketPricePerMonth` just above `market`. Every dollar figure on slide 7, the heading and the fact page recalculate from it. The speaker notes spell the figures out in words, so update those by hand. The fact page also says the yearly price is less than the $2,305 cost of one replacement hire, so check that sentence still holds after a big change.
 
 ### Add or change a source

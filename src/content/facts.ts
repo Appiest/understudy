@@ -1,4 +1,4 @@
-import { annualPricePerLocation, market, revenueFormatter, yearlyRevenue } from "./content";
+import { annualPricePerLocation, compactDollars, market, revenueFormatter, useOfFunds, yearlyRevenue, type FundUse } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -86,7 +86,7 @@ const title: SlideFacts = {
       figure: "5 rules",
       claim: "Our rules against solution jumping, written by the team for this project.",
       status: "estimate",
-      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 8 are how we’ll live up to it.",
+      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 9 are how we’ll live up to it.",
     },
   ],
   questions: [
@@ -803,6 +803,97 @@ const marketFacts: SlideFacts = {
   ],
 };
 
+const fundsPercent = (amount: number) => `${Math.round((amount / useOfFunds.raise) * 100)}%`;
+const [winningStores, buildingProduct, founderPay, servingStores, legalPrivacy] = useOfFunds.uses;
+const spentFromRaise = useOfFunds.raise - useOfFunds.reserve.amount;
+
+function fundUseFact(use: FundUse, claim: string, derivation: string): Fact {
+  return { figure: `${fundsPercent(use.amount)} (${wholeDollars.format(use.amount)})`, claim, status: "estimate", derivation, source: "proForma" };
+}
+
+const useOfFundsFacts: SlideFacts = {
+  checkedOn: "October 27, 2026",
+  summary: `This slide shows how we’d spend a ${compactDollars.format(useOfFunds.raise)} pre-seed round over 2027 and 2028. Every number comes from our pro forma spreadsheet and is a team estimate. The only outside figures are the ${monthlyPrice} price from the market slide and the $449 price of the pilot glasses.`,
+  facts: [
+    {
+      figure: compactDollars.format(useOfFunds.raise),
+      claim: "The pre-seed round we’re raising, to cover January 2027 to December 2028.",
+      status: "estimate",
+      derivation: `The pro forma’s cumulative EBITDA at the end of 2028 is −${wholeDollars.format(spentFromRaise)}, which is what the business uses in those 24 months. We rounded up to ${wholeDollars.format(useOfFunds.raise)} and keep the difference as a reserve.`,
+      source: "proForma",
+      caveat: "The plan keeps losing money through 2029, so we expect to raise a seed round at the end of 2028. At its low point, at the end of 2029, the business has used about $1.35 million in total.",
+    },
+    fundUseFact(winningStores, "Winning stores: sales and setup hires, local marketing and store visits.", "One sales and setup hire from October 2027 and two on average in 2028, at $10,000 a month each, plus $350 of marketing per new store and travel to stores."),
+    fundUseFact(buildingProduct, "Building the product: engineers, AI and software tools, and pilot glasses.", "One AI engineer from July 2027 and two on average in 2028, at $10,000 a month each, plus AI and software tools and test devices."),
+    fundUseFact(founderPay, "Pay for our four founders.", "$1,500 a month each for the first half of 2027, $3,000 for the second half and $5,000 in 2028."),
+    fundUseFact(servingStores, "Serving stores: the cost of goods sold for each paying store.", `$18 a month per store for AI processing and hosting, $8 for support, $30 once to process a new store’s capture week, and 3% of revenue in card fees. Against ${monthlyPrice} a month, that’s a gross margin of 75% in 2027 and 77% in 2028.`),
+    fundUseFact(legalPrivacy, "Legal and privacy: incorporation, a lawyer’s review of our recording and consent plan, and insurance.", "$6,000 in January 2027 for incorporation and the review, then $800 a month in 2027 and $2,500 a month in 2028."),
+    {
+      figure: `${fundsPercent(useOfFunds.reserve.amount)} (${wholeDollars.format(useOfFunds.reserve.amount)})`,
+      claim: "The part of the raise we don’t plan to spend by the end of 2028.",
+      status: "estimate",
+      derivation: `${wholeDollars.format(useOfFunds.raise)} − ${wholeDollars.format(spentFromRaise)} = ${wholeDollars.format(useOfFunds.reserve.amount)}, which is about 4 months of the 2028 monthly loss.`,
+      source: "proForma",
+    },
+    {
+      figure: `${useOfFunds.storesAtEndOfRunway} stores`,
+      claim: "Paying stores at the end of 2028 in our plan.",
+      status: "estimate",
+      derivation: "No paying stores from January to March 2027 while we build and run free pilots, 90 by December 2027, then 360 more in 2028. The plan reaches 1,305 stores by the end of 2029, the three-year goal on the market slide.",
+      source: "proForma",
+      caveat: "Store counts are net of stores that cancel. They’re a target, not a forecast from data.",
+    },
+    {
+      figure: `${compactDollars.format(yearlyRevenue(useOfFunds.storesAtEndOfRunway))} a year`,
+      claim: "Yearly subscription revenue once the 450 stores are signed.",
+      status: "estimate",
+      derivation: `${useOfFunds.storesAtEndOfRunway} stores × ${yearlyPrice} a year = ${exactRevenue(useOfFunds.storesAtEndOfRunway)}.`,
+    },
+    {
+      figure: "2030",
+      claim: "The first year the plan’s EBITDA is positive.",
+      status: "estimate",
+      derivation: "The pro forma has 3,000 paying stores by the end of 2030, $3.85 million of revenue and EBITDA of about $180,000.",
+      source: "proForma",
+      caveat: "Growing past California in 2030 is an assumption we haven’t tested.",
+    },
+    {
+      figure: "$449",
+      claim: "The price of the Ray-Ban Meta Gen 3 glasses we budget for the pilot stores.",
+      status: "verified",
+      source: "metaGlassesPrices",
+      quote: "Ray-Ban Meta (Gen 3) is available today, with prices starting at $449 USD.",
+      caveat: "The pro forma buys 10 pairs for 5 pilot stores. Paying stores buy their own glasses, so glasses aren’t our revenue or our cost after the pilots.",
+    },
+  ],
+  questions: [
+    {
+      question: "Why $1 million?",
+      answer: `It covers what the plan uses in 2027 and 2028, ${compactDollars.format(spentFromRaise)}, with about 4 months of spending left over. That gets us to 450 paying stores, enough proof to raise a seed round.`,
+    },
+    {
+      question: "Why does so much go to winning stores?",
+      answer: "Small business owners buy after they see it work in their own store. Someone has to visit, set up the glasses and run the capture week, so sales and setup is our biggest cost.",
+    },
+    {
+      question: "Why pay the founders?",
+      answer: "So we can keep working on Understudy. The stipends are part-time while we finish school, and they’re about a fifth of the raise.",
+    },
+    {
+      question: "Will you need more money?",
+      answer: "Yes. The plan loses money until 2030, so we’d raise a seed round at the end of 2028 with 450 paying stores and about $805,000 a year in subscriptions.",
+    },
+    {
+      question: "What if stores sign up slower?",
+      answer: "Most costs follow the stores. Marketing is per new store, AI and support costs are per store, and we hire sales and engineering in steps. The reserve covers about 4 more months, and we can delay a hire.",
+    },
+    {
+      question: "How did you estimate the AI cost?",
+      answer: "It’s our estimate of $18 per store a month for the voice coaching and video understanding new hires use. We’ll replace it with real numbers from the pilot stores’ bills.",
+    },
+  ],
+};
+
 const mindMapFacts: SlideFacts = {
   summary: "This slide shows our team’s Figma board. It starts from the UN Sustainable Development Goals, branches into the industries we looked at, converges on high employee turnover as the shared problem, and ends at AI glasses as the idea. Click the board or the button to open it full size.",
   facts: [
@@ -1164,6 +1255,7 @@ export const factsBySlide: Record<string, SlideFacts> = {
   canvas: canvasFacts,
   landscape,
   market: marketFacts,
+  "use-of-funds": useOfFundsFacts,
   "mind-map": mindMapFacts,
   sources: sourcesFacts,
 };
