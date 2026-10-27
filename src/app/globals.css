@@ -135,6 +135,11 @@
   background-image: repeating-linear-gradient(135deg, var(--color-ocean-wash) 0 2px, transparent 2px 14px);
 }
 
+@utility hatch-reserve {
+  background-color: var(--color-ocean-wash);
+  background-image: repeating-linear-gradient(135deg, var(--color-ocean) 0 2px, transparent 2px 12px);
+}
+
 @media print {
   @page {
     size: 1920px 1080px;

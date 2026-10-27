@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { appendix, canvas, drivers, landscape, market, mindMap, solution, title, turnover } from "@/content/content";
+import { appendix, canvas, drivers, landscape, market, mindMap, solution, title, turnover, useOfFunds } from "@/content/content";
 import type { SourceId } from "@/content/sources";
 import { CanvasSlide } from "./slides/CanvasSlide";
 import { ChallengeSlide } from "./slides/ChallengeSlide";
@@ -10,6 +10,7 @@ import { MindMapSlide } from "./slides/MindMapSlide";
 import { SolutionSlide } from "./slides/SolutionSlide";
 import { SourcesSlide } from "./slides/SourcesSlide";
 import { TitleSlide } from "./slides/TitleSlide";
+import { UseOfFundsSlide } from "./slides/UseOfFundsSlide";
 
 export type SlideProps = { step: number };
 
@@ -86,6 +87,14 @@ export const slides: SlideDefinition[] = [
     sourcesByStep: [["censusSusb"]],
     notes: market.notes,
     Content: MarketSlide,
+  },
+  {
+    id: "use-of-funds",
+    name: "Use of funds",
+    steps: 1,
+    sourcesByStep: [["proForma"]],
+    notes: useOfFunds.notes,
+    Content: UseOfFundsSlide,
   },
   {
     id: "mind-map",
