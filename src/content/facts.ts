@@ -1227,7 +1227,7 @@ const customerProfileFacts: SlideFacts = {
     },
     {
       figure: "Jobs, pains and gains",
-      claim: "Train every new hire and keep the floor covered. Losing the best employee’s time, setup work and cost, and legal trouble over recording. Hires ready fast, and seeing who can do what.",
+      claim: "The job is training every new hire. The pain is the best employee stopping work to do it. The gain is hires who are ready fast.",
       status: "estimate",
       caveat: "From the owner row of the Users table in our PRD. We’ll replace them with what owners tell us in interviews.",
     },
@@ -1238,7 +1238,7 @@ const customerProfileFacts: SlideFacts = {
       answer: "Not yet. The profile comes from our research and the PRD. Our next step is interviewing five owners, and we’ll redraw this profile from what they say.",
     },
     {
-      question: "Why is legal trouble a pain?",
+      question: "Don’t owners worry about recording laws?",
       answer: "The glasses record audio and video in a store. California is one of 11 states that require every party’s consent to record a conversation, so owners worry about getting it wrong. That’s why our plan pays for a lawyer’s review before any pilot.",
     },
   ],

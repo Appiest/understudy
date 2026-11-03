@@ -106,7 +106,9 @@ function CoachExchange() {
   return (
     <div className="flex flex-col gap-5">
       <motion.div variants={fadeReveal(0.3, 16)} className="self-start rounded-card bg-paper-raised px-8 py-5 shadow-lift">
-        <p className="text-caption font-semibold text-ink-muted">New hire</p>
+        <ReadingDetail>
+          <p className="text-caption font-semibold text-ink-muted">New hire</p>
+        </ReadingDetail>
         <p className="text-point font-semibold">{coaching.question}</p>
       </motion.div>
       <motion.div variants={fadeReveal(0.9, 16)} className="ml-24 rounded-card bg-ocean px-8 py-6 text-paper shadow-float">
@@ -129,7 +131,9 @@ const PLAYBOOK_SIZE = solution.playbook.length;
 function Readiness() {
   return (
     <motion.dl variants={fadeReveal(1.9, 16)} className="grid grid-cols-[140px_1fr_120px] items-center gap-x-6 gap-y-4 rounded-card bg-paper-raised p-8 shadow-lift">
-      <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
+      <ReadingDetail>
+        <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
+      </ReadingDetail>
       {solution.readiness.map((hire) => (
         <div key={hire.person} className="contents">
           <dt className="text-body font-bold">{hire.person}</dt>

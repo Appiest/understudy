@@ -73,7 +73,7 @@ function Callout({ callout, left, width, delay }: { callout: SceneCallout; left:
 function CoachingBubbles() {
   return (
     <div className="absolute top-4 flex w-[320px] flex-col items-end gap-3" style={{ right: 24 }}>
-      <motion.p variants={fadeReveal(2.6, 10)} className="rounded-card bg-paper px-5 py-2 text-caption font-medium whitespace-nowrap text-ink-muted">
+      <motion.p variants={fadeReveal(2.6, 10)} className="rounded-card bg-paper px-5 py-2 text-caption font-semibold whitespace-nowrap text-ink">
         {vvp.with.question}
       </motion.p>
       <motion.div variants={fadeReveal(3.0, 10)} className="flex flex-col gap-2 rounded-card bg-ocean px-5 py-3 text-paper shadow-lift">

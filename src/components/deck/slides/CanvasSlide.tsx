@@ -82,8 +82,10 @@ function Grid() {
         <line key={factor} x1={xForFactor(index)} x2={xForFactor(index)} y1={CHART.top} y2={CHART.bottom} stroke="var(--color-rule)" strokeWidth={1.5} />
       ))}
       <line x1={CHART.left} x2={CHART.width - CHART.right} y1={CHART.bottom} y2={CHART.bottom} stroke="var(--color-ink)" strokeWidth={3} />
-      <text x={CHART.left - 28} y={CHART.top + 10} textAnchor="end" className="text-caption font-semibold" fill="var(--color-ink-muted)">{canvas.axis.high}</text>
-      <text x={CHART.left - 28} y={CHART.bottom} textAnchor="end" className="text-caption font-semibold" fill="var(--color-ink-muted)">{canvas.axis.low}</text>
+      <ReadingDetail>
+        <text x={CHART.left - 28} y={CHART.top + 10} textAnchor="end" className="text-caption font-semibold" fill="var(--color-ink-muted)">{canvas.axis.high}</text>
+        <text x={CHART.left - 28} y={CHART.bottom} textAnchor="end" className="text-caption font-semibold" fill="var(--color-ink-muted)">{canvas.axis.low}</text>
+      </ReadingDetail>
     </g>
   );
 }
@@ -130,7 +132,9 @@ function GroupBrackets() {
       {groups.map((group) => (
         <motion.div key={group.label} variants={fadeReveal(1.4)} className={`absolute flex flex-col items-center ${group.tone}`} style={{ left: group.from, width: group.to - group.from, top: CHART.bottom + 100 }}>
           <span aria-hidden className="h-3 w-full border-x-[3px] border-b-[3px] border-current" />
-          <span className="mt-2 text-caption font-bold">{group.label}</span>
+          <ReadingDetail>
+            <span className="mt-2 text-caption font-bold">{group.label}</span>
+          </ReadingDetail>
         </motion.div>
       ))}
     </>

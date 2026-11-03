@@ -4,6 +4,7 @@ import { ArrowSquareOut } from "@phosphor-icons/react";
 import { animate, motion, useMotionValue, useTransform, type MotionValue, type Variants } from "motion/react";
 import { useEffect, type ReactNode } from "react";
 import { easeDrawn, exitTransition } from "@/lib/motion";
+import { useIsPitch } from "./pitchMode";
 
 export function lineReveal(delay: number): Variants {
   return {
@@ -74,7 +75,8 @@ export function StepView({ children, className = "" }: { children: ReactNode; cl
 }
 
 export function FootnoteMark({ numbers }: { numbers: number[] }) {
-  if (numbers.length === 0) return null;
+  const isPitch = useIsPitch();
+  if (isPitch || numbers.length === 0) return null;
   return <sup className="footnote-mark ml-1 font-semibold text-ink-muted figures-tabular">{numbers.join(",")}</sup>;
 }
 
