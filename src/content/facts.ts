@@ -1,4 +1,4 @@
-import { annualPricePerLocation, customerProfile, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
+import { annualPricePerLocation, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -1219,14 +1219,6 @@ const customerProfileFacts: SlideFacts = {
   summary: "This slide shows who buys Understudy, using the customer profile half of the value proposition canvas: the owner’s jobs, pains and gains. The jobs, pains and gains come from the Users section of our PRD, where we listed what each person needs and fears. We haven’t interviewed owners yet, so they’re our team’s judgment.",
   facts: [
     {
-      figure: customerProfile.stat.value,
-      claim: "Small employers (5 to 250 employees) who train their most common hires most often do it by having someone in the business work with them.",
-      status: "verified",
-      source: "nfibTraining",
-      quote: "the most frequent method of training them is to have someone in the firm work with them",
-      caveat: "It’s a 2005 poll, so the slide labels it as a 2005 survey. The 76% comes from the 382 employers in it who expect new hires to learn at least partly on the job. It’s the only primary survey we found on how small businesses train.",
-    },
-    {
       figure: "Fewer than 100 employees",
       claim: "Where we draw the line for small businesses, the same line as our serviceable market.",
       status: "verified",
@@ -1363,20 +1355,18 @@ const talinStoryFacts: SlideFacts = {
   facts: [
     {
       figure: "Largest in New Mexico",
-      claim: "Edible New Mexico calls Talin Market the state’s largest international grocer.",
+      claim: "Edible New Mexico calls Talin Market the state’s largest international grocer. The presenter says it, and the slide doesn’t show it.",
       status: "verified",
       source: "edibleTalin",
       quote: "now manages Talin Market, New Mexico’s largest international grocer",
       caveat: "It’s a magazine’s description from 2020, not a measured ranking. The article names Victor Limary as Talin’s director of operations.",
     },
-    ...talinStory.facts.map(
-      (fact): Fact => ({
-        figure: fact.value,
-        claim: `${fact.name} at Talin Market.`,
-        status: "unconfirmed",
-        caveat: "Alexis needs to get this from their parents. Nothing published gives it, so leave it as a placeholder until they answer.",
-      }),
-    ),
+    {
+      figure: String(talinStory.hires.count),
+      claim: "New hires Talin Market made last year. The slide draws one figure for each.",
+      status: "unconfirmed",
+      caveat: "Alexis needs to get this from her parents. Nothing published gives it, so it stays a placeholder until they answer.",
+    },
     {
       figure: "Pulls someone off the floor",
       claim: "Talin trains every new hire by taking someone off their own work to show them, which is what the headline and drawing say.",

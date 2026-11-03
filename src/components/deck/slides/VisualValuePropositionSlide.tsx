@@ -4,6 +4,7 @@ import { CheckCircle, Circle } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { visualValueProposition as vvp, type SceneCallout } from "@/content/content";
+import { ReadingDetail } from "../pitchMode";
 import { FootnoteMark, MaskedLines, StepView, fadeReveal } from "../primitives";
 import { Counter, Figure, Floor, HEAD_TOP_Y, LeaderLine, SCENE, Shelf } from "../ShiftScene";
 import { VoiceWave } from "../VoiceWave";
@@ -131,22 +132,28 @@ export function VisualValuePropositionSlide() {
       <div className="flex gap-14">
         <div className="flex flex-col gap-7">
           <Scene />
-          <motion.p variants={fadeReveal(1.0)} className="max-w-[1180px] text-body text-ink-muted">
-            {vvp.description}
-          </motion.p>
+          <ReadingDetail>
+            <motion.p variants={fadeReveal(1.0)} className="max-w-[1180px] text-body text-ink-muted">
+              {vvp.description}
+            </motion.p>
+          </ReadingDetail>
         </div>
         <aside className="flex flex-1 flex-col pb-2">
-          <motion.p variants={fadeReveal(0.3)} className="text-point font-bold text-ink-muted">
-            {vvp.audience}
-          </motion.p>
-          <div className="mt-8">
+          <ReadingDetail>
+            <motion.p variants={fadeReveal(0.3)} className="mb-8 text-point font-bold text-ink-muted">
+              {vvp.audience}
+            </motion.p>
+          </ReadingDetail>
+          <div>
             <ReadinessChecklist />
           </div>
           <div className="flex-1" />
-          <motion.p variants={fadeReveal(3.6)} className="text-caption text-ink-muted">
-            {vvp.hardwareNote}
-            <FootnoteMark numbers={[1]} />
-          </motion.p>
+          <ReadingDetail>
+            <motion.p variants={fadeReveal(3.6)} className="text-caption text-ink-muted">
+              {vvp.hardwareNote}
+              <FootnoteMark numbers={[1]} />
+            </motion.p>
+          </ReadingDetail>
         </aside>
       </div>
     </StepView>

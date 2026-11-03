@@ -5,6 +5,7 @@ import { team } from "@/content/config";
 import { title } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, fadeReveal, strokeDraw } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
@@ -29,13 +30,15 @@ function TitleCard() {
         <p className="text-title font-bold">
           <MaskedLines lines={["Your best employee,", "in every new hire’s ear."]} delay={0.9} />
         </p>
-        <motion.p variants={fadeReveal(1.5)} className="mt-6 max-w-[760px] text-caption text-ink-muted">
-          {title.subtitle}
-        </motion.p>
-        <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption">
-          <span className="font-bold">{team.teamName}</span>
-          <span className="block text-ink-muted">{team.teamMembers.join(", ")}</span>
-        </motion.p>
+        <ReadingDetail>
+          <motion.p variants={fadeReveal(1.5)} className="mt-6 max-w-[760px] text-caption text-ink-muted">
+            {title.subtitle}
+          </motion.p>
+          <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption">
+            <span className="font-bold">{team.teamName}</span>
+            <span className="block text-ink-muted">{team.teamMembers.join(", ")}</span>
+          </motion.p>
+        </ReadingDetail>
       </div>
     </motion.div>
   );

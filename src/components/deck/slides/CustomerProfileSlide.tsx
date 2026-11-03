@@ -1,8 +1,8 @@
 "use client";
 
-import { Briefcase, SmileySad, TrendUp, type Icon } from "@phosphor-icons/react";
+import { Basket, Briefcase, ForkKnife, SmileySad, Storefront, TrendUp, UsersThree, type Icon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import { customerProfile, type ProfileArea } from "@/content/content";
+import { customerProfile, type CustomerSegment, type ProfileArea } from "@/content/content";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 
 const SIZE = 760;
@@ -71,24 +71,36 @@ function ProfileCircle() {
   );
 }
 
+const segmentIcons: Record<CustomerSegment["icon"], Icon> = {
+  grocer: Basket,
+  franchise: Storefront,
+  restaurant: ForkKnife,
+  staff: UsersThree,
+};
+
+function CustomerSegments() {
+  return (
+    <ul className="grid grid-cols-2 gap-x-gap gap-y-12">
+      {customerProfile.segments.map((segment, index) => {
+        const SegmentIcon = segmentIcons[segment.icon];
+        return (
+          <motion.li key={segment.name} variants={fadeReveal(0.4 + index * 0.15, 20)} className="flex items-center gap-6">
+            <SegmentIcon size={88} weight="duotone" className="shrink-0 text-ocean" aria-hidden />
+            <span className="text-point font-bold">{segment.name}</span>
+          </motion.li>
+        );
+      })}
+    </ul>
+  );
+}
+
 function OwnerSummary() {
-  const { stat } = customerProfile;
   return (
     <div className="flex flex-col justify-between">
-      <div className="flex flex-col gap-10">
-        <h2 className="text-title font-extrabold">
-          <MaskedLines lines={[customerProfile.headline]} delay={0.05} />
-        </h2>
-        <motion.div variants={fadeReveal(0.3)}>
-          <p className="text-lede font-bold">{customerProfile.who}</p>
-          <p className="mt-3 text-body text-ink-muted">{customerProfile.size}</p>
-        </motion.div>
-      </div>
-      <motion.div variants={fadeReveal(1.3)}>
-        <p className="text-display font-black text-ocean figures-tabular">{stat.value}</p>
-        <p className="mt-3 text-body font-semibold">{stat.caption}</p>
-        <p className="mt-1 text-caption text-ink-muted">{stat.note}</p>
-      </motion.div>
+      <h2 className="text-title font-extrabold">
+        <MaskedLines lines={[customerProfile.headline]} delay={0.05} />
+      </h2>
+      <CustomerSegments />
     </div>
   );
 }

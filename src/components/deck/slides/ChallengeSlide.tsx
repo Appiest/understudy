@@ -3,6 +3,8 @@
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { turnover } from "@/content/content";
 import { easeDrawn, easeSweep } from "@/lib/motion";
+import { PersonGlyph } from "../PersonGlyph";
+import { ReadingDetail, useIsPitch } from "../pitchMode";
 import { CountUp, MaskedLines, StepView, fadeReveal, useProgress } from "../primitives";
 import type { SlideProps } from "../slides";
 
@@ -20,17 +22,6 @@ function replacedSeats(annualRate: number, seats: number) {
   return new Set(Array.from({ length: replaced }, (_, index) => Math.floor(((index + 0.5) * seats) / replaced)));
 }
 
-const PERSON_PATH = "M4 80 V52 a16 16 0 0 1 16 -16 a16 16 0 0 1 16 16 V80 Z";
-
-function Person({ tone }: { tone: "ink" | "ocean" }) {
-  const fill = tone === "ocean" ? "var(--color-ocean)" : "var(--color-ink)";
-  return (
-    <>
-      <circle cx={20} cy={16} r={12} fill={fill} />
-      <path d={PERSON_PATH} fill={fill} />
-    </>
-  );
-}
 
 function leaves(delay: number): Variants {
   return {
@@ -53,14 +44,14 @@ function Seat({ index, isReplaced, rowDelay }: { index: number; isReplaced: bool
       {isReplaced ? (
         <>
           <motion.g variants={leaves(delay)}>
-            <Person tone="ink" />
+            <PersonGlyph tone="ink" />
           </motion.g>
           <motion.g variants={arrives(delay)} transform="translate(0 0)">
-            <Person tone="ocean" />
+            <PersonGlyph tone="ocean" />
           </motion.g>
         </>
       ) : (
-        <Person tone="ink" />
+        <PersonGlyph tone="ink" />
       )}
     </g>
   );
@@ -81,7 +72,9 @@ function SectorRow({ name, caption, monthlySeparationRate, rowIndex }: SectorRow
         </p>
         <p className="mt-2 text-caption">
           <span className="block font-bold">{caption}</span>
-          <span className="text-ink-muted">{monthlySeparationRate}% a month × 12 months</span>
+          <ReadingDetail>
+            <span className="text-ink-muted">{monthlySeparationRate}% a month × 12 months</span>
+          </ReadingDetail>
         </p>
       </div>
       <svg viewBox={`0 0 ${turnover.seatsPerRow * 62} 84`} className="mb-3 w-full overflow-visible" role="img" aria-label={`${replaced.size} of every ${turnover.seatsPerRow} ${name.toLowerCase()} jobs refilled in a year`}>
@@ -94,27 +87,32 @@ function SectorRow({ name, caption, monthlySeparationRate, rowIndex }: SectorRow
 }
 
 function TurnoverView() {
+  const isPitch = useIsPitch();
   return (
-    <StepView className="flex flex-col justify-between">
-      <h2 className="max-w-[1500px] text-headline font-extrabold">
-        <MaskedLines lines={["Every new hire costs owners", "time they don’t have."]} delay={0.1} />
-      </h2>
-      <div className="flex flex-col gap-10">
+    <StepView className={`flex flex-col ${isPitch ? "justify-center" : "justify-between"}`}>
+      <ReadingDetail>
+        <h2 className="max-w-[1500px] text-headline font-extrabold">
+          <MaskedLines lines={["Every new hire costs owners", "time they don’t have."]} delay={0.1} />
+        </h2>
+      </ReadingDetail>
+      <div className={`flex flex-col ${isPitch ? "gap-24" : "gap-10"}`}>
         {turnover.sectors.map((sector, rowIndex) => (
           <SectorRow key={sector.name} {...sector} rowIndex={rowIndex} />
         ))}
+        <ReadingDetail>
         <motion.dl variants={fadeReveal(2.6)} className="flex items-center gap-12 text-caption text-ink-muted">
           {(["stayed", "replaced"] as const).map((kind) => (
             <div key={kind} className="flex items-center gap-4">
               <dt>
                 <svg aria-hidden viewBox="0 0 40 84" className="h-9 w-auto">
-                  <Person tone={kind === "replaced" ? "ocean" : "ink"} />
+                  <PersonGlyph tone={kind === "replaced" ? "ocean" : "ink"} />
                 </svg>
               </dt>
               <dd>{turnover.legend[kind]}</dd>
             </div>
           ))}
         </motion.dl>
+        </ReadingDetail>
       </div>
     </StepView>
   );
@@ -131,12 +129,15 @@ function tallySegment(index: number): Variants {
 }
 
 function CostTally() {
+  const isPitch = useIsPitch();
   const progress = useProgress(hiresPerStore * 0.09 + 0.4, 1.2);
   return (
     <div className="mt-auto">
       <div className="flex items-baseline justify-between">
         <p className="text-caption text-ink-muted figures-tabular">
-          {hiresPerStore} replacements × {dollars.format(replacement.costPerHire)}
+          <ReadingDetail>
+            {hiresPerStore} replacements × {dollars.format(replacement.costPerHire)}
+          </ReadingDetail>
         </p>
         <p className="text-title font-extrabold">
           <CountUp progress={progress} total={replacement.costPerStore} format={(value) => dollars.format(Math.round(value / 100) * 100)} />
@@ -144,7 +145,7 @@ function CostTally() {
       </div>
       <div className="mt-4 flex gap-1.5" role="img" aria-label={`${hiresPerStore} segments of ${dollars.format(replacement.costPerHire)} add up to ${dollars.format(replacement.costPerStore)}`}>
         {Array.from({ length: hiresPerStore }, (_, index) => (
-          <motion.span key={index} variants={tallySegment(index)} className="h-16 flex-1 origin-left bg-ocean" />
+          <motion.span key={index} variants={tallySegment(index)} className={`${isPitch ? "h-40" : "h-16"} flex-1 origin-left bg-ocean`} />
         ))}
       </div>
       <p className="mt-3 text-right text-caption font-semibold">{replacement.storeCaption}</p>
@@ -166,21 +167,26 @@ function QuoteCard() {
 
 function CostView() {
   const progress = useProgress(1.4, 0.2);
+  const isPitch = useIsPitch();
   return (
-    <StepView className="grid grid-cols-[1fr_620px] gap-gap">
-      <div className="flex flex-col">
+    <StepView className={isPitch ? "flex flex-col" : "grid grid-cols-[1fr_620px] gap-gap"}>
+      <div className="flex flex-1 flex-col">
         <p className="text-poster font-black">
           <CountUp progress={progress} total={replacement.costPerHire} format={(value) => dollars.format(Math.round(value / 10) * 10)} />
         </p>
         <motion.p variants={fadeReveal(0.5)} className="mt-4 text-lede font-bold">
           {replacement.caption}
         </motion.p>
-        <motion.p variants={fadeReveal(0.7)} className="mt-3 text-caption text-ink-muted">
-          {replacement.label}
-        </motion.p>
+        <ReadingDetail>
+          <motion.p variants={fadeReveal(0.7)} className="mt-3 text-caption text-ink-muted">
+            {replacement.label}
+          </motion.p>
+        </ReadingDetail>
         <CostTally />
       </div>
-      <QuoteCard />
+      <ReadingDetail>
+        <QuoteCard />
+      </ReadingDetail>
     </StepView>
   );
 }

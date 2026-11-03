@@ -6,7 +6,9 @@ const [brendan, alex, alexis, oli] = team.teamMembers;
 
 // Who presents which slides. Swap the names or move the slide numbers to change who says what.
 export const speakerSections = [
-  { speaker: brendan, firstSlide: 1, lastSlide: 5 },
+  { speaker: brendan, firstSlide: 1, lastSlide: 1 },
+  { speaker: alexis, firstSlide: 2, lastSlide: 2 },
+  { speaker: brendan, firstSlide: 3, lastSlide: 5 },
   { speaker: alex, firstSlide: 6, lastSlide: 9 },
   { speaker: alexis, firstSlide: 10, lastSlide: 11 },
   { speaker: oli, firstSlide: 12, lastSlide: 13 },
@@ -17,7 +19,7 @@ export const pitchScript = {
     "Hi, we’re Group 15, and this is Understudy. It’s a pair of AI glasses that learns how a store’s best employee does the job. Then it coaches each new hire by voice during real shifts. Our vision is to put your best employee in every new hire’s ear.",
   ],
   talinStory: [
-    "Alexis’s parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. They have [TALIN STAFF COUNT] people on staff, and last year they hired [TALIN NEW HIRES LAST YEAR] new ones. Every time, [WHO TRAINS NEW HIRES AT TALIN] stops working to train them, and it takes [DAYS UNTIL A TALIN HIRE WORKS ALONE] days before a new hire can work alone. While that happens, customers wait at the register.",
+    "My parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. They have [TALIN STAFF COUNT] people on staff, and last year they hired [TALIN NEW HIRES LAST YEAR] new people. Every time, [WHO TRAINS NEW HIRES AT TALIN] stops working to train them, and it takes [DAYS UNTIL A TALIN HIRE WORKS ALONE] days before a new hire can work alone. While that happens, customers wait at the register.",
     "Talin isn’t the exception. In a national survey, 76 percent of small employers said they train new hires by having someone work beside them, the same way Talin does.",
   ],
   challenge: [
