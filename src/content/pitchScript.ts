@@ -6,18 +6,22 @@ const [brendan, alex, alexis, oli] = team.teamMembers;
 
 // Who presents which slides. Swap the names or move the slide numbers to change who says what.
 export const speakerSections = [
-  { speaker: brendan, firstSlide: 1, lastSlide: 4 },
-  { speaker: alex, firstSlide: 5, lastSlide: 8 },
-  { speaker: alexis, firstSlide: 9, lastSlide: 10 },
-  { speaker: oli, firstSlide: 11, lastSlide: 12 },
+  { speaker: brendan, firstSlide: 1, lastSlide: 5 },
+  { speaker: alex, firstSlide: 6, lastSlide: 9 },
+  { speaker: alexis, firstSlide: 10, lastSlide: 11 },
+  { speaker: oli, firstSlide: 12, lastSlide: 13 },
 ];
 
 export const pitchScript = {
   title: [
     "Hi, we’re Group 15, and this is Understudy. It’s a pair of AI glasses that learns how a store’s best employee does the job. Then it coaches each new hire by voice during real shifts. Our vision is to put your best employee in every new hire’s ear.",
   ],
+  talinStory: [
+    "Alexis’s parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. They have [TALIN STAFF COUNT] people on staff, and last year they hired [TALIN NEW HIRES LAST YEAR] new ones. Every time, [WHO TRAINS NEW HIRES AT TALIN] stops working to train them, and it takes [DAYS UNTIL A TALIN HIRE WORKS ALONE] days before a new hire can work alone. While that happens, customers wait at the register.",
+    "Talin isn’t the exception. In a national survey, 76 percent of small employers said they train new hires by having someone work beside them, the same way Talin does.",
+  ],
   challenge: [
-    "Small stores never stop training. In 2025, separations equaled about 46 percent of retail jobs and 66 percent of restaurant and hotel jobs, according to the Bureau of Labor Statistics. Every time someone leaves, the owner pulls their best employee off the floor to shadow the new hire.",
+    "And small stores never stop training. In 2025, separations equaled about 46 percent of retail jobs and 66 percent of restaurant and hotel jobs, according to the Bureau of Labor Statistics. Every time someone leaves, the owner pulls their best employee off the floor to shadow the new hire.",
     "That adds up. A 2017 estimate put the cost of replacing one part-time grocery worker at about 4,200 dollars, or 67,200 dollars per store each year.",
   ],
   canvas: [
@@ -25,7 +29,7 @@ export const pitchScript = {
     "On our strategy canvas, our curve goes low where the alternatives cost owners the most, like senior staff time and custom content. It goes high on learning the store’s own know-how during real shifts.",
   ],
   customerProfile: [
-    "Our customer owns an independent grocery, a franchise location or a local restaurant with fewer than 100 employees. In a national survey, 76 percent of small employers said they train new hires by having someone work beside them.",
+    "Our customer is an owner like Alexis’s parents. They run an independent grocery, a franchise location or a local restaurant with fewer than 100 employees and no training team.",
     "Their biggest pain is losing their best employee’s time whenever someone new starts. They want new hires ready fast, and they want to see who can do what.",
   ],
   visualValueProposition: [

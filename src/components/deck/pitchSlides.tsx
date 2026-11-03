@@ -1,10 +1,11 @@
-import { customerProfile, proFormaCosts, proFormaRevenue } from "@/content/content";
+import { customerProfile, proFormaCosts, proFormaRevenue, talinStory } from "@/content/content";
 import { pitchScript, speakerSections } from "@/content/pitchScript";
 import { competitionSlides } from "./competitionSlides";
 import { slides, type SlideDefinition, type SlideProps } from "./slides";
 import { CustomerProfileSlide } from "./slides/CustomerProfileSlide";
 import { ProFormaCostsSlide } from "./slides/ProFormaCostsSlide";
 import { ProFormaRevenueSlide } from "./slides/ProFormaRevenueSlide";
+import { TalinStorySlide } from "./slides/TalinStorySlide";
 import { valuePropositionSlides } from "./valuePropositionSlides";
 
 const existingSlides = [...slides, ...competitionSlides, ...valuePropositionSlides];
@@ -37,6 +38,15 @@ function reuse(id: string, notes: string[], { beats, name }: ReuseOptions = {}):
 
 const scriptedSlides: SlideDefinition[] = [
   reuse("title", pitchScript.title, { beats: [0], name: "Vision" }),
+  {
+    id: "talin-story",
+    name: "Talin Market",
+    steps: 2,
+    printSteps: [0, 1],
+    sourcesByStep: talinStory.sources,
+    notes: pitchScript.talinStory,
+    Content: TalinStorySlide,
+  },
   reuse("challenge", pitchScript.challenge, { beats: [0, 1], name: "The problem" }),
   reuse("canvas", pitchScript.canvas, { beats: [0], name: "Strategy: our Blue Ocean value curve" }),
   {

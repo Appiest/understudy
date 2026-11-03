@@ -9,6 +9,11 @@ export type Source = {
 };
 
 export const pitchSources = {
+  edibleTalin: {
+    cite: "Edible New Mexico, Jan 2020",
+    title: "Edible New Mexico: Best Retail, Talin Market (Jan 30, 2020)",
+    url: "https://www.ediblenm.com/best-retail-talin-market/",
+  },
   kimMauborgne: {
     cite: "Kim and Mauborgne, California Management Review, 2005",
     title: "Kim, W.C. and Mauborgne, R. (2005). “Blue Ocean Strategy: From Theory to Practice.” California Management Review 47(3), 105–121.",
@@ -459,7 +464,6 @@ export const pitchSources = {
     cite: "NFIB National Small Business Poll, 2005",
     title: "NFIB Research Foundation: National Small Business Poll, Training Employees, Volume 5, Issue 1 (2005)",
     url: "http://411sbfacts.com/sbpoll-tables-res.php?POLLID=0051&QID=00000001534",
-    factsOnly: true,
   },
   strivrRetail: {
     cite: "Strivr retail and platform pages, Oct 2026",

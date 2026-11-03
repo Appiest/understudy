@@ -10,6 +10,16 @@ export const team = {
   mindMapImage: "/mind-map.png",
 };
 
+/** Talin Market details only Alexis’s parents can confirm. Replace each bracketed value with their answer. */
+export const talinMarket = {
+  staffCount: "[TALIN STAFF COUNT]",
+  hiresLastYear: "[TALIN NEW HIRES LAST YEAR]",
+  trainer: "[WHO TRAINS NEW HIRES AT TALIN]",
+  daysToWorkAlone: "[DAYS UNTIL A TALIN HIRE WORKS ALONE]",
+  quote: "[A LINE FROM ALEXIS’S PARENTS ABOUT TRAINING NEW HIRES]",
+  quoteSpeaker: "[NAME OF ALEXIS’S PARENT]",
+};
+
 export function isPlaceholder(value: string) {
   return value.startsWith("[") && value.endsWith("]");
 }
