@@ -672,3 +672,65 @@ export const comparisonChart = {
     "We give ourselves a half circle on catching mistakes, because version one only checks a few well-defined tasks. Shadowing’s column is our team’s judgment. Every other column comes from the company’s own website.",
   ],
 };
+
+export type ProFormaYear = {
+  year: number;
+  payingStores: number;
+  revenue: number;
+  spending: number;
+  ebitda: number;
+};
+
+const proFormaYears: ProFormaYear[] = [
+  { year: 2027, payingStores: 90, revenue: 53_640, spending: 290_069, ebitda: -236_429 },
+  { year: 2028, payingStores: 450, revenue: 482_760, spending: 1_052_723, ebitda: -569_963 },
+  { year: 2029, payingStores: 1_305, revenue: 1_568_970, spending: 2_109_749, ebitda: -540_779 },
+  { year: 2030, payingStores: 3_000, revenue: 3_848_670, spending: 3_669_140, ebitda: 179_530 },
+];
+
+export type Assumption = { value: string; name: string; why: string };
+
+export const proFormaRevenue = {
+  headline: `Paying stores grow from ${proFormaYears[0].payingStores} in 2027 to ${proFormaYears[3].payingStores.toLocaleString("en-US")} in 2030`,
+  years: proFormaYears,
+  somYear: 2029,
+  somLabel: "Our 3-year SOM",
+  storesUnit: "paying stores at year end",
+  revenueUnit: "revenue that year",
+  assumptions: [
+    { value: wholeDollars.format(marketPricePerMonth), name: "a month per store", why: "Training tools charge $100 to $200, and a year costs less than replacing one worker" },
+    { value: "Jan to Mar 2027", name: "free pilots", why: "Paying stores start in April" },
+    { value: "5 to 15", name: "new stores a month in 2027", why: "One sales hire joins in October" },
+  ] satisfies Assumption[],
+  sources: ["proForma", "sevenShiftsTraining", "blackBox"] as SourceId[],
+};
+
+export const proFormaCosts = {
+  headline: "We turn a profit in 2030 once 3,000 stores pay",
+  years: proFormaYears,
+  legend: { revenue: "Revenue", spending: "Spending" },
+  profitLabel: "profit",
+  lossLabel: "loss",
+  assumptions: [
+    { value: "$18", name: "a month per store for AI", why: "Plus $8 for support and 3% card fees, which leaves a 75% gross margin" },
+    { value: "$10,000", name: "a month per hire", why: "About $120,000 a year with taxes and benefits. First engineer in July 2027" },
+    { value: "$1,500", name: "a month per founder at first", why: "A stipend while we finish school, rising to $3,000 in July 2027" },
+    { value: "$350", name: "of marketing per new store", why: "Flyers, local ads, demo visits and referral credits" },
+  ] satisfies Assumption[],
+  sources: ["proForma"] as SourceId[],
+};
+
+export type ProfileArea = { name: string; items: string[] };
+
+export const customerProfile = {
+  headline: "Small-store owners train every new hire with their best employee",
+  who: "Owners of independent grocers, franchise locations and local restaurants",
+  size: "Fewer than 100 employees and no training team",
+  stat: { value: "76%", caption: "of small employers train new hires by having someone work beside them", note: "2005 survey" },
+  areas: [
+    { name: "Jobs", items: ["Train every new hire", "Keep the floor covered"] },
+    { name: "Pains", items: ["Best employee stops working", "Setup work and cost", "Legal trouble over recording"] },
+    { name: "Gains", items: ["Hires ready fast", "See who can do what"] },
+  ] satisfies ProfileArea[],
+  sources: ["nfibTraining"] as SourceId[],
+};

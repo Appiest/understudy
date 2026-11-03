@@ -1,4 +1,4 @@
-import { annualPricePerLocation, market, revenueFormatter, useOfFunds, yearlyRevenue } from "./content";
+import { annualPricePerLocation, customerProfile, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -1214,6 +1214,149 @@ const visualValuePropositionFacts: SlideFacts = {
   ],
 };
 
+const customerProfileFacts: SlideFacts = {
+  checkedOn: "November 2, 2026",
+  summary: "This slide shows who buys Understudy, using the customer profile half of the value proposition canvas: the owner’s jobs, pains and gains. The jobs, pains and gains come from the Users section of our PRD, where we listed what each person needs and fears. We haven’t interviewed owners yet, so they’re our team’s judgment.",
+  facts: [
+    {
+      figure: customerProfile.stat.value,
+      claim: "Small employers (5 to 250 employees) who train their most common hires most often do it by having someone in the business work with them.",
+      status: "verified",
+      source: "nfibTraining",
+      quote: "the most frequent method of training them is to have someone in the firm work with them",
+      caveat: "It’s a 2005 poll, so the slide labels it as a 2005 survey. The 76% comes from the 382 employers in it who expect new hires to learn at least partly on the job. It’s the only primary survey we found on how small businesses train.",
+    },
+    {
+      figure: "Fewer than 100 employees",
+      claim: "Where we draw the line for small businesses, the same line as our serviceable market.",
+      status: "verified",
+      source: "trainingIndustryReport",
+      caveat: "Training Magazine’s annual industry report only counts organizations with 100 or more employees, so businesses below that line are the training industry’s noncustomers.",
+    },
+    {
+      figure: "Jobs, pains and gains",
+      claim: "Train every new hire and keep the floor covered. Losing the best employee’s time, setup work and cost, and legal trouble over recording. Hires ready fast, and seeing who can do what.",
+      status: "estimate",
+      caveat: "From the owner row of the Users table in our PRD. We’ll replace them with what owners tell us in interviews.",
+    },
+  ],
+  questions: [
+    {
+      question: "Did you talk to any owners?",
+      answer: "Not yet. The profile comes from our research and the PRD. Our next step is interviewing five owners, and we’ll redraw this profile from what they say.",
+    },
+    {
+      question: "Why is legal trouble a pain?",
+      answer: "The glasses record audio and video in a store. California is one of 11 states that require every party’s consent to record a conversation, so owners worry about getting it wrong. That’s why our plan pays for a lawyer’s review before any pilot.",
+    },
+  ],
+};
+
+const yearRevenueFact = (year: ProFormaYear): Fact => ({
+  figure: `${count(year.payingStores)} stores`,
+  claim: `Paying stores at the end of ${year.year}, which bring in ${wholeDollars.format(year.revenue)} of revenue that year.`,
+  status: "estimate",
+  source: "proForma",
+  derivation: `Revenue adds up each month’s paying stores × ${monthlyPrice}, so it’s lower than year-end stores × ${yearlyPrice}.`,
+});
+
+const yearProfitFact = (year: ProFormaYear): Fact => ({
+  figure: `${year.year}`,
+  claim: `Revenue of ${wholeDollars.format(year.revenue)} against spending of ${wholeDollars.format(year.spending)}, for EBITDA of ${wholeDollars.format(year.ebitda)}.`,
+  status: "estimate",
+  source: "proForma",
+  derivation: "Spending is the sheet’s total cost of goods sold plus total SG&A for the year.",
+});
+
+const proFormaRevenueFacts: SlideFacts = {
+  checkedOn: "November 2, 2026",
+  summary: "This slide shows how many stores pay for Understudy each year and the revenue they bring in. Every number comes from our pro forma spreadsheet and is a team estimate. The price matches the market slide.",
+  facts: [
+    ...proFormaRevenue.years.map(yearRevenueFact),
+    {
+      figure: `${monthlyPrice} a month`,
+      claim: "Our price per store.",
+      status: "estimate",
+      source: "sevenShiftsTraining",
+      quote: "Standalone LMS tools charge $100–$200/month per location",
+      derivation: `${yearlyPrice} a year is less than the $2,305 it costs to replace one hourly restaurant worker (Black Box Intelligence, 2024).`,
+      caveat: "We haven’t tested the price with owners yet.",
+    },
+    {
+      figure: "1,305 stores",
+      claim: "Our 3-year SOM: 1% of California’s 130,536 small-business store, restaurant and bar locations. The plan reaches it at the end of 2029.",
+      status: "estimate",
+      source: "censusSusb",
+    },
+    {
+      figure: "Jan to Mar 2027",
+      claim: "Free pilots. The first 5 paying stores start in April, and the plan adds 5 to 15 a month after that.",
+      status: "estimate",
+      source: "proForma",
+    },
+  ],
+  questions: [
+    {
+      question: "Does the store count include churn?",
+      answer: "The sheet counts net new stores, after churn, but it doesn’t set a churn rate on its own line. That’s something we’ll add once pilots show how long stores stay.",
+    },
+    {
+      question: "Do stores pay for the glasses?",
+      answer: "Yes. Stores buy their own glasses, $249 to $449 from Meta, and that isn’t in our revenue. Our only revenue is the subscription.",
+    },
+  ],
+};
+
+const proFormaCostsFacts: SlideFacts = {
+  checkedOn: "November 2, 2026",
+  summary: "This slide compares revenue with spending each year and shows the profit or loss. Every number comes from our pro forma spreadsheet and is a team estimate.",
+  facts: [
+    ...proFormaRevenue.years.map(yearProfitFact),
+    {
+      figure: "$18, $8 and 3%",
+      claim: "What each store costs us a month: AI processing and hosting, customer support, and card fees. Processing a new store’s capture week costs $30 once.",
+      status: "estimate",
+      source: "proForma",
+      caveat: "We’ll check the AI cost against real API bills during pilots.",
+    },
+    {
+      figure: "75%",
+      claim: "Gross margin in 2027, rising to 78% by 2030.",
+      status: "estimate",
+      source: "proForma",
+    },
+    {
+      figure: "$10,000 a month",
+      claim: "What each engineering or sales hire costs, about $120,000 a year including payroll taxes and benefits.",
+      status: "estimate",
+      source: "proForma",
+    },
+    {
+      figure: "$1,500 a month",
+      claim: "Each founder’s stipend from January to June 2027. It rises to $3,000 in July 2027, then $5,000, $7,000 and $8,500 a month in 2028 to 2030.",
+      status: "estimate",
+      source: "proForma",
+    },
+    {
+      figure: "$350",
+      claim: "Marketing to win each new store: flyers, local ads, demo visits and referral credits.",
+      status: "estimate",
+      source: "proForma",
+      caveat: "That’s marketing only. Sales hires are a separate line.",
+    },
+  ],
+  questions: [
+    {
+      question: "Does the $1 million raise get you to profit?",
+      answer: "No. The plan uses $806,392 by the end of 2028 and $1,347,171 by the end of 2029, so we’d raise a second round of at least about $350,000 in 2029. The first raise is meant to get us to 450 paying stores, which is the traction that round needs.",
+    },
+    {
+      question: "How fast does a store pay back its marketing?",
+      answer: "Each store brings in about $118 a month after AI, support and card fees, so its $350 of marketing is paid back in about three months. Counting sales salaries, it takes longer.",
+    },
+  ],
+};
+
 export const factsBySlide: Record<string, SlideFacts> = {
   definition: definitionFacts,
   swot: swotFacts,
@@ -1229,6 +1372,9 @@ export const factsBySlide: Record<string, SlideFacts> = {
   landscape,
   market: marketFacts,
   "use-of-funds": useOfFundsFacts,
+  "customer-profile": customerProfileFacts,
+  "pro-forma-revenue": proFormaRevenueFacts,
+  "pro-forma-costs": proFormaCostsFacts,
   "mind-map": mindMapFacts,
   sources: sourcesFacts,
 };
