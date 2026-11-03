@@ -9,18 +9,24 @@ const SIZE = 760;
 const RENDERED_SIZE = 680;
 const RADIUS = SIZE / 2;
 const SECTOR_GAP = 10;
+const LABEL_DISTANCE = RADIUS * 0.52;
+const LABEL_HEIGHT = 260;
 
-type SectorStyle = { startAngle: number; endAngle: number; fill: string; icon: Icon; box: { x: number; y: number; width: number } };
+type SectorStyle = { startAngle: number; endAngle: number; fill: string; icon: Icon; labelWidth: number };
 
 const sectorStyles: Record<string, SectorStyle> = {
-  Gains: { startAngle: 150, endAngle: 270, fill: "var(--color-ocean-wash)", icon: TrendUp, box: { x: 80, y: 180, width: 290 } },
-  Jobs: { startAngle: 270, endAngle: 390, fill: "var(--color-paper-raised)", icon: Briefcase, box: { x: 410, y: 180, width: 290 } },
-  Pains: { startAngle: 30, endAngle: 150, fill: "var(--color-paper-sunken)", icon: SmileySad, box: { x: 190, y: 470, width: 400 } },
+  Gains: { startAngle: 150, endAngle: 270, fill: "var(--color-ocean-wash)", icon: TrendUp, labelWidth: 290 },
+  Jobs: { startAngle: 270, endAngle: 390, fill: "var(--color-paper-raised)", icon: Briefcase, labelWidth: 290 },
+  Pains: { startAngle: 30, endAngle: 150, fill: "var(--color-paper-sunken)", icon: SmileySad, labelWidth: 400 },
 };
 
-function pointOnCircle(angle: number) {
+function pointOnCircle(angle: number, distance = RADIUS) {
   const radians = (angle * Math.PI) / 180;
-  return { x: RADIUS + RADIUS * Math.cos(radians), y: RADIUS + RADIUS * Math.sin(radians) };
+  return { x: RADIUS + distance * Math.cos(radians), y: RADIUS + distance * Math.sin(radians) };
+}
+
+function labelCenter({ startAngle, endAngle }: SectorStyle) {
+  return pointOnCircle((startAngle + endAngle) / 2, LABEL_DISTANCE);
 }
 
 function sectorPath({ startAngle, endAngle }: SectorStyle) {
@@ -31,9 +37,10 @@ function sectorPath({ startAngle, endAngle }: SectorStyle) {
 
 function SectorText({ area, style }: { area: ProfileArea; style: SectorStyle }) {
   const AreaIcon = style.icon;
+  const center = labelCenter(style);
   return (
-    <foreignObject x={style.box.x} y={style.box.y} width={style.box.width} height={300}>
-      <div className="flex flex-col gap-3">
+    <foreignObject x={center.x - style.labelWidth / 2} y={center.y - LABEL_HEIGHT / 2} width={style.labelWidth} height={LABEL_HEIGHT}>
+      <div className="flex h-full flex-col items-center justify-center gap-3 text-center">
         <p className="flex items-center gap-3 text-point font-extrabold">
           <AreaIcon size={36} weight="bold" aria-hidden />
           {area.name}

@@ -1,5 +1,17 @@
 // Each slide's script is a list of paragraphs, one per beat. Wrap each paragraph in straight double quotes and end it with a comma.
 // Inside a paragraph, use curly quotes (“like this”) and apostrophes (’) so the straight quotes still mark where it starts and ends.
+import { team } from "./config";
+
+const [brendan, alex, alexis, oli] = team.teamMembers;
+
+// Who presents which slides. Swap the names or move the slide numbers to change who says what.
+export const speakerSections = [
+  { speaker: brendan, firstSlide: 1, lastSlide: 4 },
+  { speaker: alex, firstSlide: 5, lastSlide: 8 },
+  { speaker: alexis, firstSlide: 9, lastSlide: 10 },
+  { speaker: oli, firstSlide: 11, lastSlide: 12 },
+];
+
 export const pitchScript = {
   title: [
     "Hi, we’re Group 15, and this is Understudy. It’s a pair of AI glasses that learns how a store’s best employee does the job. Then it coaches each new hire by voice during real shifts. Our vision is to put your best employee in every new hire’s ear.",
