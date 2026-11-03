@@ -222,14 +222,15 @@ The deck has a print version that puts each slide, and each build step that matt
 
 Use Chrome for this. Safari and Firefox handle custom page sizes less reliably.
 
-### The competitive analysis and value proposition decks
+### The other decks
 
-Two more assignments live in their own decks, so each one exports as its own PDF:
+Three more assignments live in their own decks, so each one exports as its own PDF:
 
 | Assignment | Deck | Print version |
 | --- | --- | --- |
 | Competitive analysis (A8) | **http://localhost:3000/competition** | **http://localhost:3000/competition/print** |
 | Value proposition and visual value proposition (A9) | **http://localhost:3000/value-proposition** | **http://localhost:3000/value-proposition/print** |
+| Final pitch, 12 slides with the pro forma | **http://localhost:3000/pitch** | **http://localhost:3000/pitch/print** |
 
 They work exactly like the main deck: arrow keys, **N** for notes, **D** for the facts behind a slide and **P** to open that deck's print version. Competitor logos and footnotes stay clickable links in the saved PDF.
 
@@ -428,7 +429,8 @@ understudy/
     │   ├── page.tsx                   The deck, at /
     │   ├── print/page.tsx             The print version, at /print
     │   ├── competition/               The competitive analysis deck and its print version
-    │   └── value-proposition/         The value proposition deck and its print version
+    │   ├── value-proposition/         The value proposition deck and its print version
+    │   └── pitch/                     The final pitch deck and its print version
     ├── content/
     │   ├── config.ts                  Team placeholders: name, members, Figma link, mind map
     │   ├── facts.ts                   The fact pages: sources, quotes, statuses and Q&A for each slide
@@ -500,6 +502,23 @@ Every competitor logo links to its website, and each footer lists the numbered s
 | --- | --- | --- |
 | Written value proposition | 1 | Geoffrey Moore's template, with the benefit and our difference set largest |
 | Visual value proposition | 2 | The same store with and without Understudy, with callouts, a description, the owner's checklist sidebar and a hardware note |
+
+### Final pitch, at /pitch
+
+The pitch reuses slides from the other decks and adds a customer profile and two pro forma slides. `src/components/deck/pitchSlides.tsx` lists the slides and which beats of each one the pitch shows. The script is the pitch's presenter notes, in `src/content/pitchScript.ts`. It runs about 6.5 minutes at a normal speaking pace. **http://localhost:3000/pitch/script** shows the whole script slide by slide with a button that opens that file in GitHub's editor, so anyone on the team can change a line without cloning the repo.
+
+| Rubric item | Slide | What shows it |
+| --- | --- | --- |
+| Vision | 1 | The title and tagline |
+| Strategy | 3 | Our Blue Ocean value curve against every alternative |
+| Customer profile | 4 | The owner's jobs, pains and gains, with the 76% shadowing stat |
+| Visual value proposition | 5 | The same store with and without Understudy |
+| Solution | 6 | Capture, learn and coach |
+| Unique value proposition | 7 | Geoffrey Moore's template |
+| TAM, SAM and SOM | 8 | Three nested circles in locations and dollars |
+| Competitive analysis | 9 | The on-the-job versus small-business 2x2 |
+| Pro forma | 10 and 11 | Paying stores and revenue by year, then revenue against spending, each with the assumptions behind it |
+| Use of funds | 12 | Where the $1 million raise goes, the reserve and the 2028 outcome |
 
 ---
 
