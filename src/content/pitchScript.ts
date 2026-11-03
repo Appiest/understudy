@@ -19,7 +19,7 @@ export const pitchScript = {
     "Hi, we’re Group 15: Brendan, Alex, Alexis and Oli. This is Understudy, a pair of AI glasses that learns how a store’s best employee does the job. It then coaches every new hire by voice during real shifts. Our vision is to put your best employee in every new hire’s ear.",
   ],
   talinStory: [
-    "My parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. Last year they hired [TALIN NEW HIRES LAST YEAR] new people, out of a staff of [TALIN STAFF COUNT]. Every time, [WHO TRAINS NEW HIRES AT TALIN] stops working to train them. It takes about [DAYS UNTIL A TALIN HIRE WORKS ALONE] days before a new hire can work alone. Meanwhile, customers wait at the register.",
+    "My parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. Last year they hired [TALIN NEW HIRES LAST YEAR] new people, out of a staff of [TALIN STAFF COUNT]. Every time, my parents or the store manager stops working to train them. It takes about 7-14 days before a new hire can work alone. Meanwhile, customers wait at the register.",
     "Talin isn’t the exception. In a national survey of small employers, 76 percent said they train new hires by shadowing, which means having someone work beside them. That’s exactly what Talin does.",
   ],
   challenge: [
