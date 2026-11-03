@@ -3,7 +3,7 @@
 import { Basket, Briefcase, ForkKnife, SmileySad, Storefront, TrendUp, UsersThree, type Icon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { customerProfile, type CustomerSegment, type ProfileArea } from "@/content/content";
-import { MaskedLines, StepView, fadeReveal } from "../primitives";
+import { StepView, fadeReveal } from "../primitives";
 
 const SIZE = 760;
 const RENDERED_SIZE = 680;
@@ -45,7 +45,7 @@ function SectorText({ area, style }: { area: ProfileArea; style: SectorStyle }) 
           <AreaIcon size={36} weight="bold" aria-hidden />
           {area.name}
         </p>
-        <ul className="flex flex-col gap-2 text-caption font-medium">
+        <ul className="flex flex-col gap-2 text-body font-semibold">
           {area.items.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -96,10 +96,8 @@ function CustomerSegments() {
 
 function OwnerSummary() {
   return (
-    <div className="flex flex-col justify-between">
-      <h2 className="text-title font-extrabold">
-        <MaskedLines lines={[customerProfile.headline]} delay={0.05} />
-      </h2>
+    <div className="flex flex-col justify-center">
+      <h2 className="sr-only">{customerProfile.headline}</h2>
       <CustomerSegments />
     </div>
   );

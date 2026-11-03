@@ -81,7 +81,7 @@ function RingRow({ ring, index }: { ring: MarketRing; index: number }) {
       </dt>
       <dd className="mt-1 flex items-baseline gap-4">
         <span className={`font-black ${rowValueStyles[index]}`}>{revenueFormatter(revenue)(revenue)}</span>
-        <span className="text-lede font-bold text-ink-muted">a year</span>
+        <span className="text-lede font-bold">a year</span>
       </dd>
     </div>
   );

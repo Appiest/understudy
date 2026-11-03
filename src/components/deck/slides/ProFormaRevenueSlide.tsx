@@ -3,6 +3,7 @@
 import { motion, type Variants } from "motion/react";
 import { proFormaRevenue, type ProFormaYear } from "@/content/content";
 import { easeDrawn, exitTransition } from "@/lib/motion";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 import { AssumptionList, compactDollars } from "./AssumptionList";
 
@@ -51,7 +52,9 @@ function YearLabels() {
       {proFormaRevenue.years.map((year) => (
         <div key={year.year} className="flex flex-1 flex-col items-center pt-4">
           <p className="text-body font-bold figures-tabular">{year.year}</p>
-          <p className="text-caption text-ink-muted figures-tabular">{compactDollars.format(year.revenue)} revenue</p>
+          <ReadingDetail>
+            <p className="text-caption text-ink-muted figures-tabular">{compactDollars.format(year.revenue)} revenue</p>
+          </ReadingDetail>
         </div>
       ))}
     </div>

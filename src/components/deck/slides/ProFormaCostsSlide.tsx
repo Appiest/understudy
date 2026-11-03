@@ -3,6 +3,7 @@
 import { motion, type Variants } from "motion/react";
 import { proFormaCosts, type ProFormaYear } from "@/content/content";
 import { easeDrawn, exitTransition } from "@/lib/motion";
+import { useIsPitch } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 import { AssumptionList, compactDollars } from "./AssumptionList";
 
@@ -53,6 +54,8 @@ function YearBars({ year, index }: { year: ProFormaYear; index: number }) {
 function ProfitFigure({ year }: { year: ProFormaYear }) {
   const isProfit = year.ebitda > 0;
   const label = isProfit ? proFormaCosts.profitLabel : proFormaCosts.lossLabel;
+  const isPitch = useIsPitch();
+  if (isPitch && !isProfit) return null;
   return (
     <p className={`text-body figures-tabular ${isProfit ? "font-black text-ocean" : "font-semibold text-ink-muted"}`}>
       {compactDollars.format(Math.abs(year.ebitda))} {label}

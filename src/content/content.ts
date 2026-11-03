@@ -747,9 +747,9 @@ export const customerProfile = {
     { name: "Under 100 staff", icon: "staff" },
   ] satisfies CustomerSegment[],
   areas: [
-    { name: "Jobs", items: ["Train every new hire", "Keep the floor covered"] },
-    { name: "Pains", items: ["Best employee stops working", "Setup work and cost", "Legal trouble over recording"] },
-    { name: "Gains", items: ["Hires ready fast", "See who can do what"] },
+    { name: "Jobs", items: ["Train every new hire"] },
+    { name: "Pains", items: ["Best employee stops working"] },
+    { name: "Gains", items: ["Hires ready fast"] },
   ] satisfies ProfileArea[],
   sources: ["trainingIndustryReport"] as SourceId[],
 };

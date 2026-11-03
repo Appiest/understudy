@@ -37,7 +37,9 @@ function FundsBar({ row, delay, isReserve }: { row: FundsRow; delay: number; isR
       />
       <p className="flex shrink-0 items-baseline gap-3 figures-tabular">
         <span className={`text-point font-extrabold ${isReserve ? "text-ink-muted" : "text-ink"}`}>{compactDollars.format(row.fromRaise)}</span>
-        <span className="text-caption font-semibold text-ink-muted">{shareOfRaise(row.fromRaise)}</span>
+        <ReadingDetail>
+          <span className="text-caption font-semibold text-ink-muted">{shareOfRaise(row.fromRaise)}</span>
+        </ReadingDetail>
       </p>
     </div>
   );
@@ -78,7 +80,7 @@ function Outcomes() {
       <dl className="flex flex-col gap-8">
         {useOfFunds.outcomes.map((outcome) => (
           <div key={outcome.label}>
-            <dt className="text-caption text-ink-muted">{outcome.label}</dt>
+            <dt className="text-caption font-semibold">{outcome.label}</dt>
             <dd className="text-title font-black figures-tabular">{outcome.value}</dd>
             <ReadingDetail>{outcome.detail && <dd className="text-caption text-ink-muted">{outcome.detail}</dd>}</ReadingDetail>
           </div>

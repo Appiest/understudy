@@ -38,7 +38,7 @@ function PlottedLogo({ competitor, index }: { competitor: Competitor; index: num
 }
 
 function Axes() {
-  const labelClass = "absolute text-caption font-semibold text-ink-muted";
+  const labelClass = "absolute text-caption font-semibold text-ink";
   return (
     <>
       <div aria-hidden className="absolute top-1/2 left-0 h-[3px] w-full -translate-y-1/2 bg-ink" />
@@ -95,9 +95,11 @@ function StrivrMove() {
         />
         <motion.circle cx={from.x} cy={from.y} r={10} fill="none" stroke="var(--color-ink-faint)" strokeWidth={3} variants={fadeReveal(1.5)} />
       </svg>
-      <motion.p variants={fadeReveal(1.5)} className="absolute text-caption text-ink-faint" style={{ left: from.x - 10, top: from.y - 52 }}>
-        {competitorMap.strivrMove}
-      </motion.p>
+      <ReadingDetail>
+        <motion.p variants={fadeReveal(1.5)} className="absolute text-caption text-ink-faint" style={{ left: from.x - 10, top: from.y - 52 }}>
+          {competitorMap.strivrMove}
+        </motion.p>
+      </ReadingDetail>
     </>
   );
 }
