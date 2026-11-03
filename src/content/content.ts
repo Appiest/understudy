@@ -1,5 +1,5 @@
 import type { SourceId } from "./sources";
-import { team } from "./config";
+import { talinMarket, team } from "./config";
 
 export const title = {
   tagline: "Your best employee, in every new hire’s ear.",
@@ -17,6 +17,27 @@ export const title = {
     "The problem is constant retraining in businesses where people leave all the time. We validated that with labor data and cost estimates before committing to any product.",
     "These five rules kept us honest. Each later slide shows the evidence we gathered before we put the glasses back on the table.",
   ],
+};
+
+export const talinStory = {
+  headline: ["At Talin Market, every new hire", "pulls someone off the floor"],
+  store: "Talin Market, Albuquerque",
+  storeDetail: "New Mexico’s largest international grocer, run by Alexis’s parents",
+  facts: [
+    { name: "People on staff", value: talinMarket.staffCount },
+    { name: "New hires last year", value: talinMarket.hiresLastYear },
+    { name: "Who trains them", value: talinMarket.trainer },
+    { name: "Days until a hire works alone", value: talinMarket.daysToWorkAlone },
+  ],
+  quote: { text: talinMarket.quote, speaker: talinMarket.quoteSpeaker, role: "Owner, Talin Market" },
+  scale: {
+    headline: ["Talin isn’t the exception"],
+    value: 76,
+    caption: "of small employers train new hires by having someone work beside them",
+    note: "NFIB survey of small employers, 2005",
+    marker: "Talin Market",
+  },
+  sources: [["edibleTalin"], ["nfibTraining"]] as SourceId[][],
 };
 
 export const turnover = {

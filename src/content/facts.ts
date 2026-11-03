@@ -1,4 +1,4 @@
-import { annualPricePerLocation, customerProfile, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
+import { annualPricePerLocation, customerProfile, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
@@ -1357,6 +1357,53 @@ const proFormaCostsFacts: SlideFacts = {
   ],
 };
 
+const talinStoryFacts: SlideFacts = {
+  checkedOn: "November 2, 2026",
+  summary: "This slide opens the pitch with one real store, Talin Market in Albuquerque, which Alexis’s parents run. The second beat shows that Talin trains new hires the way most small employers do.",
+  facts: [
+    {
+      figure: "Largest in New Mexico",
+      claim: "Edible New Mexico calls Talin Market the state’s largest international grocer.",
+      status: "verified",
+      source: "edibleTalin",
+      quote: "now manages Talin Market, New Mexico’s largest international grocer",
+      caveat: "It’s a magazine’s description from 2020, not a measured ranking. The article names Victor Limary as Talin’s director of operations.",
+    },
+    ...talinStory.facts.map(
+      (fact): Fact => ({
+        figure: fact.value,
+        claim: `${fact.name} at Talin Market.`,
+        status: "unconfirmed",
+        caveat: "Alexis needs to get this from their parents. Nothing published gives it, so leave it as a placeholder until they answer.",
+      }),
+    ),
+    {
+      figure: "Pulls someone off the floor",
+      claim: "Talin trains every new hire by taking someone off their own work to show them, which is what the headline and drawing say.",
+      status: "unconfirmed",
+      caveat: "Confirm this with Alexis’s parents before the pitch. If they train some other way, rewrite the headline to say what actually happens.",
+    },
+    {
+      figure: `${talinStory.scale.value}%`,
+      claim: "Small employers (5 to 250 employees) who train their most common hires most often do it by having someone in the business work with them.",
+      status: "verified",
+      source: "nfibTraining",
+      quote: "the most frequent method of training them is to have someone in the firm work with them",
+      caveat: "It’s a 2005 poll, so the slide labels the year. The 76% comes from the 382 employers in it who expect new hires to learn at least partly on the job. The grid is a picture of the percentage, not of 100 surveyed businesses.",
+    },
+  ],
+  questions: [
+    {
+      question: "Isn’t this just one store?",
+      answer: "That’s why the next beat is there. Talin trains the way 76% of small employers do, and the next slide shows how often they have to do it: separations equaled 46% of retail jobs in 2025.",
+    },
+    {
+      question: "Why use a teammate’s family business?",
+      answer: "Because we can see the problem up close and ask follow-up questions. The national numbers on the next beat show Talin isn’t an outlier.",
+    },
+  ],
+};
+
 export const factsBySlide: Record<string, SlideFacts> = {
   definition: definitionFacts,
   swot: swotFacts,
@@ -1373,6 +1420,7 @@ export const factsBySlide: Record<string, SlideFacts> = {
   market: marketFacts,
   "use-of-funds": useOfFundsFacts,
   "customer-profile": customerProfileFacts,
+  "talin-story": talinStoryFacts,
   "pro-forma-revenue": proFormaRevenueFacts,
   "pro-forma-costs": proFormaCostsFacts,
   "mind-map": mindMapFacts,
