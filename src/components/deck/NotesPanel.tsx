@@ -21,9 +21,26 @@ const guideShortcut = ["Explainer", "G"];
 
 const panelLinkClass = "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-ink-muted hover:bg-paper-sunken hover:text-ink";
 
-type NotesPanelProps = { open: boolean; slide: SlideDefinition; slideNumber: number; printPath: string; hasGuide: boolean; onClose: () => void };
+type NotesPanelProps = { open: boolean; slide: SlideDefinition; slideNumber: number; step: number; printPath: string; hasGuide: boolean; onClose: () => void };
 
-export function NotesPanel({ open, slide, slideNumber, printPath, hasGuide, onClose }: NotesPanelProps) {
+function hasOneParagraphPerBeat(slide: SlideDefinition) {
+  return slide.notes.length === slide.steps;
+}
+
+function notesForBeat(slide: SlideDefinition, step: number) {
+  return hasOneParagraphPerBeat(slide) ? [slide.notes[step]] : slide.notes;
+}
+
+function BeatPosition({ slide, step }: { slide: SlideDefinition; step: number }) {
+  if (slide.steps < 2) return null;
+  return (
+    <p className="text-sm font-semibold text-ink-muted figures-tabular">
+      Beat {step + 1} of {slide.steps}
+    </p>
+  );
+}
+
+export function NotesPanel({ open, slide, slideNumber, step, printPath, hasGuide, onClose }: NotesPanelProps) {
   const visibleShortcuts = hasGuide ? [...shortcuts, guideShortcut] : shortcuts;
   return (
     <AnimatePresence>
@@ -39,6 +56,7 @@ export function NotesPanel({ open, slide, slideNumber, printPath, hasGuide, onCl
           <div className="flex items-center justify-between gap-4 px-6 pt-5">
             <div className="flex items-baseline gap-3">
               <h2 className="text-lg font-bold">{slide.name}</h2>
+              <BeatPosition slide={slide} step={step} />
               {slide.speaker && <p className="text-sm font-semibold text-ocean">{slide.speaker} presents</p>}
             </div>
             <div className="flex items-center gap-1">
@@ -62,7 +80,7 @@ export function NotesPanel({ open, slide, slideNumber, printPath, hasGuide, onCl
             </div>
           </div>
           <div className="space-y-3 overflow-y-auto px-6 pt-3 pb-4 text-base leading-relaxed">
-            {slide.notes.map((paragraph) => (
+            {notesForBeat(slide, step).map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>

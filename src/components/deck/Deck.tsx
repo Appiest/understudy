@@ -53,7 +53,7 @@ export function Deck({ deckId }: { deckId: DeckId }) {
           <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
-        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} printPath={printPath(deck)} hasGuide={hasGuide} onClose={toggleNotes} />
+        <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} step={step} printPath={printPath(deck)} hasGuide={hasGuide} onClose={toggleNotes} />
       </main>
     </MotionConfig>
   );
