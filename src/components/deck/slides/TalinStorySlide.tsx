@@ -4,6 +4,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import { talinStory } from "@/content/content";
 import { easeDrawn, easeSweep } from "@/lib/motion";
 import { CountUp, MaskedLines, StepView, fadeReveal, useProgress } from "../primitives";
+import { PERSON_GLYPH, PersonGlyph } from "../PersonGlyph";
 import { Counter, Figure, Floor, SCENE, Shelf } from "../ShiftScene";
 import type { SlideProps } from "../slides";
 
@@ -67,48 +68,63 @@ function StoreScene() {
   );
 }
 
-function StoreFacts() {
+const HIRES_PER_ROW = 12;
+
+function hireArrives(index: number): Variants {
+  return {
+    enter: { opacity: 0, y: -24 },
+    present: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeDrawn, delay: 1.6 + index * 0.08 } },
+  };
+}
+
+function HireFigures({ count }: { count: number }) {
+  const rows = Math.ceil(count / HIRES_PER_ROW);
+  const pitch = PERSON_GLYPH.width + 14;
   return (
-    <dl className="grid grid-cols-2 gap-x-gap gap-y-10">
-      {talinStory.facts.map((fact, index) => (
-        <motion.div key={fact.name} variants={fadeReveal(0.6 + index * 0.12, 16)}>
-          <dt className="text-caption text-ink-muted">{fact.name}</dt>
-          <dd className="mt-1 text-lede font-bold">{fact.value}</dd>
-        </motion.div>
+    <svg viewBox={`0 0 ${HIRES_PER_ROW * pitch} ${rows * (PERSON_GLYPH.height + 16)}`} className="w-[640px]" role="img" aria-label={`${count} new hires last year`}>
+      {Array.from({ length: count }, (_, index) => (
+        <motion.g key={index} variants={hireArrives(index)}>
+          <g transform={`translate(${(index % HIRES_PER_ROW) * pitch} ${Math.floor(index / HIRES_PER_ROW) * (PERSON_GLYPH.height + 16)})`}>
+            <PersonGlyph tone="ocean" />
+          </g>
+        </motion.g>
       ))}
-    </dl>
+    </svg>
   );
 }
 
-function OwnerQuote() {
-  const { quote } = talinStory;
+function HiresLastYear() {
+  const { count, caption } = talinStory.hires;
+  const hires = Number(count);
+  if (!Number.isInteger(hires)) {
+    return (
+      <motion.p variants={fadeReveal(1.4)} className="text-lede font-bold text-ink-faint">
+        {count}
+      </motion.p>
+    );
+  }
   return (
-    <motion.figure variants={fadeReveal(2.8, 20)} className="rounded-card bg-paper-raised p-8 shadow-lift">
-      <blockquote className="text-point font-bold">“{quote.text}”</blockquote>
-      <figcaption className="mt-5 text-caption">
-        <span className="font-bold">{quote.speaker}</span>
-        <span className="block text-ink-muted">{quote.role}</span>
-      </figcaption>
-    </motion.figure>
+    <motion.div variants={fadeReveal(1.4)} className="flex flex-col gap-6">
+      <p className="text-lede font-bold">
+        <span className="mr-4 text-display font-black text-ocean figures-tabular">{hires}</span>
+        {caption}
+      </p>
+      <HireFigures count={hires} />
+    </motion.div>
   );
 }
 
 function StoryView() {
   return (
-    <StepView className="grid grid-cols-[1fr_640px] gap-gap">
+    <StepView className="grid grid-cols-[1fr_820px] gap-gap">
       <div className="flex flex-col justify-between">
         <h2 className="text-headline font-extrabold">
           <MaskedLines lines={talinStory.headline} delay={0.1} />
         </h2>
-        <motion.div variants={fadeReveal(0.4)}>
-          <p className="text-lede font-extrabold">{talinStory.store}</p>
-          <p className="mt-2 text-body text-ink-muted">{talinStory.storeDetail}</p>
-        </motion.div>
-        <StoreFacts />
+        <HiresLastYear />
       </div>
-      <div className="flex flex-col gap-8">
+      <div className="self-center">
         <StoreScene />
-        <OwnerQuote />
       </div>
     </StepView>
   );
@@ -172,19 +188,14 @@ function ScaleView() {
   const progress = useProgress(1.6, 0.9);
   return (
     <StepView className="grid grid-cols-[1fr_700px] items-center gap-gap">
-      <div className="flex h-full flex-col justify-between">
-        <h2 className="text-headline font-extrabold">
-          <MaskedLines lines={scale.headline} delay={0.1} />
-        </h2>
+      <div>
+        <h2 className="sr-only">{scale.headline.join(" ")}</h2>
         <div>
           <p className="text-poster font-black text-ocean figures-tabular">
             <CountUp progress={progress} total={scale.value} format={(current) => `${Math.round(current)}%`} />
           </p>
           <motion.p variants={fadeReveal(1.2)} className="mt-6 max-w-[900px] text-lede font-bold">
             {scale.caption}
-          </motion.p>
-          <motion.p variants={fadeReveal(1.4)} className="mt-3 text-caption text-ink-muted">
-            {scale.note}
           </motion.p>
         </div>
       </div>

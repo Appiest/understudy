@@ -6,6 +6,7 @@ import { team } from "@/content/config";
 import { solution } from "@/content/content";
 import { easeDrawn, exitTransition } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
@@ -28,9 +29,11 @@ function StageRail({ step }: { step: number }) {
             <span className={`mt-4 h-6 w-6 rounded-full transition-colors duration-300 ${tone.dot}`} />
             <div>
               <p className={`text-title font-extrabold transition-colors duration-300 ${tone.title}`}>{stage.name}</p>
-              <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${tone.summary}`}>
-                {stage.summary}
-              </motion.p>
+              <ReadingDetail>
+                <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${tone.summary}`}>
+                  {stage.summary}
+                </motion.p>
+              </ReadingDetail>
             </div>
           </li>
         );

@@ -5,6 +5,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import { useState } from "react";
 import { canvas, type CanvasPlayer } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal, strokeDraw } from "../primitives";
 import type { SlideProps } from "../slides";
 
@@ -175,10 +176,12 @@ function CanvasView() {
         <h2 className="text-title font-extrabold">
           <MaskedLines lines={[canvas.headline]} delay={0.1} />
         </h2>
-        <motion.p variants={fadeReveal(0.6)} className="flex shrink-0 items-center gap-2 pb-1 text-caption font-semibold text-ink-muted">
-          <Info size={28} weight="bold" aria-hidden />
-          {canvas.estimateLabel}
-        </motion.p>
+        <ReadingDetail>
+          <motion.p variants={fadeReveal(0.6)} className="flex shrink-0 items-center gap-2 pb-1 text-caption font-semibold text-ink-muted">
+            <Info size={28} weight="bold" aria-hidden />
+            {canvas.estimateLabel}
+          </motion.p>
+        </ReadingDetail>
       </div>
       <StrategyCanvas />
     </StepView>

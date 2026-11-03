@@ -21,23 +21,14 @@ export const title = {
 
 export const talinStory = {
   headline: ["At Talin Market, every new hire", "pulls someone off the floor"],
-  store: "Talin Market, Albuquerque",
-  storeDetail: "New Mexico’s largest international grocer, run by Alexis’s parents",
-  facts: [
-    { name: "People on staff", value: talinMarket.staffCount },
-    { name: "New hires last year", value: talinMarket.hiresLastYear },
-    { name: "Who trains them", value: talinMarket.trainer },
-    { name: "Days until a hire works alone", value: talinMarket.daysToWorkAlone },
-  ],
-  quote: { text: talinMarket.quote, speaker: talinMarket.quoteSpeaker, role: "Owner, Talin Market" },
+  hires: { count: talinMarket.hiresLastYear, caption: "new hires last year" },
   scale: {
     headline: ["Talin isn’t the exception"],
     value: 76,
-    caption: "of small employers train new hires by having someone work beside them",
-    note: "NFIB survey of small employers, 2005",
-    marker: "Talin Market",
+    caption: "of small employers train new hires by shadowing",
+    marker: "Talin",
   },
-  sources: [["edibleTalin"], ["nfibTraining"]] as SourceId[][],
+  sources: [[], ["nfibTraining"]] as SourceId[][],
 };
 
 export const turnover = {
@@ -305,6 +296,7 @@ export type MarketRing = {
   acronym: string;
   name: string;
   covers: string;
+  pitchCovers: string;
   locations: number;
 };
 
@@ -332,12 +324,13 @@ export const market = {
   pricePerMonth: marketPricePerMonth,
   firstMarket,
   rings: [
-    { acronym: "TAM", name: "Total addressable market", covers: "Every US store, restaurant and bar with employees", locations: 1_655_368 },
-    { acronym: "SAM", name: "Serviceable available market", covers: "Stores, restaurants and bars owned by small businesses with fewer than 100 employees", locations: serviceableLocations },
+    { acronym: "TAM", name: "Total addressable market", covers: "Every US store, restaurant and bar with employees", pitchCovers: "US stores and restaurants", locations: 1_655_368 },
+    { acronym: "SAM", name: "Serviceable available market", covers: "Stores, restaurants and bars owned by small businesses with fewer than 100 employees", pitchCovers: "Owned by businesses under 100 people", locations: serviceableLocations },
     {
       acronym: "SOM",
       name: "Serviceable obtainable market",
       covers: `Year ${firstMarket.years} goal: ${firstMarket.share * 100}% of small-business locations in ${firstMarket.name}, where we’re based`,
+      pitchCovers: `${firstMarket.share * 100}% of ${firstMarket.name} in ${firstMarket.years} years`,
       locations: obtainableLocations,
     },
   ] satisfies MarketRing[],
@@ -743,15 +736,20 @@ export const proFormaCosts = {
 
 export type ProfileArea = { name: string; items: string[] };
 
+export type CustomerSegment = { name: string; icon: "grocer" | "franchise" | "restaurant" | "staff" };
+
 export const customerProfile = {
   headline: "Small-store owners train every new hire with their best employee",
-  who: "Owners of independent grocers, franchise locations and local restaurants",
-  size: "Fewer than 100 employees and no training team",
-  stat: { value: "76%", caption: "of small employers train new hires by having someone work beside them", note: "2005 survey" },
+  segments: [
+    { name: "Grocers", icon: "grocer" },
+    { name: "Franchises", icon: "franchise" },
+    { name: "Restaurants", icon: "restaurant" },
+    { name: "Under 100 staff", icon: "staff" },
+  ] satisfies CustomerSegment[],
   areas: [
     { name: "Jobs", items: ["Train every new hire", "Keep the floor covered"] },
     { name: "Pains", items: ["Best employee stops working", "Setup work and cost", "Legal trouble over recording"] },
     { name: "Gains", items: ["Hires ready fast", "See who can do what"] },
   ] satisfies ProfileArea[],
-  sources: ["nfibTraining"] as SourceId[],
+  sources: ["trainingIndustryReport"] as SourceId[],
 };

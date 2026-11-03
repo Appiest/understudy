@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import { team } from "@/content/config";
 import { useOfFunds } from "@/content/content";
 import { easeDrawn, exitTransition } from "@/lib/motion";
+import { ReadingDetail } from "../pitchMode";
 import { DocLink, MaskedLines, StepView, fadeReveal } from "../primitives";
 
 type FundsRow = { name: string; detail: string; fromRaise: number };
@@ -47,7 +48,9 @@ function FundsRowItem({ row, delay, isReserve = false }: { row: FundsRow; delay:
     <motion.li variants={fadeReveal(delay - 0.1)} className="grid grid-cols-[480px_1fr] items-center gap-8">
       <div>
         <p className="text-body font-bold">{row.name}</p>
-        <p className="text-caption text-ink-muted">{row.detail}</p>
+        <ReadingDetail>
+          <p className="text-caption text-ink-muted">{row.detail}</p>
+        </ReadingDetail>
       </div>
       <FundsBar row={row} delay={delay} isReserve={isReserve} />
     </motion.li>
@@ -77,11 +80,13 @@ function Outcomes() {
           <div key={outcome.label}>
             <dt className="text-caption text-ink-muted">{outcome.label}</dt>
             <dd className="text-title font-black figures-tabular">{outcome.value}</dd>
-            {outcome.detail && <dd className="text-caption text-ink-muted">{outcome.detail}</dd>}
+            <ReadingDetail>{outcome.detail && <dd className="text-caption text-ink-muted">{outcome.detail}</dd>}</ReadingDetail>
           </div>
         ))}
       </dl>
-      <DocLink href={team.proFormaLink}>{useOfFunds.docLink}</DocLink>
+      <ReadingDetail>
+        <DocLink href={team.proFormaLink}>{useOfFunds.docLink}</DocLink>
+      </ReadingDetail>
     </motion.div>
   );
 }

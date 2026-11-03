@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import { competitorMap, competitors, competitorSources, type Competitor } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
 import { CompetitorLogo } from "../CompetitorLogo";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal, footnoteNumbers, strokeDraw } from "../primitives";
 import { VoiceWave } from "../VoiceWave";
 
@@ -55,9 +56,11 @@ function QuadrantLabels() {
   const { quadrants } = competitorMap;
   return (
     <>
-      <p className={`${labelClass} top-0 left-0`}>{quadrants.smallOff}</p>
-      <p className={`${labelClass} bottom-0 left-0`}>{quadrants.largeOff}</p>
-      <p className={`${labelClass} right-0 bottom-0 text-right`}>{quadrants.largeOn}</p>
+      <ReadingDetail>
+        <p className={`${labelClass} top-0 left-0`}>{quadrants.smallOff}</p>
+        <p className={`${labelClass} bottom-0 left-0`}>{quadrants.largeOff}</p>
+        <p className={`${labelClass} right-0 bottom-0 text-right`}>{quadrants.largeOn}</p>
+      </ReadingDetail>
       <p className="absolute top-0 right-0 text-caption font-bold text-ocean">{quadrants.smallOn}</p>
     </>
   );

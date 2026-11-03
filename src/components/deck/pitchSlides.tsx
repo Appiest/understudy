@@ -1,6 +1,7 @@
 import { customerProfile, proFormaCosts, proFormaRevenue, talinStory } from "@/content/content";
 import { pitchScript, speakerSections } from "@/content/pitchScript";
 import { competitionSlides } from "./competitionSlides";
+import { PitchMode } from "./pitchMode";
 import { slides, type SlideDefinition, type SlideProps } from "./slides";
 import { CustomerProfileSlide } from "./slides/CustomerProfileSlide";
 import { ProFormaCostsSlide } from "./slides/ProFormaCostsSlide";
@@ -47,7 +48,7 @@ const scriptedSlides: SlideDefinition[] = [
     notes: pitchScript.talinStory,
     Content: TalinStorySlide,
   },
-  reuse("challenge", pitchScript.challenge, { beats: [0, 1], name: "The problem" }),
+  { ...reuse("challenge", pitchScript.challenge, { beats: [0, 1], name: "The problem" }), sourcesByStep: [["blsJolts"], ["groceryDive"]] },
   reuse("canvas", pitchScript.canvas, { beats: [0], name: "Strategy: our Blue Ocean value curve" }),
   {
     id: "customer-profile",
@@ -57,7 +58,7 @@ const scriptedSlides: SlideDefinition[] = [
     notes: pitchScript.customerProfile,
     Content: CustomerProfileSlide,
   },
-  reuse("visual-value-proposition", pitchScript.visualValueProposition),
+  { ...reuse("visual-value-proposition", pitchScript.visualValueProposition), footnotes: false, sourcesByStep: [[]] },
   reuse("solution", pitchScript.solution, { beats: [0, 1, 2] }),
   reuse("value-proposition", pitchScript.valueProposition),
   reuse("market", pitchScript.market),
@@ -85,4 +86,16 @@ function speakerFor(slideNumber: number) {
   return speakerSections.find((section) => slideNumber >= section.firstSlide && slideNumber <= section.lastSlide)?.speaker;
 }
 
-export const pitchSlides = scriptedSlides.map((slide, index) => ({ ...slide, speaker: speakerFor(index + 1) }));
+function inPitchMode(slide: SlideDefinition): SlideDefinition {
+  const SlideContent = slide.Content;
+  function PitchContent(props: SlideProps) {
+    return (
+      <PitchMode>
+        <SlideContent {...props} />
+      </PitchMode>
+    );
+  }
+  return { ...slide, Content: PitchContent };
+}
+
+export const pitchSlides = scriptedSlides.map((slide, index) => ({ ...inPitchMode(slide), speaker: speakerFor(index + 1) }));

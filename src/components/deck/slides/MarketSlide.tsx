@@ -2,6 +2,7 @@
 
 import { team } from "@/content/config";
 import { market, revenueFormatter, yearlyRevenue, type MarketRing } from "@/content/content";
+import { ReadingDetail, useIsPitch } from "../pitchMode";
 import { DocLink, MaskedLines, StepView } from "../primitives";
 
 const DIAGRAM_SIZE = 640;
@@ -69,13 +70,14 @@ function MarketCircles() {
 
 function RingRow({ ring, index }: { ring: MarketRing; index: number }) {
   const revenue = yearlyRevenue(ring.locations);
+  const covers = useIsPitch() ? ring.pitchCovers : ring.covers;
   return (
     <div>
       <dt className="flex items-baseline gap-3 text-caption">
         <abbr title={ring.name} className="font-bold no-underline">
           {ring.acronym}
         </abbr>
-        <span className="text-balance">{ring.covers}</span>
+        <span className="text-balance">{covers}</span>
       </dt>
       <dd className="mt-1 flex items-baseline gap-4">
         <span className={`font-black ${rowValueStyles[index]}`}>{revenueFormatter(revenue)(revenue)}</span>
@@ -98,10 +100,12 @@ export function MarketSlide() {
               <RingRow key={ring.acronym} ring={ring} index={index} />
             ))}
           </dl>
-          <div className="flex flex-col gap-3">
-            <p className="text-caption text-ink-muted">{market.priceNote}</p>
-            <DocLink href={team.marketSizingDocLink}>{market.docLink}</DocLink>
-          </div>
+          <ReadingDetail>
+            <div className="flex flex-col gap-3">
+              <p className="text-caption text-ink-muted">{market.priceNote}</p>
+              <DocLink href={team.marketSizingDocLink}>{market.docLink}</DocLink>
+            </div>
+          </ReadingDetail>
         </div>
         <MarketCircles />
       </div>

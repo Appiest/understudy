@@ -10,14 +10,9 @@ export const team = {
   mindMapImage: "/mind-map.png",
 };
 
-/** Talin Market details only Alexis’s parents can confirm. Replace each bracketed value with their answer. */
+/** Ask Alexis’s parents, then replace the placeholder with a number, for example 18. The slide draws one figure per hire. */
 export const talinMarket = {
-  staffCount: "[TALIN STAFF COUNT]",
-  hiresLastYear: "[TALIN NEW HIRES LAST YEAR]",
-  trainer: "[WHO TRAINS NEW HIRES AT TALIN]",
-  daysToWorkAlone: "[DAYS UNTIL A TALIN HIRE WORKS ALONE]",
-  quote: "[A LINE FROM ALEXIS’S PARENTS ABOUT TRAINING NEW HIRES]",
-  quoteSpeaker: "[NAME OF ALEXIS’S PARENT]",
+  hiresLastYear: "[TALIN NEW HIRES LAST YEAR]" as number | string,
 };
 
 export function isPlaceholder(value: string) {

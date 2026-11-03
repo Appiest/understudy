@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { valueProposition, type ValuePropositionPart } from "@/content/content";
+import { useIsPitch } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 
 function fillClass(part: ValuePropositionPart) {
@@ -17,7 +18,30 @@ function PartRow({ part, index }: { part: ValuePropositionPart; index: number })
   );
 }
 
+function PitchClaims() {
+  const claims = valueProposition.parts.filter((part) => part.emphasis);
+  return (
+    <ul className="flex flex-col gap-16">
+      {claims.map((claim, index) => (
+        <motion.li key={claim.fill} variants={fadeReveal(0.3 + index * 0.4, 20)} className="max-w-[1500px] text-headline font-extrabold text-ocean-deep first-letter:uppercase">
+          {claim.fill}
+        </motion.li>
+      ))}
+    </ul>
+  );
+}
+
 export function ValuePropositionSlide() {
+  if (useIsPitch()) {
+    return (
+      <StepView className="flex flex-col justify-between">
+        <h2 className="text-title font-extrabold">
+          <MaskedLines lines={[valueProposition.heading]} delay={0.05} />
+        </h2>
+        <PitchClaims />
+      </StepView>
+    );
+  }
   return (
     <StepView className="flex flex-col justify-between">
       <h2 className="text-title font-extrabold">
