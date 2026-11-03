@@ -23,6 +23,8 @@ export type SlideDefinition = {
   /** Numbers each source in the footer so the slide can mark claims with matching superscripts. */
   footnotes?: boolean;
   notes: string[];
+  /** Who presents this slide, when the deck splits its script between speakers. */
+  speaker?: string;
   Content: ComponentType<SlideProps>;
 };
 

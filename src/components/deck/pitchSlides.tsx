@@ -1,5 +1,5 @@
 import { customerProfile, proFormaCosts, proFormaRevenue } from "@/content/content";
-import { pitchScript } from "@/content/pitchScript";
+import { pitchScript, speakerSections } from "@/content/pitchScript";
 import { competitionSlides } from "./competitionSlides";
 import { slides, type SlideDefinition, type SlideProps } from "./slides";
 import { CustomerProfileSlide } from "./slides/CustomerProfileSlide";
@@ -35,7 +35,7 @@ function reuse(id: string, notes: string[], { beats, name }: ReuseOptions = {}):
   };
 }
 
-export const pitchSlides: SlideDefinition[] = [
+const scriptedSlides: SlideDefinition[] = [
   reuse("title", pitchScript.title, { beats: [0], name: "Vision" }),
   reuse("challenge", pitchScript.challenge, { beats: [0, 1], name: "The problem" }),
   reuse("canvas", pitchScript.canvas, { beats: [0], name: "Strategy: our Blue Ocean value curve" }),
@@ -70,3 +70,9 @@ export const pitchSlides: SlideDefinition[] = [
   },
   reuse("use-of-funds", pitchScript.useOfFunds),
 ];
+
+function speakerFor(slideNumber: number) {
+  return speakerSections.find((section) => slideNumber >= section.firstSlide && slideNumber <= section.lastSlide)?.speaker;
+}
+
+export const pitchSlides = scriptedSlides.map((slide, index) => ({ ...slide, speaker: speakerFor(index + 1) }));

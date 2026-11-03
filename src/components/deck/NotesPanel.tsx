@@ -37,7 +37,10 @@ export function NotesPanel({ open, slide, slideNumber, printPath, hasGuide, onCl
           exit={{ opacity: 0, y: 12, transition: { duration: 0.2 } }}
         >
           <div className="flex items-center justify-between gap-4 px-6 pt-5">
-            <h2 className="text-lg font-bold">{slide.name}</h2>
+            <div className="flex items-baseline gap-3">
+              <h2 className="text-lg font-bold">{slide.name}</h2>
+              {slide.speaker && <p className="text-sm font-semibold text-ocean">{slide.speaker} presents</p>}
+            </div>
             <div className="flex items-center gap-1">
               {hasGuide && (
                 <a href={guideHash(slideNumber)} className={panelLinkClass}>

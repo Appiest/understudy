@@ -505,7 +505,7 @@ Every competitor logo links to its website, and each footer lists the numbered s
 
 ### Final pitch, at /pitch
 
-The pitch reuses slides from the other decks and adds a customer profile and two pro forma slides. `src/components/deck/pitchSlides.tsx` lists the slides and which beats of each one the pitch shows. The script is the pitch's presenter notes, in `src/content/pitchScript.ts`. It runs about 6.5 minutes at a normal speaking pace. **http://localhost:3000/pitch/script** shows the whole script slide by slide with a button that opens that file in GitHub's editor, so anyone on the team can change a line without cloning the repo.
+The pitch reuses slides from the other decks and adds a customer profile and two pro forma slides. `src/components/deck/pitchSlides.tsx` lists the slides and which beats of each one the pitch shows. The script is the pitch's presenter notes, in `src/content/pitchScript.ts`. It runs about 6.5 minutes at a normal speaking pace. **http://localhost:3000/pitch/script** shows the whole script slide by slide with a button that opens that file in GitHub's editor, so anyone on the team can change a line without cloning the repo. `speakerSections` at the top of that file says who presents which slides. The script page groups the script by speaker, and the presenter notes (N) name who presents each slide.
 
 | Rubric item | Slide | What shows it |
 | --- | --- | --- |
