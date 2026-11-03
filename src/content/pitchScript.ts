@@ -16,7 +16,7 @@ export const speakerSections = [
 
 export const pitchScript = {
   title: [
-    "Hi, we’re Group 15: Brendan, Alex, Alexis and Oli. This is Understudy, a pair of AI glasses that learns how a store’s best employee does the job. It then coaches every new hire by voice during real shifts. Our vision is to put your best employee in every new hire’s ear.",
+    "Hello! My name is Brendan, I'm Alex, I'm Alexis and I'm Oli. This is Understudy, a pair of AI glasses that turns your new hire into your best employee on the job.",
   ],
   talinStory: [
     "My parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. Last year they hired 33 new people, out of a staff of 30. Every time, my parents or the store manager stops working to train them. It takes about 7-14 days before a new hire can work alone. Meanwhile, customers wait at the register.",
