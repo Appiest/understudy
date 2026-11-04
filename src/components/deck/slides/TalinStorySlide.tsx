@@ -117,7 +117,7 @@ function HiresLastYear() {
 function StoryView() {
   return (
     <StepView className="grid grid-cols-[1fr_820px] gap-gap">
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between gap-12">
         <h2 className="text-headline font-extrabold">
           <MaskedLines lines={talinStory.headline} delay={0.1} />
         </h2>

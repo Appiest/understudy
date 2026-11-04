@@ -10,9 +10,9 @@ export const team = {
   mindMapImage: "/mind-map.png",
 };
 
-/** Ask Alexis’s parents, then replace the placeholder with a number, for example 18. The slide draws one figure per hire. */
+/** Reported by Talin’s owners. The slide draws one figure per hire. */
 export const talinMarket = {
-  hiresLastYear: "[TALIN NEW HIRES LAST YEAR]" as number | string,
+  hiresLastYear: 33 as number | string,
 };
 
 export function isPlaceholder(value: string) {

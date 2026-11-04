@@ -1364,8 +1364,9 @@ const talinStoryFacts: SlideFacts = {
     {
       figure: String(talinStory.hires.count),
       claim: "New hires Talin Market made last year. The slide draws one figure for each.",
-      status: "unconfirmed",
-      caveat: "Alexis needs to get this from her parents. Nothing published gives it, so it stays a placeholder until they answer.",
+      status: "verified",
+      source: "talinOwners",
+      caveat: "Talin’s owners, Alexis’s parents, gave us this number. It comes from them, not from a published report.",
     },
     {
       figure: "Pulls someone off the floor",
