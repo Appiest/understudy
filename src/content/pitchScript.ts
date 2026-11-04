@@ -13,8 +13,8 @@ export const speakerSections = [
   { speaker: alexis, firstSlide: 2, lastSlide: 2 },
   { speaker: brendan, firstSlide: 3, lastSlide: 5 },
   { speaker: alex, firstSlide: 6, lastSlide: 9 },
-  { speaker: alexis, firstSlide: 10, lastSlide: 11 },
-  { speaker: oli, firstSlide: 12, lastSlide: 13 },
+  { speaker: alexis, firstSlide: 10, lastSlide: 12 },
+  { speaker: oli, firstSlide: 13, lastSlide: 15 },
 ];
 
 export const pitchScript = {
@@ -51,6 +51,12 @@ export const pitchScript = {
   ],
   competitorMap: [
     "On-the-job AI coaching already exists, but only for big companies. Strivr has an early-access smart glasses product built for enterprise retail. Small businesses only get apps like Trainual and Connecteam, which train people away from the floor. We expect bigger players to chase large enterprises first. That gives us time to win small stores with a scrappier product and grow from there.",
+  ],
+  comparison: [
+    "Shadowing works in a small store, but it needs a coworker standing next to the new hire. Strivr and the factory tools coach hands-free, but they sell to large companies. Understudy is the only option that does both.",
+  ],
+  swot: [
+    "Our biggest strength is that Understudy copies the store’s best worker, with no training content to write. Our biggest weakness is that AI still misreads first-person video, which is why version one checks only a few tasks. Constant turnover and Meta opening its glasses to outside apps give us our opening. The main threats are that Meta controls our platform and Strivr has already moved onto glasses.",
   ],
   proFormaRevenue: [
     "Our 149 dollar price sits in the middle of the 100 to 200 dollars a month that training tools charge. A full year with us costs less than replacing one worker. After free pilots from January to March 2027, we add 5 to 15 paying stores a month to reach 90 by December. We grow to 450 stores in 2028, 1,305 in 2029 and 3,000 in 2030, when revenue reaches 3.8 million dollars.",

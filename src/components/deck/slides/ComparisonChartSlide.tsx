@@ -4,6 +4,7 @@ import { UsersThree } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { chartCompetitors, chartSources, comparisonChart, comparisonRows, type Competitor, type Verdict } from "@/content/content";
 import { CompetitorLogo } from "../CompetitorLogo";
+import { ReadingDetail } from "../pitchMode";
 import { MaskedLines, StepView, fadeReveal, footnoteNumbers } from "../primitives";
 
 const LOGO_MAX_WIDTH = 96;
@@ -49,7 +50,9 @@ function ColumnHeader({ competitor }: { competitor: Competitor }) {
       <span className="flex flex-col items-center gap-1 text-fineprint font-bold text-ink-muted">
         <UsersThree size={30} weight="bold" aria-hidden />
         Shadowing
-        <span className="font-normal text-ink-faint">{comparisonChart.teamJudgment}</span>
+        <ReadingDetail>
+          <span className="font-normal text-ink-faint">{comparisonChart.teamJudgment}</span>
+        </ReadingDetail>
       </span>
     );
   }
@@ -66,7 +69,9 @@ function HeaderRow() {
     <tr>
       <th scope="col" className="pl-5 text-left align-middle">
         <span className="sr-only">Feature</span>
-        <Legend />
+        <ReadingDetail>
+          <Legend />
+        </ReadingDetail>
       </th>
       {chartCompetitors.map((competitor) => (
         <th key={competitor.name} scope="col" className={`h-[104px] px-1 align-middle text-caption ${competitor.isUs ? "rounded-t-card bg-ocean" : ""}`}>
