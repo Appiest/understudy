@@ -9,6 +9,11 @@ export type Source = {
 };
 
 export const pitchSources = {
+  talinOwners: {
+    cite: "Talin Market owners, Nov 2026",
+    title: "Talin Market’s owners, reported to our team in November 2026",
+    factsOnly: true,
+  },
   edibleTalin: {
     cite: "Edible New Mexico, Jan 2020",
     title: "Edible New Mexico: Best Retail, Talin Market (Jan 30, 2020)",
