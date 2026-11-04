@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { swot, type SwotItem, type SwotQuadrant } from "@/content/content";
+import { ReadingDetail, useIsPitch } from "../pitchMode";
 import { FootnoteMark, StepView, fadeReveal, footnoteNumbers } from "../primitives";
 
 const effectColor: Record<SwotQuadrant["effect"], string> = {
@@ -10,13 +11,16 @@ const effectColor: Record<SwotQuadrant["effect"], string> = {
 };
 
 function Item({ item }: { item: SwotItem }) {
+  const isPitch = useIsPitch();
   return (
     <li>
-      <p className="text-caption font-bold">
+      <p className={isPitch ? "text-point font-bold" : "text-caption font-bold"}>
         {item.name}
         <FootnoteMark numbers={footnoteNumbers(swot.sources, item.sources)} />
       </p>
-      <p className="mt-1 text-caption text-ink-muted">{item.detail}</p>
+      <ReadingDetail>
+        <p className="mt-1 text-caption text-ink-muted">{item.detail}</p>
+      </ReadingDetail>
     </li>
   );
 }
@@ -35,6 +39,7 @@ function Quadrant({ quadrant, index }: { quadrant: SwotQuadrant; index: number }
 }
 
 function RowLabel({ label }: { label: string }) {
+  if (useIsPitch()) return null;
   return (
     <motion.p variants={fadeReveal(0.2)} className="rotate-180 self-center text-center text-caption font-semibold text-ink-muted [writing-mode:vertical-rl]">
       {label}
@@ -45,7 +50,7 @@ function RowLabel({ label }: { label: string }) {
 export function SwotSlide() {
   const [strengths, weaknesses, opportunities, threats] = swot.quadrants;
   return (
-    <StepView className="grid grid-cols-[40px_1fr_1fr] grid-rows-2 gap-x-6 gap-y-6">
+    <StepView className={`grid grid-rows-2 gap-x-6 gap-y-6 ${useIsPitch() ? "grid-cols-2" : "grid-cols-[40px_1fr_1fr]"}`}>
       <h2 className="sr-only">{swot.heading}</h2>
       <RowLabel label={swot.rows[0]} />
       <Quadrant quadrant={strengths} index={0} />
