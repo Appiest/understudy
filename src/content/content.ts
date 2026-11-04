@@ -19,6 +19,10 @@ export const title = {
   ],
 };
 
+export const closing = {
+  lines: ["Together, let’s revolutionize the way businesses", `onboard new employees with ${team.productName}.`],
+};
+
 export const talinStory = {
   headline: ["At Talin Market, every new hire", "pulls someone off the floor"],
   hires: { count: talinMarket.hiresLastYear, caption: "new hires last year" },

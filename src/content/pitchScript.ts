@@ -1,9 +1,6 @@
 // Each slide's script is a list of paragraphs, one per beat. Wrap each paragraph in straight double quotes and end it with a comma.
 // Inside a paragraph, use curly quotes (“like this”) and apostrophes (’) so the straight quotes still mark where it starts and ends.
 import { team } from "./config";
-import { valueProposition } from "./content";
-
-const valuePropositionStatement = valueProposition.parts.map((part) => `${part.templateWord} ${part.fill}`).join(" ");
 
 const [brendan, alex, alexis, oli] = team.teamMembers;
 
@@ -14,7 +11,7 @@ export const speakerSections = [
   { speaker: brendan, firstSlide: 3, lastSlide: 5 },
   { speaker: alex, firstSlide: 6, lastSlide: 9 },
   { speaker: alexis, firstSlide: 10, lastSlide: 12 },
-  { speaker: oli, firstSlide: 13, lastSlide: 15 },
+  { speaker: oli, firstSlide: 13, lastSlide: 16 },
 ];
 
 export const pitchScript = {
@@ -65,6 +62,9 @@ export const pitchScript = {
     "Each store costs us about 18 dollars a month for AI, plus support and card fees, for a gross margin of about 75 percent. Most of our spending is people. We budget 10,000 dollars a month per hire, while the four of us start on 1,500 dollar stipends as we finish school. We lose about 236,000 dollars in 2027, 570,000 in 2028 and 541,000 in 2029. In 2030 we turn a profit of about 180,000 dollars.",
   ],
   useOfFunds: [
-    "We’re raising 1 million dollars to cover 24 months, from January 2027 to December 2028. Winning stores gets the largest share, about 275,000 dollars. The 194,000 dollar reserve covers about four months of spending if stores sign up slower than we planned. By the end of 2028, that gets us to 450 paying stores and about 805,000 dollars a year in recurring revenue. We’ll take that traction into our next round, which carries us to profitability in 2030. Thank you!",
+    "We’re raising 1 million dollars to cover 24 months, from January 2027 to December 2028. Winning stores gets the largest share, about 275,000 dollars. The 194,000 dollar reserve covers about four months of spending if stores sign up slower than we planned. By the end of 2028, that gets us to 450 paying stores and about 805,000 dollars a year in recurring revenue. We’ll take that traction into our next round, which carries us to profitability in 2030.",
+  ],
+  closing: [
+    "Together, let’s revolutionize the way businesses onboard new employees with Understudy. Thank you!",
   ],
 };

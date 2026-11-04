@@ -3,6 +3,7 @@ import { pitchScript, speakerSections } from "@/content/pitchScript";
 import { competitionSlides } from "./competitionSlides";
 import { PitchMode } from "./pitchMode";
 import { slides, type SlideDefinition, type SlideProps } from "./slides";
+import { ClosingSlide } from "./slides/ClosingSlide";
 import { CustomerProfileSlide } from "./slides/CustomerProfileSlide";
 import { ProFormaCostsSlide } from "./slides/ProFormaCostsSlide";
 import { ProFormaRevenueSlide } from "./slides/ProFormaRevenueSlide";
@@ -82,6 +83,14 @@ const scriptedSlides: SlideDefinition[] = [
     Content: ProFormaCostsSlide,
   },
   reuse("use-of-funds", pitchScript.useOfFunds),
+  {
+    id: "closing",
+    name: "Closing",
+    steps: 1,
+    sourcesByStep: [[]],
+    notes: pitchScript.closing,
+    Content: ClosingSlide,
+  },
 ];
 
 function speakerFor(slideNumber: number) {
