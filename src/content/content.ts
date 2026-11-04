@@ -166,6 +166,8 @@ export const solution = {
     },
   ],
   captureDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  playbookTopics: ["store layout", "register", "house rules"],
+  glassesPrice: "$249–$449",
   playbook: ["Open the register", "Receive a delivery", "Stock to the planogram", "Log fridge temperatures", "Handle a return", "Close out the drawer"],
   coaching: {
     question: "Where does the oat milk go?",
@@ -465,6 +467,10 @@ export const visualValueProposition = {
     callouts: [{ text: "Your best employee stays on the register", tone: "gain" }] satisfies SceneCallout[],
     question: "Where does the oat milk go?",
     answer: "Second shelf, left of the almond milk.",
+  },
+  photos: {
+    today: { src: "/photos/training-today.jpg", alt: "A trainee barista watches an experienced barista work the espresso machine" },
+    with: { src: "/photos/with-understudy.jpg", alt: "A grocery worker in an apron arranges a shelf alone" },
   },
   audience: "For small stores and restaurants",
   hardwareNote: "Runs on off-the-shelf AI glasses that cost $249 to $449",

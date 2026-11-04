@@ -14,7 +14,7 @@ function Item({ item }: { item: SwotItem }) {
   const isPitch = useIsPitch();
   return (
     <li>
-      <p className={isPitch ? "text-point font-bold" : "text-caption font-bold"}>
+      <p className={isPitch ? "text-body font-medium" : "text-caption font-bold"}>
         {item.name}
         <FootnoteMark numbers={footnoteNumbers(swot.sources, item.sources)} />
       </p>
@@ -28,7 +28,7 @@ function Item({ item }: { item: SwotItem }) {
 function Quadrant({ quadrant, index }: { quadrant: SwotQuadrant; index: number }) {
   return (
     <motion.section variants={fadeReveal(0.3 + index * 0.15, 20)} className="rounded-card bg-paper-raised px-9 py-6 shadow-lift">
-      <h3 className={`text-point font-extrabold ${effectColor[quadrant.effect]}`}>{quadrant.name}</h3>
+      <h3 className={`${useIsPitch() ? "text-title" : "text-point"} font-extrabold ${effectColor[quadrant.effect]}`}>{quadrant.name}</h3>
       <ul className="mt-4 grid grid-cols-2 gap-x-10 gap-y-5">
         {quadrant.items.map((item) => (
           <Item key={item.name} item={item} />
