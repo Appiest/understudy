@@ -33,7 +33,7 @@ export const pitchScript = {
     "Every other way to train a new hire requires staff time, costs a ton of money, or extensive custom content generation. Understudy needs almost none of that. We enable new hires to do the job immediately, and a TINY cost compared to the alternatives.",
   ],
   customerProfile: [
-    "Our customers are owners like Alexis’s parents. They run groceries, franchises and restaurants with fewer than 100 employees and no training team. They want new hires ready fast without losing their best employee.",
+    "Our customers are owners like Alexis’s parents. They run groceries, franchises and restaurants with fewer than 100 employees and have no dedicated training team. They want new hires ready fast without having to pull their best employee from shifts or spending a ton of money on training content.",
   ],
   visualValueProposition: [
     "With Understudy, the new hire asks, “Where does the oat milk go?” The glasses answer, “Second shelf, left of the almond milk.” The best employee never leaves the register. After one week, the owner can see that the new hire, Maya, can already do three of four tasks alone.",
