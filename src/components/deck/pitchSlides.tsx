@@ -60,7 +60,7 @@ const scriptedSlides: SlideDefinition[] = [
     Content: CustomerProfileSlide,
   },
   { ...reuse("visual-value-proposition", pitchScript.visualValueProposition), footnotes: false, sourcesByStep: [[]] },
-  reuse("solution", pitchScript.solution, { beats: [0, 1, 2] }),
+  { ...reuse("solution", pitchScript.solution, { beats: [0, 1, 2] }), sourcesByStep: [[], [], ["metaGlassesPrices"]] },
   reuse("value-proposition", pitchScript.valueProposition),
   reuse("market", pitchScript.market),
   { ...reuse("competitor-map", pitchScript.competitorMap), footnotes: false },

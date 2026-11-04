@@ -4,12 +4,14 @@ import { Eyeglasses, Warning } from "@phosphor-icons/react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { team } from "@/content/config";
 import { solution } from "@/content/content";
-import { easeDrawn, exitTransition } from "@/lib/motion";
+import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
-import { ReadingDetail } from "../pitchMode";
+import { ReadingDetail, useIsPitch } from "../pitchMode";
 import { MaskedLines, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
+import { SolutionPanel } from "./SolutionPanel";
+import { CoachPitchPanel, PlaybookPanel } from "./SolutionPitchPanels";
 
 const SCOPE_STEP = solution.stages.length;
 
@@ -42,19 +44,6 @@ function StageRail({ step }: { step: number }) {
   );
 }
 
-const panelFrame: Variants = {
-  enter: { opacity: 0, x: 40 },
-  present: { opacity: 1, x: 0, transition: { duration: 0.7, ease: easeDrawn } },
-  exit: { opacity: 0, x: -20, transition: exitTransition },
-};
-
-function Panel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <motion.div initial="enter" animate="present" exit="exit" variants={panelFrame} className={`absolute inset-0 ${className}`}>
-      {children}
-    </motion.div>
-  );
-}
 
 function dayFills(index: number): Variants {
   return {
@@ -65,7 +54,7 @@ function dayFills(index: number): Variants {
 
 function CapturePanel() {
   return (
-    <Panel className="flex flex-col justify-between">
+    <SolutionPanel className="flex flex-col justify-between">
       <GlassesRender view="side" className="w-full" />
       <div>
         <div className="flex h-56 items-end gap-4" role="img" aria-label="A week of normal shifts recorded, Monday to Sunday">
@@ -79,13 +68,13 @@ function CapturePanel() {
           ))}
         </div>
       </div>
-    </Panel>
+    </SolutionPanel>
   );
 }
 
 function LearnPanel() {
   return (
-    <Panel className="flex items-center">
+    <SolutionPanel className="flex items-center">
       <div className="w-full rounded-card bg-paper-raised p-12 shadow-float">
         <p className="text-lede font-extrabold">Your store’s playbook</p>
         <ol className="mt-8 grid grid-cols-2 gap-x-10 gap-y-6">
@@ -97,7 +86,7 @@ function LearnPanel() {
           ))}
         </ol>
       </div>
-    </Panel>
+    </SolutionPanel>
   );
 }
 
@@ -154,19 +143,19 @@ function Readiness() {
 
 function CoachPanel() {
   return (
-    <Panel className="flex flex-col justify-between">
+    <SolutionPanel className="flex flex-col justify-between">
       <div className="-mt-4 mb-2">
         <VoiceWave width={1000} height={70} delay={0.6} fadeTowards="end" />
       </div>
       <CoachExchange />
       <Readiness />
-    </Panel>
+    </SolutionPanel>
   );
 }
 
 function ScopePanel() {
   return (
-    <Panel className="flex flex-col justify-center gap-12">
+    <SolutionPanel className="flex flex-col justify-center gap-12">
       <div>
         <p className="text-lede font-extrabold">{solution.scope.heading}</p>
         <dl className="mt-6 grid grid-cols-[260px_1fr] gap-x-8 gap-y-5">
@@ -178,14 +167,15 @@ function ScopePanel() {
           ))}
         </dl>
       </div>
-    </Panel>
+    </SolutionPanel>
   );
 }
 
 const panels = [CapturePanel, LearnPanel, CoachPanel, ScopePanel];
+const pitchPanels = [CapturePanel, PlaybookPanel, CoachPitchPanel, ScopePanel];
 
 export function SolutionSlide({ step }: SlideProps) {
-  const ActivePanel = panels[step];
+  const ActivePanel = (useIsPitch() ? pitchPanels : panels)[step];
   return (
     <div className="stage-gutter absolute inset-0 grid grid-cols-[620px_1fr] gap-gap">
       <div className="flex flex-col">

@@ -4,7 +4,8 @@ import { CheckCircle, Circle } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 import { visualValueProposition as vvp, type SceneCallout } from "@/content/content";
-import { ReadingDetail } from "../pitchMode";
+import { ReadingDetail, useIsPitch } from "../pitchMode";
+import { PhotoValueProposition } from "./PhotoValueProposition";
 import { FootnoteMark, MaskedLines, StepView, fadeReveal } from "../primitives";
 import { Counter, Figure, Floor, HEAD_TOP_Y, LeaderLine, SCENE, Shelf } from "../ShiftScene";
 import { VoiceWave } from "../VoiceWave";
@@ -124,6 +125,7 @@ function ReadinessChecklist() {
 }
 
 export function VisualValuePropositionSlide() {
+  if (useIsPitch()) return <PhotoValueProposition />;
   return (
     <StepView className="flex flex-col gap-9">
       <h2 className="text-title font-extrabold">
