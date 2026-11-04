@@ -1395,7 +1395,14 @@ const talinStoryFacts: SlideFacts = {
   ],
 };
 
+const closingFacts: SlideFacts = {
+  summary: "The closing slide repeats our name and asks the audience to join us. It has no figures to back up.",
+  facts: [],
+  questions: [],
+};
+
 export const factsBySlide: Record<string, SlideFacts> = {
+  closing: closingFacts,
   definition: definitionFacts,
   swot: swotFacts,
   "competitor-map": competitorMapFacts,
