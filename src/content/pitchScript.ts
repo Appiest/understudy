@@ -26,11 +26,11 @@ export const pitchScript = {
     "Talin isn’t the exception. In a national survey, 76 percent of small employers said they train new hires the same way.",
   ],
   challenge: [
-    "And they have to do it constantly. In 2025, 46 percent of retail jobs and 66 percent of restaurant and hotel jobs turned over, according to the Bureau of Labor Statistics.",
-    "A 2017 estimate puts the cost of replacing one part-time grocery worker at about 4,200 dollars. A typical independent grocer replaces 16 a year, which comes to 67,200 dollars per store.",
+    "And they have to do it constantly. In 2025, just under half of all retail jobs and over half of all restaurant and hotel jobs turned over.",
+    "If replacing one part-time grocery worker costs around 4,200 dollars, and a typical independent grocer replaces 16 a year, that's over 67 thousand dollars spent per store annually.",
   ],
   canvas: [
-    "Every other way to train a new hire costs owners senior staff time or custom content. Understudy needs almost none of either. What it does far better is learn the store’s own know-how during real shifts.",
+    "Every other way to train a new hire requires staff time, costs a ton of money, or extensive custom content generation. Understudy needs almost none of that. We enable new hires to do the job immediately, and a TINY cost compared to the alternatives.",
   ],
   customerProfile: [
     "Our customers are owners like Alexis’s parents. They run groceries, franchises and restaurants with fewer than 100 employees and no training team. They want new hires ready fast without losing their best employee.",
