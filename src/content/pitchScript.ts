@@ -35,19 +35,19 @@ export const pitchScript = {
   customerProfile: [
     "Our customers are owners like Alexis’s parents. They run groceries, franchises and restaurants with fewer than 100 employees and have no dedicated training team. They want new hires ready fast without having to pull their best employee from shifts or spending a ton of money on training content.",
   ],
-  visualValueProposition: [
-    "With Understudy, the new hire asks, “Where does the oat milk go?” The glasses answer, “Second shelf, left of the almond milk.” The best employee never leaves the register. After one week, the owner can see that the new hire, Maya, can already do three of four tasks alone.",
+    visualValueProposition: [
+    "Same store, two days. Today, on the left, the best employee stops to train and the line backs up. With Understudy, the new hire asks, “Where does the oat milk go?” and hears, “Second shelf, left of the almond milk.” Nobody leaves their post. After one week, the owner can see Maya already does three of four tasks alone.",
   ],
   solution: [
-    "Here’s how it works. First, the store’s best employee wears the glasses for about a week of normal shifts, with nothing extra to do.",
-    "Our AI turns that footage into a playbook for that one store, covering its layout, its register and its house rules.",
-    "Then new hires wear the glasses and get coached by voice. The glasses also catch missed steps, like a fridge temperature nobody logged. Everything runs on off-the-shelf glasses that cost 249 to 449 dollars, so we never build hardware.",
+    "Here’s how. Step one, capture: that employee wears the glasses for a week of normal shifts and does nothing extra.",
+    "Step two, learn: our AI turns that week into a playbook for that one store. Where things go, how checkout works, the house rules, even the judgment calls.",
+    "Step three, coach: new hires put them on and get guided by voice. They even catch skipped steps, like a fridge temperature nobody logged. And because we use off-the-shelf glasses that cost 249 to 449 dollars, we never build hardware.",
   ],
   valueProposition: [
-    valuePropositionStatement,
+    "In one line: owners get new hires trained on the job without pulling anyone off it. Shadowing ties up a coworker, and generic training apps don’t know your aisles. Understudy avoids both, so owners get ready hires without the trade-off.",
   ],
   market: [
-    "We count locations because we charge per store. At 149 dollars a month, our total market is the 1.66 million US stores and restaurants with employees, worth 3 billion dollars a year. Our serviceable market is the 1.13 million owned by businesses under 100 employees, worth about 2 billion. Our obtainable market is 1 percent of California’s small locations within three years, which is 1,305 stores and 2.3 million dollars a year.",
+    "We charge 149 dollars a month per location, so we size the market by location. 1.66 million US stores and restaurants have employees, about 3 billion dollars a year. The 1.13 million run by businesses under 100 people make up our 2 billion dollar serviceable market. We start in California: 1 percent of its small locations in three years is 1,305 stores and 2.3 million dollars a year, and that counts only the subscription, not the glasses. So why hasn’t anyone built this for them? Alexis.",
   ],
   competitorMap: [
     "On-the-job AI coaching already exists, but only for big companies. Strivr has an early-access smart glasses product built for enterprise retail. Small businesses only get apps like Trainual and Connecteam, which train people away from the floor. We expect bigger players to chase large enterprises first. That gives us time to win small stores with a scrappier product and grow from there.",
