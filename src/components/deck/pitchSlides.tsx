@@ -65,7 +65,6 @@ const scriptedSlides: SlideDefinition[] = [
   reuse("market", pitchScript.market),
   { ...reuse("competitor-map", pitchScript.competitorMap), footnotes: false },
   reuse("comparison", pitchScript.comparison),
-  reuse("swot", pitchScript.swot),
   {
     id: "pro-forma-revenue",
     name: "Pro forma: stores and revenue",
