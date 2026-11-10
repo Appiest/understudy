@@ -779,6 +779,7 @@ export const ignite = {
     mockupLabel: "Concept mockup",
     comparisonNote: "Understudy column shows design goals; not yet built.",
     talinSubtitle: "Talin Market in Albuquerque is run by Alexis’s parents.",
+    keysHint: "Press N for speaker notes, D for the facts behind each slide.",
   },
   headlines: {
     talinStory: [

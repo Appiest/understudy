@@ -48,18 +48,28 @@ function BeatLabel({ slideNumber, step }: { slideNumber: number; step: number })
   );
 }
 
-type SlideFooterProps = { slide: SlideDefinition; step: number; slideNumber?: number };
+/** `data-interactive` makes the deck ignore clicks and taps on the hint, so reading it doesn't advance the slide. */
+function ScreenHint({ text }: { text: string }) {
+  return (
+    <p data-interactive className="pointer-events-auto text-fineprint text-ink-faint">
+      {text}
+    </p>
+  );
+}
+
+type SlideFooterProps = { slide: SlideDefinition; step: number; slideNumber?: number; showScreenHint?: boolean };
 
 const footerLayout = {
   citations: "h-(--spacing-footer) items-center pb-2",
   footnotes: "min-h-(--spacing-footer) items-end pb-7",
 };
 
-export function SlideFooter({ slide, step, slideNumber }: SlideFooterProps) {
+export function SlideFooter({ slide, step, slideNumber, showScreenHint = false }: SlideFooterProps) {
   const Sources = slide.footnotes ? NumberedFootnotes : Citations;
   return (
     <footer className={`pointer-events-none absolute inset-x-0 bottom-0 flex gap-gap px-stage-x ${footerLayout[slide.footnotes ? "footnotes" : "citations"]}`}>
       <Sources slide={slide} step={step} />
+      {showScreenHint && slide.screenHint && <ScreenHint text={slide.screenHint} />}
       {slideNumber && <BeatLabel slideNumber={slideNumber} step={step} />}
     </footer>
   );

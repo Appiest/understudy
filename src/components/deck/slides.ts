@@ -26,6 +26,8 @@ export type SlideDefinition = {
   footerNote?: string;
   /** A short line shown in the footer before the sources. */
   footerLead?: string;
+  /** A footer hint for people viewing the deck on screen. The print version leaves it out. */
+  screenHint?: string;
   notes: string[];
   /** Who presents this slide, when the deck splits its script between speakers. */
   speaker?: string;

@@ -43,7 +43,7 @@ function inBriefMode(slide: SlideDefinition): SlideDefinition {
 }
 
 const mainSlides: SlideDefinition[] = [
-  reuse("title", withDetail(pitchScript.title, 0, movedDetail.title), { beats: [0], name: "Vision" }),
+  { ...reuse("title", withDetail(pitchScript.title, 0, movedDetail.title), { beats: [0], name: "Vision" }), screenHint: ignite.brief.keysHint },
   reuse("talin-story", pitchScript.talinStory, { headlines: headlines.talinStory }),
   {
     ...reuse("challenge", withDetail(pitchScript.challenge, 1, movedDetail.cost), { beats: [0, 1], name: "The problem", headlines: headlines.challenge }),

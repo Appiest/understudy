@@ -50,7 +50,7 @@ export function Deck({ deckId }: { deckId: DeckId }) {
               </motion.section>
             )}
           </AnimatePresence>
-          <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} />
+          <SlideFooter slide={slide} step={step} slideNumber={beatLabelVisible ? index + 1 : undefined} showScreenHint />
           <div aria-hidden className="paper-grain pointer-events-none absolute inset-0" />
         </div>
         <NotesPanel open={notesOpen} slide={slide} slideNumber={index + 1} step={step} printPath={printPath(deck)} hasGuide={hasGuide} onClose={toggleNotes} />
