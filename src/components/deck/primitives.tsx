@@ -4,7 +4,14 @@ import { ArrowSquareOut } from "@phosphor-icons/react";
 import { animate, motion, useMotionValue, useTransform, type MotionValue, type Variants } from "motion/react";
 import { useEffect, type ReactNode } from "react";
 import { easeDrawn, exitTransition } from "@/lib/motion";
-import { useIsPitch } from "./pitchMode";
+import { ignite } from "@/content/content";
+import { useIsBrief, useIsPitch } from "./pitchMode";
+
+/** Marks an illustrated screen as a mockup in the grant deck, so readers don't take it for a shipped product. */
+export function MockupLabel({ className = "" }: { className?: string }) {
+  if (!useIsBrief()) return null;
+  return <p className={`rounded-chip bg-paper-sunken px-3 py-0.5 text-fineprint font-semibold whitespace-nowrap text-ink-muted ${className}`}>{ignite.brief.mockupLabel}</p>;
+}
 
 export function lineReveal(delay: number): Variants {
   return {

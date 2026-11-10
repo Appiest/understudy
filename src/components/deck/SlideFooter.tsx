@@ -26,14 +26,17 @@ function CitationLink({ id }: { id: SourceId }) {
 function NumberedFootnotes({ slide, step }: { slide: SlideDefinition; step: number }) {
   const cited = sourcesForStep(slide, step);
   return (
-    <ol className="flex flex-wrap gap-x-5 text-fineprint text-ink-muted">
-      {cited.map((id, index) => (
-        <li key={id} className="flex gap-1.5">
-          <span className="font-semibold text-ink figures-tabular">{index + 1}</span>
-          <CitationLink id={id} />
-        </li>
-      ))}
-    </ol>
+    <div className="flex flex-col gap-1 text-fineprint text-ink-muted">
+      {slide.footerLead && <p className="font-semibold text-ink">{slide.footerLead}</p>}
+      <ol className="flex flex-wrap gap-x-5">
+        {cited.map((id, index) => (
+          <li key={id} className="flex gap-1.5">
+            <span className="font-semibold text-ink figures-tabular">{index + 1}</span>
+            <CitationLink id={id} />
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 

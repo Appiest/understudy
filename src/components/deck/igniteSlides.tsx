@@ -58,7 +58,7 @@ const mainSlides: SlideDefinition[] = [
   reuse("value-proposition", pitchScript.valueProposition, { headlines: [headlines.valueProposition] }),
   reuse("market", withDetail(pitchScript.market, 0, movedDetail.market)),
   reuse("competitor-map", pitchScript.competitorMap),
-  reuse("comparison", pitchScript.comparison),
+  { ...reuse("comparison", pitchScript.comparison), footerLead: ignite.brief.comparisonNote },
   { id: "traction", name: "Traction", steps: 1, sourcesByStep: [tractionSlide.sources], notes: tractionSlide.notes, Content: TractionSlide },
   {
     id: "use-cases",

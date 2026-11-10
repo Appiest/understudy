@@ -8,7 +8,7 @@ import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
 import { useHeadlineOverride } from "../headlineOverride";
 import { ReadingDetail, useIsPitch } from "../pitchMode";
-import { MaskedLines, fadeReveal } from "../primitives";
+import { MaskedLines, MockupLabel, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
 import { SolutionPanel } from "./SolutionPanel";
@@ -120,25 +120,28 @@ const PLAYBOOK_SIZE = solution.playbook.length;
 
 function Readiness() {
   return (
-    <motion.dl variants={fadeReveal(1.9, 16)} className="grid grid-cols-[140px_1fr_120px] items-center gap-x-6 gap-y-4 rounded-card bg-paper-raised p-8 shadow-lift">
-      <ReadingDetail>
-        <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
-      </ReadingDetail>
-      {solution.readiness.map((hire) => (
-        <div key={hire.person} className="contents">
-          <dt className="text-body font-bold">{hire.person}</dt>
-          <dd className="h-5 overflow-hidden rounded-full bg-paper-sunken">
-            <motion.div
-              className="h-full origin-left rounded-full bg-ocean"
-              variants={{ enter: { scaleX: 0 }, present: { scaleX: hire.ready / PLAYBOOK_SIZE, transition: { duration: 1, ease: easeDrawn, delay: 2.2 } } }}
-            />
-          </dd>
-          <dd className="text-right text-body font-semibold figures-tabular">
-            {hire.ready} of {PLAYBOOK_SIZE}
-          </dd>
-        </div>
-      ))}
-    </motion.dl>
+    <motion.div variants={fadeReveal(1.9, 16)} className="relative">
+      <dl className="grid grid-cols-[140px_1fr_120px] items-center gap-x-6 gap-y-4 rounded-card bg-paper-raised p-8 shadow-lift">
+        <ReadingDetail>
+          <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
+        </ReadingDetail>
+        {solution.readiness.map((hire) => (
+          <div key={hire.person} className="contents">
+            <dt className="text-body font-bold">{hire.person}</dt>
+            <dd className="h-5 overflow-hidden rounded-full bg-paper-sunken">
+              <motion.div
+                className="h-full origin-left rounded-full bg-ocean"
+                variants={{ enter: { scaleX: 0 }, present: { scaleX: hire.ready / PLAYBOOK_SIZE, transition: { duration: 1, ease: easeDrawn, delay: 2.2 } } }}
+              />
+            </dd>
+            <dd className="text-right text-body font-semibold figures-tabular">
+              {hire.ready} of {PLAYBOOK_SIZE}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <MockupLabel className="absolute top-8 right-8" />
+    </motion.div>
   );
 }
 

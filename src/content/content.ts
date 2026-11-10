@@ -776,6 +776,8 @@ export const ignite = {
   brief: {
     titleSubtitle: "AI glasses that coach new hires by voice during real shifts",
     hardwareNote: `Runs on ${solution.glassesPrice.replace("–", " to ")} off-the-shelf AI glasses`,
+    mockupLabel: "Concept mockup",
+    comparisonNote: "Understudy column shows design goals; not yet built.",
   },
   headlines: {
     talinStory: [
@@ -851,6 +853,7 @@ const grantTalent = {
   role: "We’re looking for a developer, or someone building with AI coding tools, for about 70 hours of work.",
   build: "They’ll build a voice coach that talks a new hire through produce ID and box checks during a shift and corrects a mistake when it happens.",
   deliverable: "The deliverable is a working prototype that runs on our test hardware and is ready to use on the floor at Talin Market.",
+  hardware: "First prototype runs on a phone and earbud, then moves to glasses once the coaching works.",
   test: "We’ll test it with new hires at Talin Market on real shifts and compare them with the way new hires learn now, by shadowing a coworker.",
 };
 
@@ -874,6 +877,7 @@ export const grantFunds = {
       grantTalent.role,
       grantTalent.build,
       grantTalent.deliverable,
+      grantTalent.hardware,
       grantTalent.test,
       "We’ll measure three things: how long it takes a new hire to work alone, how often a manager has to repeat a correction, and how many mistakes new hires make on produce ID and box checks.",
     ].join(" "),

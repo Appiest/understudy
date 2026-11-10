@@ -7,7 +7,7 @@ import { ignite, visualValueProposition as vvp, type SceneCallout } from "@/cont
 import { useHeadline } from "../headlineOverride";
 import { FullDetail, ReadingDetail, useIsBrief, useIsPitch } from "../pitchMode";
 import { PhotoValueProposition } from "./PhotoValueProposition";
-import { FootnoteMark, MaskedLines, StepView, fadeReveal } from "../primitives";
+import { FootnoteMark, MaskedLines, MockupLabel, StepView, fadeReveal } from "../primitives";
 import { Counter, Figure, Floor, HEAD_TOP_Y, LeaderLine, SCENE, Shelf } from "../ShiftScene";
 import { VoiceWave } from "../VoiceWave";
 
@@ -121,6 +121,7 @@ function ReadinessChecklist() {
           </li>
         ))}
       </ul>
+      <MockupLabel className="mt-6 w-fit" />
     </motion.section>
   );
 }

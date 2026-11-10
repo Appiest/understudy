@@ -1611,6 +1611,10 @@ const grantFundsFacts: SlideFacts = {
       answer: grantFunds.talent.deliverable,
     },
     {
+      question: "What does the prototype run on?",
+      answer: grantFunds.talent.hardware,
+    },
+    {
       question: "How will you test it?",
       answer: grantFunds.talent.test,
     },
