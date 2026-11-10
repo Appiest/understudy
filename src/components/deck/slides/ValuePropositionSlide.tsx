@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { valueProposition, type ValuePropositionPart } from "@/content/content";
+import { useHeadline } from "../headlineOverride";
 import { MaskedLines, StepView, fadeReveal } from "../primitives";
 
 function fillClass(part: ValuePropositionPart) {
@@ -21,7 +22,7 @@ export function ValuePropositionSlide() {
   return (
     <StepView className="flex flex-col justify-between">
       <h2 className="text-title font-extrabold">
-        <MaskedLines lines={[valueProposition.heading]} delay={0.05} />
+        <MaskedLines lines={useHeadline([valueProposition.heading])} delay={0.05} />
       </h2>
       <dl className="flex flex-col gap-7">
         {valueProposition.parts.map((part, index) => (

@@ -3,10 +3,11 @@
 import { CheckCircle, Circle } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
-import { visualValueProposition as vvp, type SceneCallout } from "@/content/content";
-import { ReadingDetail, useIsPitch } from "../pitchMode";
+import { ignite, visualValueProposition as vvp, type SceneCallout } from "@/content/content";
+import { useHeadline } from "../headlineOverride";
+import { FullDetail, ReadingDetail, useIsBrief, useIsPitch } from "../pitchMode";
 import { PhotoValueProposition } from "./PhotoValueProposition";
-import { FootnoteMark, MaskedLines, StepView, fadeReveal } from "../primitives";
+import { FootnoteMark, MaskedLines, MockupLabel, StepView, fadeReveal } from "../primitives";
 import { Counter, Figure, Floor, HEAD_TOP_Y, LeaderLine, SCENE, Shelf } from "../ShiftScene";
 import { VoiceWave } from "../VoiceWave";
 
@@ -120,24 +121,29 @@ function ReadinessChecklist() {
           </li>
         ))}
       </ul>
+      <MockupLabel className="mt-6 w-fit" />
     </motion.section>
   );
 }
 
 export function VisualValuePropositionSlide() {
+  const headline = useHeadline([vvp.tagline]);
+  const hardwareNote = useIsBrief() ? ignite.brief.hardwareNote : vvp.hardwareNote;
   if (useIsPitch()) return <PhotoValueProposition />;
   return (
     <StepView className="flex flex-col gap-9">
       <h2 className="text-title font-extrabold">
-        <MaskedLines lines={[vvp.tagline]} delay={0.05} />
+        <MaskedLines lines={headline} delay={0.05} />
       </h2>
       <div className="flex gap-14">
         <div className="flex flex-col gap-7">
           <Scene />
           <ReadingDetail>
-            <motion.p variants={fadeReveal(1.0)} className="max-w-[1180px] text-body text-ink-muted">
-              {vvp.description}
-            </motion.p>
+            <FullDetail>
+              <motion.p variants={fadeReveal(1.0)} className="max-w-[1180px] text-body text-ink-muted">
+                {vvp.description}
+              </motion.p>
+            </FullDetail>
           </ReadingDetail>
         </div>
         <aside className="flex flex-1 flex-col pb-2">
@@ -152,7 +158,7 @@ export function VisualValuePropositionSlide() {
           <div className="flex-1" />
           <ReadingDetail>
             <motion.p variants={fadeReveal(3.6)} className="text-caption text-ink-muted">
-              {vvp.hardwareNote}
+              {hardwareNote}
               <FootnoteMark numbers={[1]} />
             </motion.p>
           </ReadingDetail>

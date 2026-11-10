@@ -6,8 +6,9 @@ import { team } from "@/content/config";
 import { solution } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
+import { useHeadlineOverride } from "../headlineOverride";
 import { ReadingDetail, useIsPitch } from "../pitchMode";
-import { MaskedLines, fadeReveal } from "../primitives";
+import { MaskedLines, MockupLabel, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
 import { SolutionPanel } from "./SolutionPanel";
@@ -21,7 +22,7 @@ function stageTone(stageIndex: number, step: number) {
   return { title: "text-ink-faint", dot: "bg-paper-sunken", summary: "hidden" };
 }
 
-function StageRail({ step }: { step: number }) {
+function StageRail({ step, showSummaries }: { step: number; showSummaries: boolean }) {
   return (
     <ol className="flex flex-col gap-8">
       {solution.stages.map((stage, index) => {
@@ -32,7 +33,7 @@ function StageRail({ step }: { step: number }) {
             <div>
               <p className={`text-title font-extrabold transition-colors duration-300 ${tone.title}`}>{stage.name}</p>
               <ReadingDetail>
-                <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${tone.summary}`}>
+                <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${showSummaries ? tone.summary : "hidden"}`}>
                   {stage.summary}
                 </motion.p>
               </ReadingDetail>
@@ -119,25 +120,28 @@ const PLAYBOOK_SIZE = solution.playbook.length;
 
 function Readiness() {
   return (
-    <motion.dl variants={fadeReveal(1.9, 16)} className="grid grid-cols-[140px_1fr_120px] items-center gap-x-6 gap-y-4 rounded-card bg-paper-raised p-8 shadow-lift">
-      <ReadingDetail>
-        <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
-      </ReadingDetail>
-      {solution.readiness.map((hire) => (
-        <div key={hire.person} className="contents">
-          <dt className="text-body font-bold">{hire.person}</dt>
-          <dd className="h-5 overflow-hidden rounded-full bg-paper-sunken">
-            <motion.div
-              className="h-full origin-left rounded-full bg-ocean"
-              variants={{ enter: { scaleX: 0 }, present: { scaleX: hire.ready / PLAYBOOK_SIZE, transition: { duration: 1, ease: easeDrawn, delay: 2.2 } } }}
-            />
-          </dd>
-          <dd className="text-right text-body font-semibold figures-tabular">
-            {hire.ready} of {PLAYBOOK_SIZE}
-          </dd>
-        </div>
-      ))}
-    </motion.dl>
+    <motion.div variants={fadeReveal(1.9, 16)} className="relative">
+      <dl className="grid grid-cols-[140px_1fr_120px] items-center gap-x-6 gap-y-4 rounded-card bg-paper-raised p-8 shadow-lift">
+        <ReadingDetail>
+          <dt className="col-span-3 text-caption font-semibold text-ink-muted">Owner dashboard: tasks each new hire can do alone</dt>
+        </ReadingDetail>
+        {solution.readiness.map((hire) => (
+          <div key={hire.person} className="contents">
+            <dt className="text-body font-bold">{hire.person}</dt>
+            <dd className="h-5 overflow-hidden rounded-full bg-paper-sunken">
+              <motion.div
+                className="h-full origin-left rounded-full bg-ocean"
+                variants={{ enter: { scaleX: 0 }, present: { scaleX: hire.ready / PLAYBOOK_SIZE, transition: { duration: 1, ease: easeDrawn, delay: 2.2 } } }}
+              />
+            </dd>
+            <dd className="text-right text-body font-semibold figures-tabular">
+              {hire.ready} of {PLAYBOOK_SIZE}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <MockupLabel className="absolute top-8 right-8" />
+    </motion.div>
   );
 }
 
@@ -174,19 +178,36 @@ function ScopePanel() {
 const panels = [CapturePanel, LearnPanel, CoachPanel, ScopePanel];
 const pitchPanels = [CapturePanel, PlaybookPanel, CoachPitchPanel, ScopePanel];
 
+function SolutionHeading() {
+  const override = useHeadlineOverride();
+  if (override) {
+    return (
+      <h2 className="text-title font-extrabold">
+        <MaskedLines lines={override} delay={0.05} />
+      </h2>
+    );
+  }
+  return (
+    <>
+      <h2 className="text-headline font-black">
+        <MaskedLines lines={[`${team.productName}:`]} delay={0.05} />
+      </h2>
+      <p className="text-title font-extrabold text-ocean">
+        <MaskedLines lines={[solution.headline]} delay={0.2} />
+      </p>
+    </>
+  );
+}
+
 export function SolutionSlide({ step }: SlideProps) {
   const ActivePanel = (useIsPitch() ? pitchPanels : panels)[step];
+  const hasOverride = useHeadlineOverride() !== undefined;
   return (
     <div className="stage-gutter absolute inset-0 grid grid-cols-[620px_1fr] gap-gap">
       <div className="flex flex-col">
-        <h2 className="text-headline font-black">
-          <MaskedLines lines={[`${team.productName}:`]} delay={0.05} />
-        </h2>
-        <p className="text-title font-extrabold text-ocean">
-          <MaskedLines lines={[solution.headline]} delay={0.2} />
-        </p>
+        <SolutionHeading />
         <div className="mt-auto">
-          <StageRail step={step} />
+          <StageRail step={step} showSummaries={!hasOverride} />
         </div>
       </div>
       <div className="relative">

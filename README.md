@@ -218,7 +218,7 @@ The deck has a print version that puts each slide, and each build step that matt
    - **Margins:** None
    - **Background graphics:** checked. Without this, the colored shapes disappear.
    - **Headers and footers:** unchecked
-6. Click **Save** and name the file something like `Understudy - Group 15.pdf`.
+6. Click **Save** and name the file something like `Understudy.pdf`.
 
 Use Chrome for this. Safari and Firefox handle custom page sizes less reliably.
 
@@ -247,7 +247,6 @@ Open `src/content/config.ts`. Everything that names our team, links to our Figma
 | Placeholder | What to put there | Where it shows up |
 | --- | --- | --- |
 | `productName` | The product's name. It's "Understudy" for now. | Title slide, solution slide, strategy canvas, landscape, browser tab |
-| `teamName` | Our team's name. It's "Group 15". | Title slide |
 | `teamMembers` | Our names, in quotes and separated by commas | Title slide |
 | `figmaBoardLink` | The full link to our Figma board, starting with `https://` | The "Open our Figma board" button on the mind map slide |
 | `mindMapImage` | The path to our exported mind map image, for example `"/mind-map.png"` | The mind map slide. Leave it as `""` to keep the drawn mind map. |

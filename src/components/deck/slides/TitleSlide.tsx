@@ -2,10 +2,10 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { team } from "@/content/config";
-import { title } from "@/content/content";
+import { ignite, title } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
-import { ReadingDetail } from "../pitchMode";
+import { ReadingDetail, useIsBrief } from "../pitchMode";
 import { MaskedLines, fadeReveal, strokeDraw } from "../primitives";
 import type { SlideProps } from "../slides";
 import { VoiceWave } from "../VoiceWave";
@@ -17,6 +17,7 @@ const glassesArrive = {
 };
 
 function TitleCard() {
+  const isBrief = useIsBrief();
   return (
     <motion.div key="title" initial="enter" animate="present" exit="exit" className="stage-gutter absolute inset-0 flex flex-col">
       <h1 className="relative z-0 text-poster font-black">
@@ -32,11 +33,10 @@ function TitleCard() {
         </p>
         <ReadingDetail>
           <motion.p variants={fadeReveal(1.5)} className="mt-6 max-w-[760px] text-caption text-ink-muted">
-            {title.subtitle}
+            {isBrief ? ignite.brief.titleSubtitle : title.subtitle}
           </motion.p>
-          <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption">
-            <span className="font-bold">{team.teamName}</span>
-            <span className="block text-ink-muted">{team.teamMembers.join(", ")}</span>
+          <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption text-ink-muted">
+            {team.teamMembers.join(", ")}
           </motion.p>
         </ReadingDetail>
       </div>

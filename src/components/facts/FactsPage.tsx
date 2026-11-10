@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowSquareOut, ArrowsClockwise, BookOpenText, CheckCircle, PaintBrush, Scales, Warning, type Icon } from "@phosphor-icons/react";
+import { ArrowSquareOut, ArrowsClockwise, BookOpenText, ChatCircleText, CheckCircle, PaintBrush, Scales, Warning, type Icon } from "@phosphor-icons/react";
 import { factsBySlide, factsCheckedOn, type Fact, type FactStatus } from "@/content/facts";
 import { guideFor } from "@/content/guides";
 import { sources, type Source } from "@/content/sources";
@@ -15,6 +15,8 @@ const statusStyle: Record<FactStatus, { label: string; Icon: Icon; className: st
   adjusted: { label: "Corrected to match the source", Icon: ArrowsClockwise, className: "bg-ocean-wash text-ocean-deep" },
   estimate: { label: "Team estimate", Icon: Scales, className: "bg-paper-sunken text-ink" },
   illustrative: { label: "Illustration, not data", Icon: PaintBrush, className: "bg-paper-sunken text-ink" },
+  ownerReported: { label: "Reported by the owners, not from records", Icon: ChatCircleText, className: "bg-paper-sunken text-ink" },
+  intervieweeEstimate: { label: "Interviewee estimate, not measured", Icon: ChatCircleText, className: "bg-paper-sunken text-ink" },
   unconfirmed: { label: "Couldn’t confirm", Icon: Warning, className: "bg-rival-wash text-rival" },
 };
 

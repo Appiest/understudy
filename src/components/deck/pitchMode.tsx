@@ -16,3 +16,19 @@ export function useIsPitch() {
 export function ReadingDetail({ children }: { children: ReactNode }) {
   return useIsPitch() ? null : children;
 }
+
+const BriefContext = createContext(false);
+
+/** The read-alone grant deck: keeps layouts as they are but drops long supporting text, which moves to the notes and fact pages. */
+export function BriefMode({ children }: { children: ReactNode }) {
+  return <BriefContext.Provider value>{children}</BriefContext.Provider>;
+}
+
+export function useIsBrief() {
+  return useContext(BriefContext);
+}
+
+/** Supporting text that the brief deck leaves off the slide. */
+export function FullDetail({ children }: { children: ReactNode }) {
+  return useIsBrief() ? null : children;
+}
