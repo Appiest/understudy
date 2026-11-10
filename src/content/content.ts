@@ -821,9 +821,9 @@ export const useCases = {
   cards: [
     { caption: "Spot the bad lime", photo: { src: "/photos/limes.PNG", alt: "A crate of limes, some with brown spots and yellowing skin" } },
     { caption: "Judge the blemish", photo: { src: "/photos/productblemish.PNG", alt: "Daikon radishes in a produce box, with marks and blemishes on their skin" } },
-    { caption: "Check the box", photo: { src: "/photos/consolidation.PNG", alt: "A cart stacked with mixed cases of Korean groceries waiting to be sorted" } },
+    { caption: "Check consolidation", photo: { src: "/photos/consolidation.PNG", alt: "A cart stacked with mixed cases of Korean groceries waiting to be sorted" } },
     {
-      caption: "Handle the excess",
+      caption: "Handle the excess inventory",
       // The photo has a white strip along its bottom edge, so it's zoomed slightly from the top to crop it out.
       photo: { src: "/photos/excessinventory.PNG", alt: "Extra cases of instant noodles stacked on a top shelf above the aisle", zoom: 1.04 },
     },
@@ -831,7 +831,7 @@ export const useCases = {
   footerNote: "Photos: Talin Market. Tasks from owner and manager interviews, 2026.",
   sources: ["talinPhotos", "talinInterviews"] as SourceId[],
   notes: [
-    "These are four tasks the owners and store manager at Talin Market told us they want new hires coached on in real time. Spot the bad lime: the photo shows a crate where some limes have brown spots and yellowing skin. Judge the blemish: the photo shows daikon radishes with marks on their skin. Check the box: the photo shows a cart stacked with mixed cases. Handle the excess: the photo shows extra cases stored on a top shelf. All four photos were taken at Talin Market.",
+    "These are four tasks the owners and store manager at Talin Market told us they want new hires coached on in real time. Spot the bad lime: the photo shows a crate where some limes have brown spots and yellowing skin. Judge the blemish: the photo shows daikon radishes with marks on their skin. Check consolidation: the photo shows a cart stacked with mixed cases. Handle the excess inventory: the photo shows extra cases stored on a top shelf. All four photos were taken at Talin Market.",
   ],
 };
 
