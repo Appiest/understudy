@@ -5,7 +5,7 @@ import { turnover } from "@/content/content";
 import { easeDrawn, easeSweep } from "@/lib/motion";
 import { AddedHeadline, useHeadline, useHeadlineSize } from "../headlineOverride";
 import { PersonGlyph } from "../PersonGlyph";
-import { FullDetail, ReadingDetail, useIsPitch } from "../pitchMode";
+import { FullDetail, ReadingDetail, useIsBrief, useIsPitch } from "../pitchMode";
 import { CountUp, MaskedLines, StepView, fadeReveal, useProgress } from "../primitives";
 import type { SlideProps } from "../slides";
 
@@ -170,10 +170,12 @@ function QuoteCard() {
 function CostView() {
   const progress = useProgress(1.4, 0.2);
   const isPitch = useIsPitch();
+  const isBrief = useIsBrief();
+  const hidesQuote = isPitch || isBrief;
   return (
-    <StepView className={isPitch ? "flex flex-col" : "grid grid-cols-[1fr_620px] gap-gap"}>
+    <StepView className={hidesQuote ? "flex flex-col" : "grid grid-cols-[1fr_620px] gap-gap"}>
       <div className="flex flex-1 flex-col">
-        <AddedHeadline className="mb-10 text-title font-extrabold" />
+        <AddedHeadline className="mb-10 max-w-[1500px] text-title font-extrabold" />
         <p className="text-poster font-black">
           <CountUp progress={progress} total={replacement.costPerHire} format={(value) => dollars.format(Math.round(value / 10) * 10)} />
         </p>

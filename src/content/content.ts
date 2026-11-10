@@ -767,16 +767,15 @@ export const customerProfile = {
 const MONTHS_PER_YEAR = 12;
 const [retailSector, restaurantSector] = turnover.sectors;
 export const yearlyTurnover = (sector: { monthlySeparationRate: number }) => Math.round(sector.monthlySeparationRate * MONTHS_PER_YEAR);
-const grantAmount = 3_000;
+const grantAmount = grantPlan.amount;
 
 /** The /ignite grant deck, read without a presenter. Each headline states the slide’s point. */
-const briefRows = new Set([0, 2, 4]);
 
 export const ignite = {
   /** Shorter supporting text for the read-alone deck. The full text moves to its notes and fact pages. */
   brief: {
+    titleSubtitle: "AI glasses that coach new hires by voice during real shifts",
     hardwareNote: `Runs on ${solution.glassesPrice.replace("–", " to ")} off-the-shelf AI glasses`,
-    valuePropositionParts: valueProposition.parts.filter((_, index) => briefRows.has(index)).map((part) => ({ ...part, fill: part.fill.replace(/,$/, "") })),
   },
   headlines: {
     talinStory: [
@@ -791,7 +790,7 @@ export const ignite = {
     customerProfile: ["Our customers own groceries, franchises and restaurants with under 100 staff and no training team"],
     visualValueProposition: ["With Understudy, a new hire gets answers by voice and nobody leaves their post"],
     solution: [
-      ["Your best employee wears the glasses for a week of shifts"],
+      ["Our AI learns how your best employee works, then coaches new hires by voice"],
       ["Our AI turns that week into a playbook for one store"],
       ["New hires get coached by voice, even on steps they skip"],
     ],
@@ -834,15 +833,16 @@ export const useCases = {
 };
 
 export const formFactors = {
-  headline: "One coach, three ways to deliver it.",
-  options: [
-    { name: "Smart glasses", line: "Voice plus a camera that sees the task", icon: "glasses" },
-    { name: "Walkie-talkie add-on", line: "Voice coaching through a store radio", icon: "radio" },
-    { name: "Clip-on mic and speaker", line: "Small, voice only, clips to an apron", icon: "mic" },
+  headline: "Smart glasses are our design. Two lighter options we could explore.",
+  primary: { label: "Our design", name: "Smart glasses", line: "Voice plus a camera that sees the task", icon: "glasses" as const },
+  alternativesLabel: "Alternative options",
+  alternatives: [
+    { name: "Walkie-talkie add-on", line: "Voice coaching through the store radio", icon: "radio" as const },
+    { name: "Clip-on mic and speaker", line: "Small, voice only, clips to an apron", icon: "mic" as const },
   ],
-  closing: "We’ll test which one new hires actually use.",
+  closing: "Which we pursue depends on user feedback and feasibility.",
   notes: [
-    `The coach is voice first, so it doesn’t have to live in glasses. Smart glasses add a camera, which lets the coach see the task and catch skipped steps. Off-the-shelf AI glasses cost ${solution.glassesPrice.replace("–", " to ")}. A walkie-talkie add-on and a small clip-on mic and speaker are voice only. We’ll test all three at Talin Market to see which one new hires actually use on a shift.`,
+    `Smart glasses are our design. They add a camera, which lets the coach see the task and catch skipped steps. Off-the-shelf AI glasses cost ${solution.glassesPrice.replace("–", " to ")}. A walkie-talkie add-on and a small clip-on mic and speaker are lighter, voice-only options we could explore. Which we pursue depends on user feedback and feasibility. The first prototype tests the coaching on a phone and earbud, then moves to glasses once the coaching works.`,
   ],
 };
 
@@ -857,7 +857,7 @@ const grantTalent = {
 export const grantFunds = {
   amount: grantAmount,
   headline: `${wholeDollars.format(grantAmount)} to build a voice coach and test it at Talin Market.`,
-  goal: "Prove a new hire can learn produce ID and box checks from voice coaching, not a shadowing coworker.",
+  goal: "Prove an AI voice coach can teach produce ID and box checks to new hires, not a shadowing coworker.",
   lineItems: grantPlan.lineItems,
   estimateLabel: "Estimated cost",
   unassignedLabel: "Not assigned yet",
@@ -869,7 +869,7 @@ export const grantFunds = {
   talent: grantTalent,
   notes: [
     [
-      `We’re asking for ${wholeDollars.format(grantAmount)} to build a voice coach and test it at Talin Market. The goal is to prove a new hire can learn produce ID and box checks from voice coaching instead of shadowing a coworker. Every amount is our estimate, pending mentor approval.`,
+      `We’re asking for ${wholeDollars.format(grantAmount)} to build a voice coach and test it at Talin Market. The goal is to prove an AI voice coach can teach produce ID and box checks to new hires, instead of a shadowing coworker. Every amount is our estimate, pending mentor approval.`,
       grantPlan.lineItems.map((item) => `${item.name}, about ${wholeDollars.format(item.amount)}, covers ${item.covers.charAt(0).toLowerCase()}${item.covers.slice(1)}.`).join(" "),
       grantTalent.role,
       grantTalent.build,
@@ -878,4 +878,26 @@ export const grantFunds = {
       "We’ll measure three things: how long it takes a new hire to work alone, how often a manager has to repeat a correction, and how many mistakes new hires make on produce ID and box checks.",
     ].join(" "),
   ],
+};
+
+/** The /ignite closing slide. The amount, staff count and date come from grantPlan so they match the use-of-funds slide. */
+export const grantClosing = {
+  headline: "Help us put Understudy on the floor at Talin Market.",
+  ask: `${wholeDollars.format(grantAmount)} builds an AI voice coach for produce ID and box checks, tested with ${grantPlan.testStaff} staff by ${grantPlan.testBy}.`,
+  recap: [
+    { label: "The problem", line: `${talinMarket.hiresLastYear} hired, ${talinMarket.hiresWhoStayed} stayed` },
+    { label: "The evidence", line: "Owners and the store manager asked for real-time coaching" },
+    { label: "The plan", line: "Build it, test it, measure it" },
+  ],
+  tagline: title.tagline,
+  sources: ["talinInterviews"] as SourceId[],
+  notes: [
+    `Help us put Understudy on the floor at Talin Market. ${wholeDollars.format(grantAmount)} builds an AI voice coach for produce ID and box checks, and we’ll test it with ${grantPlan.testStaff} Talin Market staff by ${grantPlan.testBy}. The problem is turnover: the owners told us Talin hired ${talinMarket.hiresLastYear} people last year and only ${talinMarket.hiresWhoStayed} stayed. The owners and the store manager asked for real-time coaching and correction, not just training videos. Our plan is to build the coach, test it on real shifts, and measure how long new hires take to work alone, how often a manager repeats a correction, and how many mistakes they make on produce ID and box checks. Your best employee, in every new hire’s ear.`,
+  ],
+};
+
+export const igniteAppendix = {
+  heading: "Appendix",
+  proFormaNote: "Assumes a later, larger raise.",
+  notes: ["The appendix holds our full pro forma through 2030 and every source in the deck. The pro forma assumes a later, larger raise. The grant pays for the first step on its own."],
 };

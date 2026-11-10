@@ -16,9 +16,15 @@ export const talinMarket = {
   hiresWhoStayed: 2 as number | string,
 };
 
+/** The /ignite grant test: how many Talin Market staff try the prototype, and by when. */
+const grantTest = { staff: 5, by: "March 2027" };
+
 /** The /ignite use of funds. Amounts are team estimates in dollars and should add up to the grant amount. */
 export const grantPlan = {
-  milestone: "[WHAT WE’LL HAVE DONE BY WHEN]",
+  amount: 3_000,
+  testStaff: grantTest.staff,
+  testBy: grantTest.by,
+  milestone: `A working produce ID and box check prototype, tested with ${grantTest.staff} Talin Market staff by ${grantTest.by}.`,
   lineItems: [
     { name: "Developer or AI help", detail: "About 70 hours", covers: "About 70 hours of building the voice coach", amount: 2_100 },
     { name: "Test hardware", covers: "Devices for the three ways we deliver the coach", amount: 450 },

@@ -1,14 +1,21 @@
-import { appendix, canvas, formFactors, grantFunds, ignite, useCases, market, title, tractionSlide, turnover, valueProposition, visualValueProposition } from "@/content/content";
+import { appendix, canvas, formFactors, grantClosing, grantFunds, ignite, igniteAppendix, useCases, market, title, tractionSlide, turnover, visualValueProposition } from "@/content/content";
 import { pitchScript } from "@/content/pitchScript";
 import { BriefMode } from "./pitchMode";
 import { reuse } from "./reuseSlide";
 import type { SlideDefinition, SlideProps } from "./slides";
+import { AppendixDividerSlide } from "./slides/AppendixDividerSlide";
 import { FormFactorsSlide } from "./slides/FormFactorsSlide";
+import { GrantClosingSlide } from "./slides/GrantClosingSlide";
 import { GrantFundsSlide } from "./slides/GrantFundsSlide";
 import { TractionSlide } from "./slides/TractionSlide";
 import { UseCasesSlide } from "./slides/UseCasesSlide";
 
 const { headlines } = ignite;
+
+/** Puts a sentence in front of that beat's notes. */
+function withLead(notes: string[], beat: number, lead: string) {
+  return notes.map((note, index) => (index === beat ? `${lead} ${note}` : note));
+}
 
 /** Adds the supporting text the brief slide leaves out to the end of that beat's notes. */
 function withDetail(notes: string[], beat: number, detail: string[]) {
@@ -20,7 +27,6 @@ const movedDetail = {
   canvas: [`${canvas.estimateLabel}.`],
   cost: [`“${turnover.quote.text}” ${turnover.quote.speaker}, ${turnover.quote.role}.`],
   visualValueProposition: [visualValueProposition.description, `${visualValueProposition.hardwareNote}.`],
-  valueProposition: [valueProposition.parts.map((part) => `${part.templateWord} ${part.fill}`).join(" ")],
   market: [...market.rings.map((ring) => `${ring.acronym}: ${ring.covers}.`), market.priceNote],
 };
 
@@ -48,8 +54,8 @@ const mainSlides: SlideDefinition[] = [
   reuse("visual-value-proposition", withDetail(pitchScript.visualValueProposition, 0, movedDetail.visualValueProposition), {
     headlines: [headlines.visualValueProposition],
   }),
-  reuse("solution", pitchScript.solution, { beats: [0, 1, 2], headlines: headlines.solution }),
-  reuse("value-proposition", withDetail(pitchScript.valueProposition, 0, movedDetail.valueProposition), { headlines: [headlines.valueProposition] }),
+  reuse("solution", withLead(pitchScript.solution, 0, `${headlines.solution[0][0]}.`), { beats: [0, 1, 2], headlines: headlines.solution }),
+  reuse("value-proposition", pitchScript.valueProposition, { headlines: [headlines.valueProposition] }),
   reuse("market", withDetail(pitchScript.market, 0, movedDetail.market)),
   reuse("competitor-map", pitchScript.competitorMap),
   reuse("comparison", pitchScript.comparison),
@@ -73,11 +79,26 @@ const mainSlides: SlideDefinition[] = [
     notes: grantFunds.notes,
     Content: GrantFundsSlide,
   },
+  {
+    id: "grant-closing",
+    name: "Closing",
+    steps: 1,
+    sourcesByStep: [grantClosing.sources],
+    notes: grantClosing.notes,
+    Content: GrantClosingSlide,
+  },
 ];
 
 const appendixSlides: SlideDefinition[] = [
-  reuse("pro-forma-revenue", pitchScript.proFormaRevenue, { name: "Appendix: pro forma stores and revenue" }),
-  reuse("pro-forma-costs", pitchScript.proFormaCosts, { name: "Appendix: pro forma spending and profit" }),
+  { id: "appendix", name: "Appendix", steps: 1, sourcesByStep: [[]], notes: igniteAppendix.notes, Content: AppendixDividerSlide },
+  {
+    ...reuse("pro-forma-revenue", pitchScript.proFormaRevenue, { name: "Appendix: pro forma stores and revenue" }),
+    footerLead: igniteAppendix.proFormaNote,
+  },
+  {
+    ...reuse("pro-forma-costs", pitchScript.proFormaCosts, { name: "Appendix: pro forma spending and profit" }),
+    footerLead: igniteAppendix.proFormaNote,
+  },
   reuse("sources", appendix.notes, { name: "Appendix: sources" }),
 ];
 

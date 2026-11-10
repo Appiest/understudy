@@ -1,5 +1,5 @@
-import { talinMarket, team } from "./config";
-import { annualPricePerLocation, grantFunds, useCases, title as titleSlide, valueProposition, visualValueProposition, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
+import { grantPlan, talinMarket, team } from "./config";
+import { annualPricePerLocation, grantFunds, ignite, useCases, title as titleSlide, visualValueProposition, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
 import type { SourceId } from "./sources";
 
 export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "ownerReported" | "intervieweeEstimate" | "unconfirmed";
@@ -87,7 +87,13 @@ const title: SlideFacts = {
       figure: "Subtitle",
       claim: titleSlide.subtitle,
       status: "estimate",
-      caveat: "The grant deck leaves this line off the title slide. It’s our own description of the project.",
+      caveat: "The grant deck shows a shorter line instead. It’s our own description of the project.",
+    },
+    {
+      figure: "Grant deck subtitle",
+      claim: ignite.brief.titleSubtitle,
+      status: "estimate",
+      caveat: "Our own description of the product, taken from the pitch script’s opening line.",
     },
   ],
   facts: [
@@ -420,6 +426,12 @@ const solution: SlideFacts = {
     },
   ],
   background: [
+    {
+      figure: "Grant deck headline",
+      claim: `${ignite.headlines.solution[0][0]}.`,
+      status: "estimate",
+      caveat: "It sums up the capture, learn and coach steps on this slide in one line. It adds no new claim.",
+    },
     {
       figure: "11 states",
       claim: "States that require everyone in a conversation to consent before it’s recorded: California, Delaware, Florida, Illinois, Maryland, Massachusetts, Michigan, Montana, New Hampshire, Pennsylvania and Washington.",
@@ -1191,15 +1203,6 @@ const valuePropositionFacts: SlideFacts = {
   checkedOn: "October 14, 2026",
   summary: "Our written value proposition follows Geoffrey Moore’s template from Crossing the Chasm. The alternative we name comes from the comparison chart, and our differentiation matches the two axes of the competitive landscape.",
   facts: [],
-  background: [
-    {
-      figure: "Full statement",
-      claim: valueProposition.parts.map((part) => `${part.templateWord} ${part.fill}`).join(" "),
-      status: "estimate",
-      source: "mooreChasm",
-      caveat: "The grant deck shows only the For, Understudy and Unlike lines. This is the whole statement.",
-    },
-  ],
   questions: [
     {
       question: "Why shadowing as the main alternative?",
@@ -1292,9 +1295,17 @@ const yearProfitFact = (year: ProFormaYear): Fact => ({
   derivation: "Spending is the sheet’s total cost of goods sold plus total SG&A for the year.",
 });
 
+const proFormaRaiseNote: Fact = {
+  figure: "Later raise",
+  claim: "The pro forma assumes a later, larger raise. The grant deck notes this in the footer of both pro forma slides.",
+  status: "estimate",
+  caveat: "It’s our planning assumption, not money we’ve raised. The grant pays for the first step on its own.",
+};
+
 const proFormaRevenueFacts: SlideFacts = {
   checkedOn: "November 2, 2026",
   summary: "This slide shows how many stores pay for Understudy each year and the revenue they bring in. Every number comes from our pro forma spreadsheet and is a team estimate. The price matches the market slide.",
+  background: [proFormaRaiseNote],
   facts: [
     ...proFormaRevenue.years.map(yearRevenueFact),
     {
@@ -1334,6 +1345,7 @@ const proFormaRevenueFacts: SlideFacts = {
 const proFormaCostsFacts: SlideFacts = {
   checkedOn: "November 2, 2026",
   summary: "This slide compares revenue with spending each year and shows the profit or loss. Every number comes from our pro forma spreadsheet and is a team estimate.",
+  background: [proFormaRaiseNote],
   facts: [
     ...proFormaRevenue.years.map(yearProfitFact),
     {
@@ -1434,6 +1446,44 @@ const talinStoryFacts: SlideFacts = {
   ],
 };
 
+const grantClosingFacts: SlideFacts = {
+  checkedOn: "November 9, 2026",
+  summary: "This slide closes the grant deck. It repeats the ask from the use-of-funds slide and recaps the problem, the evidence and the plan. Every figure comes from an earlier slide.",
+  facts: [
+    {
+      figure: wholeDollars.format(grantPlan.amount),
+      claim: "The grant amount we’re asking for, the same as the use-of-funds slide.",
+      status: "estimate",
+      caveat: "It’s the amount we chose to request, not a measured figure.",
+    },
+    {
+      figure: `${grantPlan.testStaff} staff by ${grantPlan.testBy}`,
+      claim: "Our milestone: test the prototype with Talin Market staff by this date.",
+      status: "estimate",
+      caveat: "Our plan and target date, not a result yet.",
+    },
+    {
+      figure: `${talinMarket.hiresLastYear} hired, ${talinMarket.hiresWhoStayed} stayed`,
+      claim: "How many people Talin Market hired last year and how many still work there.",
+      status: "ownerReported",
+      source: "talinInterviews",
+      caveat: "The owners told us this in interviews. It isn’t from Talin’s records.",
+    },
+    {
+      figure: "Real-time coaching",
+      claim: "What the owners and store manager asked for: real-time coaching and correction, not just training videos.",
+      status: "ownerReported",
+      source: "talinInterviews",
+    },
+  ],
+  questions: [
+    {
+      question: "What does the plan mean by measure it?",
+      answer: `We’ll measure three things at Talin Market: ${grantFunds.metrics.map((metric) => metric.charAt(0).toLowerCase() + metric.slice(1)).join("; ")}.`,
+    },
+  ],
+};
+
 const closingFacts: SlideFacts = {
   summary: "The closing slide repeats our name and asks the audience to join us. It has no figures to back up.",
   facts: [],
@@ -1525,7 +1575,7 @@ const grantItemFact = (item: (typeof grantFunds.lineItems)[number]): Fact => ({
 
 const grantFundsFacts: SlideFacts = {
   checkedOn: "November 9, 2026",
-  summary: `This slide shows how we’ll spend a ${wholeDollars.format(grantFunds.amount)} grant to build a voice coach and test it at Talin Market. It replaces the $1 million use of funds from the final pitch. Every line item is a team estimate, pending mentor approval.`,
+  summary: `This slide shows how we’ll spend a ${wholeDollars.format(grantFunds.amount)} grant to build an AI voice coach and test it at Talin Market. It replaces the $1 million use of funds from the final pitch. Every line item is a team estimate, pending mentor approval.`,
   facts: [
     {
       figure: wholeDollars.format(grantFunds.amount),
@@ -1539,6 +1589,12 @@ const grantFundsFacts: SlideFacts = {
       claim: "The developer or AI help we expect the build to take.",
       status: "estimate",
       caveat: "Our estimate of the work, not a quote from a developer.",
+    },
+    {
+      figure: `${grantPlan.testStaff} staff by ${grantPlan.testBy}`,
+      claim: `Our milestone: ${grantPlan.milestone.charAt(0).toLowerCase()}${grantPlan.milestone.slice(1)}`,
+      status: "estimate",
+      caveat: "Our plan and target date, not a result yet.",
     },
   ],
   questions: [
@@ -1571,14 +1627,8 @@ const grantFundsFacts: SlideFacts = {
 
 const formFactorsFacts: SlideFacts = {
   checkedOn: "November 9, 2026",
-  summary: "This slide shows three ways we could deliver the same voice coach. They’re options we plan to test at Talin Market, not products we’ve built.",
+  summary: "This slide shows smart glasses as our design and two lighter, voice-only options we could explore. None of them is built yet.",
   facts: [
-    {
-      figure: "3 options",
-      claim: "Smart glasses, a walkie-talkie add-on, and a small clip-on mic and speaker.",
-      status: "estimate",
-      caveat: "Our plan. We haven’t tested any of them with new hires yet.",
-    },
     {
       figure: "$249 to $449",
       claim: "The price range of Meta’s AI glasses, the smart glasses option.",
@@ -1590,8 +1640,12 @@ const formFactorsFacts: SlideFacts = {
   ],
   questions: [
     {
-      question: "Why not just glasses?",
-      answer: "Glasses add a camera, but we don’t know yet which device new hires will actually wear on a shift. The test at Talin Market will tell us.",
+      question: "Why glasses?",
+      answer: "Glasses add a camera, so the coach can see the task and catch skipped steps. The walkie-talkie add-on and the clip-on mic are voice only. Which we pursue depends on user feedback and feasibility.",
+    },
+    {
+      question: "What does the first prototype run on?",
+      answer: "The first prototype tests the coaching on a phone and earbud, then moves to glasses once the coaching works.",
     },
   ],
 };
@@ -1621,5 +1675,6 @@ export const factsBySlide: Record<string, SlideFacts> = {
   traction: tractionFacts,
   "use-cases": useCasesFacts,
   "grant-funds": grantFundsFacts,
+  "grant-closing": grantClosingFacts,
   "form-factors": formFactorsFacts,
 };

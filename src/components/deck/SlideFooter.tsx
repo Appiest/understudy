@@ -7,6 +7,7 @@ function Citations({ slide, step }: { slide: SlideDefinition; step: number }) {
   if (cited.length === 0) return null;
   return (
     <p className="max-w-[1100px] text-fineprint text-ink-muted">
+      {slide.footerLead && <span className="font-semibold text-ink">{slide.footerLead} </span>}
       Source{cited.length > 1 ? "s" : ""}: {cited.map((id) => sources[id].cite).join("; ")}
     </p>
   );

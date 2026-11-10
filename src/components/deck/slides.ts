@@ -24,6 +24,8 @@ export type SlideDefinition = {
   footnotes?: boolean;
   /** Replaces the footer's source list with this exact line. */
   footerNote?: string;
+  /** A short line shown in the footer before the sources. */
+  footerLead?: string;
   notes: string[];
   /** Who presents this slide, when the deck splits its script between speakers. */
   speaker?: string;

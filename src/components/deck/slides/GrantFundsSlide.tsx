@@ -83,7 +83,7 @@ function LineItems() {
 
 function OutcomeCard() {
   return (
-    <motion.dl variants={fadeReveal(1.2, 20)} className="flex flex-col gap-8 rounded-card bg-paper-raised p-10 shadow-lift">
+    <motion.dl variants={fadeReveal(1.2, 20)} className="flex flex-col gap-6 rounded-card bg-paper-raised px-10 py-8 shadow-lift">
       <div>
         <dt className="text-caption font-semibold text-ink-muted">{grantFunds.milestoneLabel}</dt>
         <dd className="mt-2 text-body font-bold">
@@ -114,7 +114,7 @@ export function GrantFundsSlide() {
         </motion.p>
       </div>
       <GrantBar />
-      <div className="grid flex-1 grid-cols-[1fr_640px] items-start gap-gap">
+      <div className="grid flex-1 grid-cols-[1fr_760px] items-start gap-gap">
         <LineItems />
         <OutcomeCard />
       </div>
