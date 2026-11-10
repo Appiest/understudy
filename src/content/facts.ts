@@ -1496,7 +1496,7 @@ const tractionFacts: SlideFacts = {
   facts: [
     {
       figure: "3",
-      claim: "Interviews: Talin Market’s two owners and its store manager.",
+      claim: "Interviews at Talin Market: two with the owners, who are Alexis Limary’s parents, and one with the store manager.",
       status: "verified",
       source: "talinInterviews",
     },

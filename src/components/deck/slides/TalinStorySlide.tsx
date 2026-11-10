@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion, type Variants } from "motion/react";
-import { talinStory } from "@/content/content";
+import { ignite, talinStory } from "@/content/content";
 import { easeDrawn, easeSweep } from "@/lib/motion";
 import { HiddenHeadline, useHeadline, useHeadlineSize } from "../headlineOverride";
 import { CountUp, MaskedLines, StepView, fadeReveal, useProgress } from "../primitives";
 import { PERSON_GLYPH, PersonGlyph } from "../PersonGlyph";
+import { useIsBrief } from "../pitchMode";
 import { Counter, Figure, Floor, SCENE, Shelf } from "../ShiftScene";
 import type { SlideProps } from "../slides";
 
@@ -115,14 +116,27 @@ function HiresLastYear() {
   );
 }
 
+/** The grant deck is read without a presenter, so it says on the slide who runs Talin. */
+function BriefSubtitle() {
+  if (!useIsBrief()) return null;
+  return (
+    <motion.p variants={fadeReveal(0.6)} className="mt-6 text-lede font-bold text-ink-muted">
+      {ignite.brief.talinSubtitle}
+    </motion.p>
+  );
+}
+
 function StoryView() {
   const headlineSize = useHeadlineSize("text-headline");
   return (
     <StepView className="grid grid-cols-[1fr_820px] gap-gap">
       <div className="flex flex-col justify-between gap-12">
-        <h2 className={`${headlineSize} font-extrabold`}>
-          <MaskedLines lines={useHeadline(talinStory.headline)} delay={0.1} />
-        </h2>
+        <div>
+          <h2 className={`${headlineSize} font-extrabold`}>
+            <MaskedLines lines={useHeadline(talinStory.headline)} delay={0.1} />
+          </h2>
+          <BriefSubtitle />
+        </div>
         <HiresLastYear />
       </div>
       <div className="self-center">

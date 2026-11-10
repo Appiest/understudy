@@ -778,6 +778,7 @@ export const ignite = {
     hardwareNote: `Runs on ${solution.glassesPrice.replace("–", " to ")} off-the-shelf AI glasses`,
     mockupLabel: "Concept mockup",
     comparisonNote: "Understudy column shows design goals; not yet built.",
+    talinSubtitle: "Talin Market in Albuquerque is run by Alexis’s parents.",
   },
   headlines: {
     talinStory: [
@@ -802,7 +803,7 @@ export const ignite = {
 
 export const tractionSlide = {
   headline: "We interviewed Talin Market’s owners and store manager.",
-  interviews: { count: 3, label: "interviews", detail: "2 owners, 1 store manager" },
+  interviews: { count: 3, label: "interviews", detail: "2 owners (Alexis’s parents), 1 store manager." },
   findings: [
     { figure: "10 to 20 min", label: "for a new stocker to find where an item goes; experienced staff take seconds (store manager estimate)" },
     { figure: "~Half", label: "of new hires don’t make it through onboarding (owner estimate)" },
@@ -811,7 +812,7 @@ export const tractionSlide = {
   ask: "They asked for real-time coaching and correction, not just training videos.",
   sources: ["talinInterviews"] as SourceId[],
   notes: [
-    "We interviewed the two owners and the store manager at Talin Market. The store manager estimates that a new stocker takes 10 to 20 minutes to find where an item goes, while experienced staff take seconds. An owner estimates that about half of new hires don’t make it through onboarding. Produce ID came up as the hardest skill to learn. They asked for coaching in the moment rather than more training videos. These are their estimates, not measurements or figures from Talin’s records.",
+    "We did three interviews at Talin Market. Two were with the owners, who are Alexis Limary’s parents, and one was with the store manager. The store manager estimates that a new stocker takes 10 to 20 minutes to find where an item goes, while experienced staff take seconds. An owner estimates that about half of new hires don’t make it through onboarding. Produce ID came up as the hardest skill to learn. They asked for coaching in the moment rather than more training videos. These are their estimates, not measurements or figures from Talin’s records.",
   ],
 };
 
