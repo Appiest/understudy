@@ -28,9 +28,8 @@ function Signoff() {
         </div>
         <p className="text-point font-bold">{grantClosing.tagline}</p>
       </motion.div>
-      <motion.p variants={fadeReveal(1.3)} className="text-right text-caption">
-        <span className="font-bold">{team.teamName}</span>
-        <span className="block text-ink-muted">{team.teamMembers.join(", ")}</span>
+      <motion.p variants={fadeReveal(1.3)} className="text-right text-caption text-ink-muted">
+        {team.teamMembers.join(", ")}
       </motion.p>
     </div>
   );

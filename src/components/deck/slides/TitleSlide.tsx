@@ -35,9 +35,8 @@ function TitleCard() {
           <motion.p variants={fadeReveal(1.5)} className="mt-6 max-w-[760px] text-caption text-ink-muted">
             {isBrief ? ignite.brief.titleSubtitle : title.subtitle}
           </motion.p>
-          <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption">
-            <span className="font-bold">{team.teamName}</span>
-            <span className="block text-ink-muted">{team.teamMembers.join(", ")}</span>
+          <motion.p variants={fadeReveal(1.7)} className="mt-6 text-caption text-ink-muted">
+            {team.teamMembers.join(", ")}
           </motion.p>
         </ReadingDetail>
       </div>

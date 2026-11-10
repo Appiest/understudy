@@ -429,8 +429,8 @@ export const pitchSources = {
     factsOnly: true,
   },
   proForma: {
-    cite: "Understudy pro forma, Group 15, Oct 2026",
-    title: "Group 15: Understudy pro forma and use of funds (Google Sheets, October 2026)",
+    cite: "Understudy pro forma, Oct 2026",
+    title: "Understudy pro forma and use of funds (Google Sheets, October 2026)",
     url: team.proFormaLink,
   },
   trainingIndustryReport: {

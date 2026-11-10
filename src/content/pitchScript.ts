@@ -2,21 +2,19 @@
 // Inside a paragraph, use curly quotes (“like this”) and apostrophes (’) so the straight quotes still mark where it starts and ends.
 import { team } from "./config";
 
-const [brendan, alex, alexis, oli] = team.teamMembers;
+const [alexis, oli] = team.teamMembers;
 
 // Who presents which slides. Swap the names or move the slide numbers to change who says what.
 export const speakerSections = [
-  { speaker: brendan, firstSlide: 1, lastSlide: 1 },
-  { speaker: alexis, firstSlide: 2, lastSlide: 2 },
-  { speaker: brendan, firstSlide: 3, lastSlide: 5 },
-  { speaker: alex, firstSlide: 6, lastSlide: 9 },
+  { speaker: alexis, firstSlide: 1, lastSlide: 5 },
+  { speaker: oli, firstSlide: 6, lastSlide: 9 },
   { speaker: alexis, firstSlide: 10, lastSlide: 11 },
   { speaker: oli, firstSlide: 12, lastSlide: 15 },
 ];
 
 export const pitchScript = {
   title: [
-    "Hi, we’re Group 15: Brendan, Alex, Alexis and Oli. This is Understudy, AI glasses that coach new hires by voice during real shifts. Our vision? Give every new hire the knowledge and expertise of your best employee.",
+    "Hi, we’re Alexis and Oli. This is Understudy, AI glasses that coach new hires by voice during real shifts. Our vision? Give every new hire the knowledge and expertise of your best employee.",
   ],
   talinStory: [
     "My parents run Talin Market in Albuquerque, New Mexico’s largest international grocer. Last year they hired 33 new people, and out of the 33 only two lasted. With a staff of 30 people Every time, [TALIN] stops working to train them. It takes about [DAYS UNTIL A TALIN HIRE WORKS ALONE] days before a new hire can work alone. Meanwhile, customers wait at the register.",
