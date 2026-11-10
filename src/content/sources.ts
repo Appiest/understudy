@@ -9,6 +9,16 @@ export type Source = {
 };
 
 export const pitchSources = {
+  talinInterviews: {
+    cite: "Talin Market owner and manager interviews, 2026",
+    title: "Our interviews with Talin Market’s two owners and its store manager, 2026",
+    factsOnly: true,
+  },
+  talinPhotos: {
+    cite: "Photos: Talin Market",
+    title: "Photos taken at Talin Market, Albuquerque, 2026",
+    factsOnly: true,
+  },
   talinOwners: {
     cite: "Talin Market owners, Nov 2026",
     title: "Talin Market’s owners, reported to our team in November 2026",

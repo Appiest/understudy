@@ -375,7 +375,7 @@ const comparisonGuide: SlideGuide = {
     {
       question: "Which row matters most to buyers?",
       answer:
-        "We think it’s the top row, because it names the cost owners feel when their best employee stops working to train. We haven’t tested that with owners yet. It’s the first thing a pilot or owner interviews should check.",
+        "We think it’s the top row, because it names the cost owners feel when their best employee stops working to train. So far we’ve interviewed only the owners and store manager at Talin Market, so it’s still our judgment. It’s the first thing a pilot should check.",
     },
   ],
   professorQuestions: [

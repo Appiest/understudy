@@ -6,6 +6,7 @@ import { team } from "@/content/config";
 import { solution } from "@/content/content";
 import { easeDrawn } from "@/lib/motion";
 import { GlassesRender } from "../GlassesRender";
+import { useHeadlineOverride } from "../headlineOverride";
 import { ReadingDetail, useIsPitch } from "../pitchMode";
 import { MaskedLines, fadeReveal } from "../primitives";
 import type { SlideProps } from "../slides";
@@ -21,7 +22,7 @@ function stageTone(stageIndex: number, step: number) {
   return { title: "text-ink-faint", dot: "bg-paper-sunken", summary: "hidden" };
 }
 
-function StageRail({ step }: { step: number }) {
+function StageRail({ step, showSummaries }: { step: number; showSummaries: boolean }) {
   return (
     <ol className="flex flex-col gap-8">
       {solution.stages.map((stage, index) => {
@@ -32,7 +33,7 @@ function StageRail({ step }: { step: number }) {
             <div>
               <p className={`text-title font-extrabold transition-colors duration-300 ${tone.title}`}>{stage.name}</p>
               <ReadingDetail>
-                <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${tone.summary}`}>
+                <motion.p key={`${stage.name}-${step}`} initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }} className={`mt-3 max-w-[560px] text-body text-ink-muted ${showSummaries ? tone.summary : "hidden"}`}>
                   {stage.summary}
                 </motion.p>
               </ReadingDetail>
@@ -174,19 +175,36 @@ function ScopePanel() {
 const panels = [CapturePanel, LearnPanel, CoachPanel, ScopePanel];
 const pitchPanels = [CapturePanel, PlaybookPanel, CoachPitchPanel, ScopePanel];
 
+function SolutionHeading() {
+  const override = useHeadlineOverride();
+  if (override) {
+    return (
+      <h2 className="text-title font-extrabold">
+        <MaskedLines lines={override} delay={0.05} />
+      </h2>
+    );
+  }
+  return (
+    <>
+      <h2 className="text-headline font-black">
+        <MaskedLines lines={[`${team.productName}:`]} delay={0.05} />
+      </h2>
+      <p className="text-title font-extrabold text-ocean">
+        <MaskedLines lines={[solution.headline]} delay={0.2} />
+      </p>
+    </>
+  );
+}
+
 export function SolutionSlide({ step }: SlideProps) {
   const ActivePanel = (useIsPitch() ? pitchPanels : panels)[step];
+  const hasOverride = useHeadlineOverride() !== undefined;
   return (
     <div className="stage-gutter absolute inset-0 grid grid-cols-[620px_1fr] gap-gap">
       <div className="flex flex-col">
-        <h2 className="text-headline font-black">
-          <MaskedLines lines={[`${team.productName}:`]} delay={0.05} />
-        </h2>
-        <p className="text-title font-extrabold text-ocean">
-          <MaskedLines lines={[solution.headline]} delay={0.2} />
-        </p>
+        <SolutionHeading />
         <div className="mt-auto">
-          <StageRail step={step} />
+          <StageRail step={step} showSummaries={!hasOverride} />
         </div>
       </div>
       <div className="relative">

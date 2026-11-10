@@ -3,6 +3,7 @@
 import { Basket, Briefcase, ForkKnife, SmileySad, Storefront, TrendUp, UsersThree, type Icon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { customerProfile, type CustomerSegment, type ProfileArea } from "@/content/content";
+import { HiddenHeadline } from "../headlineOverride";
 import { StepView, fadeReveal } from "../primitives";
 
 const SIZE = 760;
@@ -97,7 +98,7 @@ function CustomerSegments() {
 function OwnerSummary() {
   return (
     <div className="flex flex-col justify-center">
-      <h2 className="sr-only">{customerProfile.headline}</h2>
+      <HiddenHeadline lines={[customerProfile.headline]} className="mb-16 text-title font-extrabold" />
       <CustomerSegments />
     </div>
   );

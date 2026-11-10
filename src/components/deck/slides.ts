@@ -22,6 +22,8 @@ export type SlideDefinition = {
   sourcesByStep: SourceId[][];
   /** Numbers each source in the footer so the slide can mark claims with matching superscripts. */
   footnotes?: boolean;
+  /** Replaces the footer's source list with this exact line. */
+  footerNote?: string;
   notes: string[];
   /** Who presents this slide, when the deck splits its script between speakers. */
   speaker?: string;

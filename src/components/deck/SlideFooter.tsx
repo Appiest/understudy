@@ -2,6 +2,7 @@ import { sources, type Source, type SourceId } from "@/content/sources";
 import { sourcesForStep, type SlideDefinition } from "./slides";
 
 function Citations({ slide, step }: { slide: SlideDefinition; step: number }) {
+  if (slide.footerNote) return <p className="max-w-[1100px] text-fineprint text-ink-muted">{slide.footerNote}</p>;
   const cited = sourcesForStep(slide, step);
   if (cited.length === 0) return null;
   return (

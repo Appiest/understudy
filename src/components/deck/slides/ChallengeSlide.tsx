@@ -3,8 +3,9 @@
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { turnover } from "@/content/content";
 import { easeDrawn, easeSweep } from "@/lib/motion";
+import { AddedHeadline, useHeadline, useHeadlineSize } from "../headlineOverride";
 import { PersonGlyph } from "../PersonGlyph";
-import { ReadingDetail, useIsPitch } from "../pitchMode";
+import { FullDetail, ReadingDetail, useIsPitch } from "../pitchMode";
 import { CountUp, MaskedLines, StepView, fadeReveal, useProgress } from "../primitives";
 import type { SlideProps } from "../slides";
 
@@ -88,11 +89,12 @@ function SectorRow({ name, caption, monthlySeparationRate, rowIndex }: SectorRow
 
 function TurnoverView() {
   const isPitch = useIsPitch();
+  const headlineSize = useHeadlineSize("text-headline");
   return (
     <StepView className={`flex flex-col ${isPitch ? "justify-center" : "justify-between"}`}>
       <ReadingDetail>
-        <h2 className="max-w-[1500px] text-headline font-extrabold">
-          <MaskedLines lines={["Every new hire costs owners", "time they don’t have."]} delay={0.1} />
+        <h2 className={`max-w-[1500px] ${headlineSize} font-extrabold`}>
+          <MaskedLines lines={useHeadline(["Every new hire costs owners", "time they don’t have."])} delay={0.1} />
         </h2>
       </ReadingDetail>
       <div className={`flex flex-col ${isPitch ? "gap-24" : "gap-10"}`}>
@@ -171,6 +173,7 @@ function CostView() {
   return (
     <StepView className={isPitch ? "flex flex-col" : "grid grid-cols-[1fr_620px] gap-gap"}>
       <div className="flex flex-1 flex-col">
+        <AddedHeadline className="mb-10 text-title font-extrabold" />
         <p className="text-poster font-black">
           <CountUp progress={progress} total={replacement.costPerHire} format={(value) => dollars.format(Math.round(value / 10) * 10)} />
         </p>
@@ -185,7 +188,9 @@ function CostView() {
         <CostTally />
       </div>
       <ReadingDetail>
-        <QuoteCard />
+        <FullDetail>
+          <QuoteCard />
+        </FullDetail>
       </ReadingDetail>
     </StepView>
   );

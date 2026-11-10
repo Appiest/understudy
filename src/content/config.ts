@@ -10,9 +10,21 @@ export const team = {
   mindMapImage: "/mind-map.png",
 };
 
-/** Reported by Talin’s owners. The slide draws one figure per hire. */
+/** Reported by Talin’s owners in our interviews, not taken from their records. The slide draws one figure per hire. */
 export const talinMarket = {
   hiresLastYear: 33 as number | string,
+  hiresWhoStayed: 2 as number | string,
+};
+
+/** The /ignite use of funds. Amounts are team estimates in dollars and should add up to the grant amount. */
+export const grantPlan = {
+  milestone: "[WHAT WE’LL HAVE DONE BY WHEN]",
+  lineItems: [
+    { name: "Developer or AI help", detail: "About 70 hours", covers: "About 70 hours of building the voice coach", amount: 2_100 },
+    { name: "Test hardware", covers: "Devices for the three ways we deliver the coach", amount: 450 },
+    { name: "AI and cloud costs", covers: "Speech and AI model usage while we build and test", amount: 150 },
+    { name: "Testing reserve", covers: "Fixes, spare devices or extra test time if the test needs them", amount: 300 },
+  ],
 };
 
 export function isPlaceholder(value: string) {

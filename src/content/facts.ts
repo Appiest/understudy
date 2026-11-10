@@ -1,7 +1,8 @@
-import { annualPricePerLocation, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
+import { talinMarket, team } from "./config";
+import { annualPricePerLocation, grantFunds, useCases, title as titleSlide, valueProposition, visualValueProposition, talinStory, market, proFormaRevenue, revenueFormatter, useOfFunds, yearlyRevenue, type ProFormaYear } from "./content";
 import type { SourceId } from "./sources";
 
-export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "unconfirmed";
+export type FactStatus = "verified" | "adjusted" | "estimate" | "illustrative" | "ownerReported" | "intervieweeEstimate" | "unconfirmed";
 
 export type Fact = {
   figure: string;
@@ -32,7 +33,7 @@ export const canvasMethod = [
   "Each line is one way a store can train a new hire today, plus ours. For every factor along the bottom, each option gets a score from 0 to 10, where a higher score means the option offers more of that factor. The chart plots those scores and connects them from left to right, which is how Kim and Mauborgne draw a strategy canvas.",
   "The scores are our team’s judgment, not survey data. They were set in our project brief from what we know about how each option works. If someone asks, say that plainly first, then walk through the reasoning for the factor they’re asking about.",
   "On the left five factors, a high score means the buyer carries more of that burden: more cost, more staff time, more content to make, more hardware and more time off the floor. That’s why a low score is good there, and why our curve sits low. On the right five factors, a high score means the buyer gets more of that benefit.",
-  "We plan to replace the estimates with evidence. In the five owner interviews, we’ll ask each owner to score the options they’ve actually used on the same ten factors, then redraw the canvas from their average scores.",
+  "We plan to replace the estimates with evidence. We’ll ask the owners and store manager at Talin Market to score the options they’ve actually used on the same ten factors, then redraw the canvas from their scores.",
 ];
 
 export const canvasRationale = [
@@ -81,12 +82,20 @@ export const canvasRationale = [
 
 const title: SlideFacts = {
   summary: "This slide introduces the product and the rules we used to avoid jumping to a solution. It has no statistics, so the questions here are about our process.",
+  background: [
+    {
+      figure: "Subtitle",
+      claim: titleSlide.subtitle,
+      status: "estimate",
+      caveat: "The grant deck leaves this line off the title slide. It’s our own description of the project.",
+    },
+  ],
   facts: [
     {
       figure: "5 rules",
       claim: "Our rules against solution jumping, written by the team for this project.",
       status: "estimate",
-      caveat: "Rule 2 says to talk to noncustomers first. We haven’t interviewed owners yet, so say that the five owner interviews on slide 9 are how we’ll live up to it.",
+      caveat: "Rule 2 says to talk to noncustomers first. So far we’ve interviewed the owners and store manager at Talin Market, which has no training department. That’s one store, so say so.",
     },
   ],
   questions: [
@@ -100,7 +109,7 @@ const title: SlideFacts = {
     },
     {
       question: "Did you actually talk to owners?",
-      answer: "Not yet. Everything so far comes from published data and our own reasoning. Interviewing five owners and testing capture on one real shift are our next steps.",
+      answer: "Yes, at one store. We interviewed the owners and store manager at Talin Market. Everything else comes from published data and our own reasoning. Testing capture on one real shift is our next step.",
     },
   ],
 };
@@ -481,7 +490,7 @@ const canvasFacts: SlideFacts = {
       claim: "Every score on the canvas.",
       status: "estimate",
       derivation: "The scores came from our project brief and reflect the team’s judgment. They are not survey data.",
-      caveat: "Say this before anyone asks. Then explain that the owner interviews will replace them with real ratings.",
+      caveat: "Say this before anyone asks. Then explain that we plan to replace them with ratings from the owners and store manager at Talin Market.",
     },
     {
       figure: "Value innovation",
@@ -526,7 +535,7 @@ const canvasFacts: SlideFacts = {
   questions: [
     {
       question: "Where did these scores come from?",
-      answer: "They’re our team’s estimates, based on how each training option works. They aren’t survey data. The reasoning for every factor is on this page, and we’ll replace the estimates with ratings from the owners we interview.",
+      answer: "They’re our team’s estimates, based on how each training option works. They aren’t survey data. The reasoning for every factor is on this page, and we plan to replace the estimates with ratings from the owners and store manager at Talin Market.",
     },
     {
       question: "Isn’t this chart biased toward your own product?",
@@ -715,6 +724,12 @@ const marketFacts: SlideFacts = {
   ],
   background: [
     {
+      figure: "Market sizing doc",
+      claim: `Our full market sizing math is in our market sizing doc: ${team.marketSizingDocLink}`,
+      status: "estimate",
+      caveat: `The grant deck leaves the doc link and the price note off the slide. The price is the ${monthlyPrice} a month fact above.`,
+    },
+    {
       figure: "+2.2%",
       claim: "Growth in the BLS count of US retail and food service locations from 2022 to 2025, from 1,743,893 to 1,783,136.",
       status: "verified",
@@ -778,7 +793,7 @@ const marketFacts: SlideFacts = {
     },
     {
       question: `Where does ${monthlyPrice} a month come from?`,
-      answer: `It’s our estimate. 7shifts says standalone training tools charge $100 to $200 a month per location, and ${yearlyPrice} a year is less than the $2,305 it costs to replace one hourly restaurant worker. We’ll test it in the owner interviews.`,
+      answer: `It’s our estimate. 7shifts says standalone training tools charge $100 to $200 a month per location, and ${yearlyPrice} a year is less than the $2,305 it costs to replace one hourly restaurant worker. We’ll test it with the owners and store manager at Talin Market.`,
     },
     {
       question: "Is 1% realistic?",
@@ -1176,6 +1191,15 @@ const valuePropositionFacts: SlideFacts = {
   checkedOn: "October 14, 2026",
   summary: "Our written value proposition follows Geoffrey Moore’s template from Crossing the Chasm. The alternative we name comes from the comparison chart, and our differentiation matches the two axes of the competitive landscape.",
   facts: [],
+  background: [
+    {
+      figure: "Full statement",
+      claim: valueProposition.parts.map((part) => `${part.templateWord} ${part.fill}`).join(" "),
+      status: "estimate",
+      source: "mooreChasm",
+      caveat: "The grant deck shows only the For, Understudy and Unlike lines. This is the whole statement.",
+    },
+  ],
   questions: [
     {
       question: "Why shadowing as the main alternative?",
@@ -1191,6 +1215,14 @@ const valuePropositionFacts: SlideFacts = {
 const visualValuePropositionFacts: SlideFacts = {
   checkedOn: "October 14, 2026",
   summary: "This page shows the value proposition as one scene: the same store with and without Understudy. The people, the dialogue and Maya’s checklist are illustrations, not data.",
+  background: [
+    {
+      figure: "Scene description",
+      claim: visualValueProposition.description,
+      status: "illustrative",
+      caveat: "The grant deck leaves this description off the slide and keeps the scene.",
+    },
+  ],
   facts: [
     {
       figure: "$249 to $449",
@@ -1229,13 +1261,13 @@ const customerProfileFacts: SlideFacts = {
       figure: "Jobs, pains and gains",
       claim: "The job is training every new hire. The pain is the best employee stopping work to do it. The gain is hires who are ready fast.",
       status: "estimate",
-      caveat: "From the owner row of the Users table in our PRD. We’ll replace them with what owners tell us in interviews.",
+      caveat: "From the owner row of the Users table in our PRD. We’ll update them with what the owners and store manager at Talin Market tell us.",
     },
   ],
   questions: [
     {
       question: "Did you talk to any owners?",
-      answer: "Not yet. The profile comes from our research and the PRD. Our next step is interviewing five owners, and we’ll redraw this profile from what they say.",
+      answer: "At one store so far. We interviewed the owners and store manager at Talin Market. The rest of the profile comes from our research and the PRD.",
     },
     {
       question: "Don’t owners worry about recording laws?",
@@ -1364,9 +1396,16 @@ const talinStoryFacts: SlideFacts = {
     {
       figure: String(talinStory.hires.count),
       claim: "New hires Talin Market made last year. The slide draws one figure for each.",
-      status: "verified",
-      source: "talinOwners",
-      caveat: "Talin’s owners, Alexis’s parents, gave us this number. It comes from them, not from a published report.",
+      status: "ownerReported",
+      source: "talinInterviews",
+      caveat: "Talin’s owners, Alexis’s parents, told us this in our interviews. It’s their count, not a figure from Talin’s hiring or payroll records.",
+    },
+    {
+      figure: `${talinMarket.hiresWhoStayed} of ${talinMarket.hiresLastYear}`,
+      claim: "How many of the people Talin hired last year still work there. The grant deck’s headlines say it.",
+      status: "ownerReported",
+      source: "talinInterviews",
+      caveat: "Talin’s owners told us this in our interviews. It’s their count, not a figure from Talin’s records.",
     },
     {
       figure: "Pulls someone off the floor",
@@ -1401,6 +1440,162 @@ const closingFacts: SlideFacts = {
   questions: [],
 };
 
+const tractionFacts: SlideFacts = {
+  checkedOn: "November 9, 2026",
+  summary: "This slide reports what we learned by interviewing the owners and store manager at Talin Market in 2026. The figures are their own estimates, not measurements or numbers from Talin’s records.",
+  facts: [
+    {
+      figure: "3",
+      claim: "Interviews: Talin Market’s two owners and its store manager.",
+      status: "verified",
+      source: "talinInterviews",
+    },
+    {
+      figure: "10 to 20 min",
+      claim: "How long the store manager estimates it takes a new stocker to find where an item goes. Experienced staff take seconds, by the same estimate.",
+      status: "intervieweeEstimate",
+      source: "talinInterviews",
+      caveat: "The store manager’s estimate from our interview. We haven’t timed it.",
+    },
+    {
+      figure: "~Half",
+      claim: "The share of new hires who don’t make it through onboarding, as an owner estimates it.",
+      status: "intervieweeEstimate",
+      source: "talinInterviews",
+      caveat: "An owner’s estimate from our interview, not a count from Talin’s records.",
+    },
+    {
+      figure: "Produce ID",
+      claim: "The skill our interviewees named as the hardest for new hires to learn.",
+      status: "ownerReported",
+      source: "talinInterviews",
+    },
+    {
+      figure: "Coaching in the moment",
+      claim: "What our interviewees asked for instead of more training videos.",
+      status: "ownerReported",
+      source: "talinInterviews",
+    },
+  ],
+  questions: [
+    {
+      question: "Is this more than one store?",
+      answer: "No. We interviewed the owners and store manager at Talin Market only. The national surveys earlier in the deck show that Talin trains new hires the way most small employers do.",
+    },
+    {
+      question: "Did you measure the 10 to 20 minutes?",
+      answer: "No. It’s the store manager’s estimate. Timing it is part of the test the grant pays for.",
+    },
+  ],
+};
+
+const useCaseFact = (card: (typeof useCases.cards)[number]): Fact => ({
+  figure: card.caption,
+  claim: `A task the owners and store manager at Talin Market want new hires coached on in real time. The photo shows: ${card.photo.alt.charAt(0).toLowerCase()}${card.photo.alt.slice(1)}.`,
+  status: "ownerReported",
+  source: "talinInterviews",
+});
+
+const useCasesFacts: SlideFacts = {
+  checkedOn: "November 9, 2026",
+  summary: "This slide shows four tasks that the owners and store manager at Talin Market told us they want coached in real time. The tasks come from our interviews, and the photos were taken at Talin Market.",
+  facts: [
+    ...useCases.cards.map(useCaseFact),
+    {
+      figure: "4 photos",
+      claim: "Each card’s photo was taken at Talin Market.",
+      status: "verified",
+      source: "talinPhotos",
+    },
+  ],
+  questions: [
+    {
+      question: "Do other stores want these tasks coached?",
+      answer: "We don’t know yet. These four come from the owners and store manager at Talin Market only.",
+    },
+  ],
+};
+
+const grantItemFact = (item: (typeof grantFunds.lineItems)[number]): Fact => ({
+  figure: wholeDollars.format(item.amount),
+  claim: `${item.name}: ${item.covers.charAt(0).toLowerCase()}${item.covers.slice(1)}.`,
+  status: "estimate",
+  caveat: "Our estimate, not a quote. Back it with a quote, a price page or our own past spending, and add that source here.",
+});
+
+const grantFundsFacts: SlideFacts = {
+  checkedOn: "November 9, 2026",
+  summary: `This slide shows how we’ll spend a ${wholeDollars.format(grantFunds.amount)} grant to build a voice coach and test it at Talin Market. It replaces the $1 million use of funds from the final pitch. Every line item is a team estimate, pending mentor approval.`,
+  facts: [
+    {
+      figure: wholeDollars.format(grantFunds.amount),
+      claim: "The grant amount we’re asking for.",
+      status: "estimate",
+      caveat: "It’s the amount we chose to request, not a measured figure.",
+    },
+    ...grantFunds.lineItems.map(grantItemFact),
+    {
+      figure: "About 70 hours",
+      claim: "The developer or AI help we expect the build to take.",
+      status: "estimate",
+      caveat: "Our estimate of the work, not a quote from a developer.",
+    },
+  ],
+  questions: [
+    {
+      question: "Who are you hiring?",
+      answer: grantFunds.talent.role,
+    },
+    {
+      question: "What will they build?",
+      answer: grantFunds.talent.build,
+    },
+    {
+      question: "What do you get at the end?",
+      answer: grantFunds.talent.deliverable,
+    },
+    {
+      question: "How will you test it?",
+      answer: grantFunds.talent.test,
+    },
+    {
+      question: "How will you know it worked?",
+      answer: `We’ll measure three things at Talin Market: ${grantFunds.metrics.map((metric) => metric.charAt(0).toLowerCase() + metric.slice(1)).join("; ")}.`,
+    },
+    {
+      question: "How does this fit with the pro forma in the appendix?",
+      answer: "The pro forma models our full plan through 2030, which assumed a larger raise later. The grant pays for the first step on its own.",
+    },
+  ],
+};
+
+const formFactorsFacts: SlideFacts = {
+  checkedOn: "November 9, 2026",
+  summary: "This slide shows three ways we could deliver the same voice coach. They’re options we plan to test at Talin Market, not products we’ve built.",
+  facts: [
+    {
+      figure: "3 options",
+      claim: "Smart glasses, a walkie-talkie add-on, and a small clip-on mic and speaker.",
+      status: "estimate",
+      caveat: "Our plan. We haven’t tested any of them with new hires yet.",
+    },
+    {
+      figure: "$249 to $449",
+      claim: "The price range of Meta’s AI glasses, the smart glasses option.",
+      status: "verified",
+      source: "metaGlassesPrices",
+      quote: "Ray-Ban Meta (Gen 3) is available today, with prices starting at $449 USD.",
+      caveat: "Prices change quickly. Check again before we submit.",
+    },
+  ],
+  questions: [
+    {
+      question: "Why not just glasses?",
+      answer: "Glasses add a camera, but we don’t know yet which device new hires will actually wear on a shift. The test at Talin Market will tell us.",
+    },
+  ],
+};
+
 export const factsBySlide: Record<string, SlideFacts> = {
   closing: closingFacts,
   definition: definitionFacts,
@@ -1423,4 +1618,8 @@ export const factsBySlide: Record<string, SlideFacts> = {
   "pro-forma-costs": proFormaCostsFacts,
   "mind-map": mindMapFacts,
   sources: sourcesFacts,
+  traction: tractionFacts,
+  "use-cases": useCasesFacts,
+  "grant-funds": grantFundsFacts,
+  "form-factors": formFactorsFacts,
 };

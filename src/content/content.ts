@@ -1,5 +1,5 @@
 import type { SourceId } from "./sources";
-import { talinMarket, team } from "./config";
+import { grantPlan, talinMarket, team } from "./config";
 
 export const title = {
   tagline: "Your best employee, in every new hire’s ear.",
@@ -762,4 +762,120 @@ export const customerProfile = {
     { name: "Gains", items: ["Hires ready fast"] },
   ] satisfies ProfileArea[],
   sources: ["trainingIndustryReport"] as SourceId[],
+};
+
+const MONTHS_PER_YEAR = 12;
+const [retailSector, restaurantSector] = turnover.sectors;
+export const yearlyTurnover = (sector: { monthlySeparationRate: number }) => Math.round(sector.monthlySeparationRate * MONTHS_PER_YEAR);
+const grantAmount = 3_000;
+
+/** The /ignite grant deck, read without a presenter. Each headline states the slide’s point. */
+const briefRows = new Set([0, 2, 4]);
+
+export const ignite = {
+  /** Shorter supporting text for the read-alone deck. The full text moves to its notes and fact pages. */
+  brief: {
+    hardwareNote: `Runs on ${solution.glassesPrice.replace("–", " to ")} off-the-shelf AI glasses`,
+    valuePropositionParts: valueProposition.parts.filter((_, index) => briefRows.has(index)).map((part) => ({ ...part, fill: part.fill.replace(/,$/, "") })),
+  },
+  headlines: {
+    talinStory: [
+      [`Only ${talinMarket.hiresWhoStayed} of the ${talinMarket.hiresLastYear} people Talin Market hired last year stayed`],
+      ["Most small employers train new hires the way Talin does, with a coworker beside them"],
+    ],
+    challenge: [
+      [`Separations equaled ${yearlyTurnover(retailSector)}% of retail jobs and ${yearlyTurnover(restaurantSector)}% of restaurant and hotel jobs in 2025`],
+      [`Replacing part-time workers costs a typical independent grocer ${wholeDollars.format(turnover.replacement.costPerStore)} a year`],
+    ],
+    canvas: ["Understudy needs almost none of the staff time, money or custom content that other training takes"],
+    customerProfile: ["Our customers own groceries, franchises and restaurants with under 100 staff and no training team"],
+    visualValueProposition: ["With Understudy, a new hire gets answers by voice and nobody leaves their post"],
+    solution: [
+      ["Your best employee wears the glasses for a week of shifts"],
+      ["Our AI turns that week into a playbook for one store"],
+      ["New hires get coached by voice, even on steps they skip"],
+    ],
+    valueProposition: ["Owners get new hires trained on the job without pulling anyone off it"],
+  },
+};
+
+export const tractionSlide = {
+  headline: "We interviewed Talin Market’s owners and store manager.",
+  interviews: { count: 3, label: "interviews", detail: "2 owners, 1 store manager" },
+  findings: [
+    { figure: "10 to 20 min", label: "for a new stocker to find where an item goes; experienced staff take seconds (store manager estimate)" },
+    { figure: "~Half", label: "of new hires don’t make it through onboarding (owner estimate)" },
+    { figure: "Produce ID", label: "named the hardest skill to learn (store manager and owner)" },
+  ],
+  ask: "They asked for real-time coaching and correction, not just training videos.",
+  sources: ["talinInterviews"] as SourceId[],
+  notes: [
+    "We interviewed the two owners and the store manager at Talin Market. The store manager estimates that a new stocker takes 10 to 20 minutes to find where an item goes, while experienced staff take seconds. An owner estimates that about half of new hires don’t make it through onboarding. Produce ID came up as the hardest skill to learn. They asked for coaching in the moment rather than more training videos. These are their estimates, not measurements or figures from Talin’s records.",
+  ],
+};
+
+export const useCases = {
+  headline: "Four tasks Talin Market wants coached in real time.",
+  cards: [
+    { caption: "Spot the bad lime", photo: { src: "/photos/limes.PNG", alt: "A crate of limes, some with brown spots and yellowing skin" } },
+    { caption: "Judge the blemish", photo: { src: "/photos/productblemish.PNG", alt: "Daikon radishes in a produce box, with marks and blemishes on their skin" } },
+    { caption: "Check the box", photo: { src: "/photos/consolidation.PNG", alt: "A cart stacked with mixed cases of Korean groceries waiting to be sorted" } },
+    {
+      caption: "Handle the excess",
+      // The photo has a white strip along its bottom edge, so it's zoomed slightly from the top to crop it out.
+      photo: { src: "/photos/excessinventory.PNG", alt: "Extra cases of instant noodles stacked on a top shelf above the aisle", zoom: 1.04 },
+    },
+  ],
+  footerNote: "Photos: Talin Market. Tasks from owner and manager interviews, 2026.",
+  sources: ["talinPhotos", "talinInterviews"] as SourceId[],
+  notes: [
+    "These are four tasks the owners and store manager at Talin Market told us they want new hires coached on in real time. Spot the bad lime: the photo shows a crate where some limes have brown spots and yellowing skin. Judge the blemish: the photo shows daikon radishes with marks on their skin. Check the box: the photo shows a cart stacked with mixed cases. Handle the excess: the photo shows extra cases stored on a top shelf. All four photos were taken at Talin Market.",
+  ],
+};
+
+export const formFactors = {
+  headline: "One coach, three ways to deliver it.",
+  options: [
+    { name: "Smart glasses", line: "Voice plus a camera that sees the task", icon: "glasses" },
+    { name: "Walkie-talkie add-on", line: "Voice coaching through a store radio", icon: "radio" },
+    { name: "Clip-on mic and speaker", line: "Small, voice only, clips to an apron", icon: "mic" },
+  ],
+  closing: "We’ll test which one new hires actually use.",
+  notes: [
+    `The coach is voice first, so it doesn’t have to live in glasses. Smart glasses add a camera, which lets the coach see the task and catch skipped steps. Off-the-shelf AI glasses cost ${solution.glassesPrice.replace("–", " to ")}. A walkie-talkie add-on and a small clip-on mic and speaker are voice only. We’ll test all three at Talin Market to see which one new hires actually use on a shift.`,
+  ],
+};
+
+/** The talent the grant pays for. It lives in the speaker notes and fact page, not on the slide. */
+const grantTalent = {
+  role: "We’re looking for a developer, or someone building with AI coding tools, for about 70 hours of work.",
+  build: "They’ll build a voice coach that talks a new hire through produce ID and box checks during a shift and corrects a mistake when it happens.",
+  deliverable: "The deliverable is a working prototype that runs on our test hardware and is ready to use on the floor at Talin Market.",
+  test: "We’ll test it with new hires at Talin Market on real shifts and compare them with the way new hires learn now, by shadowing a coworker.",
+};
+
+export const grantFunds = {
+  amount: grantAmount,
+  headline: `${wholeDollars.format(grantAmount)} to build a voice coach and test it at Talin Market.`,
+  goal: "Prove a new hire can learn produce ID and box checks from voice coaching, not a shadowing coworker.",
+  lineItems: grantPlan.lineItems,
+  estimateLabel: "Estimated cost",
+  unassignedLabel: "Not assigned yet",
+  milestoneLabel: "What the grant gets us",
+  milestone: grantPlan.milestone,
+  measureLabel: "What we’ll measure",
+  metrics: ["Time until a new hire works alone", "How often a manager repeats a correction", "Mistakes on produce ID and box checks"],
+  footerNote: "Amounts are estimates, pending mentor approval.",
+  talent: grantTalent,
+  notes: [
+    [
+      `We’re asking for ${wholeDollars.format(grantAmount)} to build a voice coach and test it at Talin Market. The goal is to prove a new hire can learn produce ID and box checks from voice coaching instead of shadowing a coworker. Every amount is our estimate, pending mentor approval.`,
+      grantPlan.lineItems.map((item) => `${item.name}, about ${wholeDollars.format(item.amount)}, covers ${item.covers.charAt(0).toLowerCase()}${item.covers.slice(1)}.`).join(" "),
+      grantTalent.role,
+      grantTalent.build,
+      grantTalent.deliverable,
+      grantTalent.test,
+      "We’ll measure three things: how long it takes a new hire to work alone, how often a manager has to repeat a correction, and how many mistakes new hires make on produce ID and box checks.",
+    ].join(" "),
+  ],
 };
